@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+
+  app:
+    image: richarvey/nginx-php-fpm
+    container_name: saml-app
+    working_dir: /app
+    ports:
+      - "127.0.0.1:80:80/tcp"
+    volumes:
+      - .:/app/simplesaml
+      - ./docker/config/nginx/sites-enabled:/etc/nginx/sites-enabled
+      - ./docker/config/php/app.ini:/usr/local/etc/php/php.ini
+
+#  mysql:
+#    image: mysql:5.7.21
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE:      catalog
+#      MYSQL_USER:          catalog
+#      MYSQL_PASSWORD:      catalog
+#    volumes:
+#      - mysqldata:/var/lib/mysql
+
+volumes:
+  mysqldata:
+    driver: "local"
