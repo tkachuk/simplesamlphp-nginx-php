@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test\XML;
 
 use PHPUnit\Framework\TestCase;
@@ -31,7 +29,7 @@ XML;
     /**
      * @return void
      */
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->xml = new Parser(static::XMLDOC);
     }

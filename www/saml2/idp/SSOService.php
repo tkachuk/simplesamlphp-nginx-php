@@ -11,8 +11,6 @@
 
 require_once('../../_include.php');
 
-use Webmozart\Assert\Assert;
-
 \SimpleSAML\Logger::info('SAML2.0 - IdP.SSOService: Accessing SAML 2.0 IdP endpoint SSOService');
 
 $metadata = \SimpleSAML\Metadata\MetaDataStorageHandler::getMetadataHandler();
@@ -28,4 +26,4 @@ try {
         throw $e; // do not ignore other exceptions!
     }
 }
-Assert::true(false);
+assert(false);

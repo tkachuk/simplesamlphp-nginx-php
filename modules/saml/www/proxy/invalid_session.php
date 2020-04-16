@@ -48,7 +48,7 @@ if (isset($_POST['continue'])) {
 }
 
 $cfg = \SimpleSAML\Configuration::getInstance();
-$template = new \SimpleSAML\XHTML\Template($cfg, 'saml:proxy/invalid_session.twig');
+$template = new \SimpleSAML\XHTML\Template($cfg, 'saml:proxy/invalid_session.tpl.php');
 $translator = $template->getTranslator();
 $template->data['AuthState'] = (string) $_REQUEST['AuthState'];
 
@@ -74,4 +74,4 @@ if (array_key_exists('name', $spmd)) {
     $template->data['sp_name'] = $spmd['entityid'];
 }
 
-$template->send();
+$template->show();

@@ -1,12 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\saml;
 
 use SAML2\XML\saml\NameID;
 use SimpleSAML\Logger;
-use Webmozart\Assert\Assert;
 
 /**
  * Base filter for generating NameID values.
@@ -55,9 +52,10 @@ abstract class BaseNameIDGenerator extends \SimpleSAML\Auth\ProcessingFilter
      * @param array $config  Configuration information about this filter.
      * @param mixed $reserved  For future use.
      */
-    public function __construct(array $config, $reserved)
+    public function __construct($config, $reserved)
     {
         parent::__construct($config, $reserved);
+        assert(is_array($config));
 
         if (isset($config['NameQualifier'])) {
             $this->nameQualifier = $config['NameQualifier'];
@@ -78,7 +76,7 @@ abstract class BaseNameIDGenerator extends \SimpleSAML\Auth\ProcessingFilter
      *
      * @return string|null  The NameID value.
      */
-    abstract protected function getValue(array &$state): ?string;
+    abstract protected function getValue(array &$state);
 
 
     /**
@@ -87,9 +85,10 @@ abstract class BaseNameIDGenerator extends \SimpleSAML\Auth\ProcessingFilter
      * @param array &$state  The request state.
      * @return void
      */
-    public function process(array &$state): void
+    public function process(&$state)
     {
-        Assert::string($this->format);
+        assert(is_array($state));
+        assert(is_string($this->format));
 
         $value = $this->getValue($state);
         if ($value === null) {
@@ -120,7 +119,6 @@ abstract class BaseNameIDGenerator extends \SimpleSAML\Auth\ProcessingFilter
             $nameId->setSPNameQualifier($this->spNameQualifier);
         }
 
-        /** @psalm-suppress PossiblyNullArrayOffset */
         $state['saml:NameID'][$this->format] = $nameId;
     }
 }

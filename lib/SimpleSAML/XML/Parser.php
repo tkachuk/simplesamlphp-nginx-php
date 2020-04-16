@@ -7,11 +7,7 @@
  * @package SimpleSAMLphp
  */
 
-declare(strict_types=1);
-
 namespace SimpleSAML\XML;
-
-use SimpleXMLElement;
 
 class Parser
 {
@@ -21,27 +17,28 @@ class Parser
     /**
      * @param string $xml
      */
-    public function __construct(string $xml)
+    public function __construct($xml)
     {
         $this->simplexml = new \SimpleXMLElement($xml);
         $this->simplexml->registerXPathNamespace('saml2', 'urn:oasis:names:tc:SAML:2.0:assertion');
         $this->simplexml->registerXPathNamespace('saml2meta', 'urn:oasis:names:tc:SAML:2.0:metadata');
         $this->simplexml->registerXPathNamespace('ds', 'http://www.w3.org/2000/09/xmldsig#');
     }
-
+    
 
     /**
      * @param \SimpleXMLElement $element
      * @return \SimpleSAML\XML\Parser
+     * @psalm-return \SimpleSAML\XML\Parser
      */
-    public static function fromSimpleXMLElement(SimpleXMLElement $element): Parser
+    public static function fromSimpleXMLElement(\SimpleXMLElement $element)
     {
         // Traverse all existing namespaces in element
         $namespaces = $element->getNamespaces();
         foreach ($namespaces as $prefix => $ns) {
             $element[(($prefix === '') ? 'xmlns' : 'xmlns:' . $prefix)] = $ns;
         }
-
+        
         /* Create a new parser with the xml document where the namespace definitions
          * are added.
          */
@@ -51,7 +48,7 @@ class Parser
         }
         return new Parser($xml);
     }
-
+    
 
     /**
      * @param string $xpath
@@ -59,7 +56,7 @@ class Parser
      * @throws \Exception
      * @return string
      */
-    public function getValueDefault(string $xpath, string $defvalue): string
+    public function getValueDefault($xpath, $defvalue)
     {
         try {
             /** @var string */
@@ -68,7 +65,7 @@ class Parser
             return $defvalue;
         }
     }
-
+    
 
     /**
      * @param string $xpath
@@ -76,7 +73,7 @@ class Parser
      * @throws \Exception
      * @return string|null
      */
-    public function getValue(string $xpath, bool $required = false): ?string
+    public function getValue($xpath, $required = false)
     {
         $result = $this->simplexml->xpath($xpath);
         if (!is_array($result) || empty($result)) {
@@ -90,7 +87,7 @@ class Parser
         }
         return (string) $result[0];
     }
-
+    
 
     /**
      * @param array $xpath
@@ -98,7 +95,7 @@ class Parser
      * @throws \Exception
      * @return string|null
      */
-    public function getValueAlternatives(array $xpath, bool $required = false): ?string
+    public function getValueAlternatives(array $xpath, $required = false)
     {
         foreach ($xpath as $x) {
             $seek = $this->getValue($x);

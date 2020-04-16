@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\saml;
 
 use RobRichards\XMLSecLibs\XMLSecurityKey;
@@ -22,7 +20,6 @@ use SimpleSAML\Configuration;
 use SimpleSAML\Error as SSP_Error;
 use SimpleSAML\Logger;
 use SimpleSAML\Utils;
-use Webmozart\Assert\Assert;
 
 /**
  * Common code for building SAML 2 messages based on the available metadata.
@@ -43,7 +40,7 @@ class Message
         Configuration $srcMetadata,
         Configuration $dstMetadata,
         SignedElement $element
-    ): void {
+    ) {
         $dstPrivateKey = $dstMetadata->getString('signature.privatekey', null);
 
         if ($dstPrivateKey !== null) {
@@ -95,7 +92,8 @@ class Message
         Configuration $srcMetadata,
         Configuration $dstMetadata,
         \SAML2\Message $message
-    ): void {
+    ) {
+
         $signingEnabled = null;
         if ($message instanceof LogoutRequest || $message instanceof LogoutResponse) {
             $signingEnabled = $srcMetadata->getBoolean('sign.logout', null);
@@ -135,7 +133,7 @@ class Message
      *
      * @throws \SimpleSAML\Error\Exception if we cannot find the certificate matching the fingerprint.
      */
-    private static function findCertificate(array $certFingerprints, array $certificates): string
+    private static function findCertificate(array $certFingerprints, array $certificates)
     {
         $candidates = [];
 
@@ -170,7 +168,7 @@ class Message
      * @throws \SimpleSAML\Error\Exception if there is not certificate in the metadata for the entity.
      * @throws \Exception if the signature validation fails with an exception.
      */
-    public static function checkSign(Configuration $srcMetadata, SignedElement $element): bool
+    public static function checkSign(Configuration $srcMetadata, SignedElement $element)
     {
         // find the public key that should verify signatures by this entity
         $keys = $srcMetadata->getPublicKeys('signing');
@@ -187,6 +185,30 @@ class Message
                         Logger::debug('Skipping unknown key type: ' . $key['type']);
                 }
             }
+        } elseif ($srcMetadata->hasValue('certFingerprint')) {
+            Logger::notice(
+                "Validating certificates by fingerprint is deprecated. Please use " .
+                "certData or certificate options in your remote metadata configuration."
+            );
+
+            $certFingerprint = $srcMetadata->getArrayizeString('certFingerprint');
+            foreach ($certFingerprint as &$fp) {
+                $fp = strtolower(str_replace(':', '', $fp));
+            }
+
+            $certificates = $element->getCertificates();
+
+            // we don't have the full certificate stored. Try to find it in the message or the assertion instead
+            if (count($certificates) === 0) {
+                /* We need the full certificate in order to match it against the fingerprint. */
+                Logger::debug('No certificate in message when validating against fingerprint.');
+                return false;
+            } else {
+                Logger::debug('Found ' . count($certificates) . ' certificates in ' . get_class($element));
+            }
+
+            $pemCert = self::findCertificate($certFingerprint, $certificates);
+            $pemKeys = [$pemCert];
         } else {
             throw new SSP_Error\Exception(
                 'Missing certificate in metadata for ' .
@@ -238,7 +260,7 @@ class Message
         Configuration $srcMetadata,
         Configuration $dstMetadata,
         \SAML2\Message $message
-    ): void {
+    ) {
         $enabled = null;
         if ($message instanceof LogoutRequest || $message instanceof LogoutResponse) {
             $enabled = $srcMetadata->getBoolean('validate.logout', null);
@@ -282,7 +304,7 @@ class Message
     public static function getDecryptionKeys(
         Configuration $srcMetadata,
         Configuration $dstMetadata
-    ): array {
+    ) {
         $sharedKey = $srcMetadata->getString('sharedkey', null);
         if ($sharedKey !== null) {
             $key = new XMLSecurityKey(XMLSecurityKey::AES128_CBC);
@@ -295,7 +317,7 @@ class Message
         // load the new private key if it exists
         $keyArray = Utils\Crypto::loadPrivateKey($dstMetadata, false, 'new_');
         if ($keyArray !== null) {
-            assert::keyExists($keyArray, 'PEM');
+            assert(isset($keyArray['PEM']));
 
             $key = new XMLSecurityKey(XMLSecurityKey::RSA_1_5, ['type' => 'private']);
             if (array_key_exists('password', $keyArray)) {
@@ -305,13 +327,9 @@ class Message
             $keys[] = $key;
         }
 
-        /**
-         * find the existing private key
-         *
-         * @var array $keyArray  Because the second param is true
-         */
+        // find the existing private key
         $keyArray = Utils\Crypto::loadPrivateKey($dstMetadata, true);
-        Assert::keyExists($keyArray, 'PEM');
+        assert(isset($keyArray['PEM']));
 
         $key = new XMLSecurityKey(XMLSecurityKey::RSA_1_5, ['type' => 'private']);
         if (array_key_exists('password', $keyArray)) {
@@ -337,7 +355,7 @@ class Message
     public static function getBlacklistedAlgorithms(
         Configuration $srcMetadata,
         Configuration $dstMetadata
-    ): array {
+    ) {
         $blacklist = $srcMetadata->getArray('encryption.blacklisted-algorithms', null);
         if ($blacklist === null) {
             $blacklist = $dstMetadata->getArray('encryption.blacklisted-algorithms', [XMLSecurityKey::RSA_1_5]);
@@ -363,8 +381,8 @@ class Message
         Configuration $srcMetadata,
         Configuration $dstMetadata,
         $assertion
-    ): Assertion {
-        Assert::isInstanceOfAny($assertion, [\SAML2\Assertion::class, \SAML2\EncryptedAssertion::class]);
+    ) {
+        assert($assertion instanceof Assertion || $assertion instanceof EncryptedAssertion);
 
         if ($assertion instanceof Assertion) {
             $encryptAssertion = $srcMetadata->getBoolean('assertion.encryption', null);
@@ -423,7 +441,7 @@ class Message
         Configuration $srcMetadata,
         Configuration $dstMetadata,
         Assertion &$assertion
-    ): void {
+    ) {
         if (!$assertion->hasEncryptedAttributes()) {
             return;
         }
@@ -460,7 +478,7 @@ class Message
      *
      * @return \SimpleSAML\Module\saml\Error The error.
      */
-    public static function getResponseError(StatusResponse $response): \SimpleSAML\Module\saml\Error
+    public static function getResponseError(StatusResponse $response)
     {
         $status = $response->getStatus();
         return new \SimpleSAML\Module\saml\Error($status['Code'], $status['SubCode'], $status['Message']);
@@ -477,7 +495,7 @@ class Message
     public static function buildAuthnRequest(
         Configuration $spMetadata,
         Configuration $idpMetadata
-    ): AuthnRequest {
+    ) {
         $ar = new AuthnRequest();
 
         // get the NameIDPolicy to apply. IdP metadata has precedence.
@@ -539,7 +557,7 @@ class Message
     public static function buildLogoutRequest(
         Configuration $srcMetadata,
         Configuration $dstMetadata
-    ): LogoutRequest {
+    ) {
         $lr = new LogoutRequest();
         $issuer = new Issuer();
         $issuer->setValue($srcMetadata->getString('entityid'));
@@ -562,7 +580,7 @@ class Message
     public static function buildLogoutResponse(
         Configuration $srcMetadata,
         Configuration $dstMetadata
-    ): LogoutResponse {
+    ) {
         $lr = new LogoutResponse();
         $issuer = new Issuer();
         $issuer->setValue($srcMetadata->getString('entityid'));
@@ -593,7 +611,7 @@ class Message
         Configuration $spMetadata,
         Configuration $idpMetadata,
         Response $response
-    ): array {
+    ) {
         if (!$response->isSuccess()) {
             throw self::getResponseError($response);
         }
@@ -647,9 +665,10 @@ class Message
         Configuration $idpMetadata,
         Response $response,
         $assertion,
-        bool $responseSigned
-    ): Assertion {
-        Assert::isInstanceOfAny($assertion, [\SAML2\Assertion::class, \SAML2\EncryptedAssertion::class]);
+        $responseSigned
+    ) {
+        assert($assertion instanceof Assertion || $assertion instanceof EncryptedAssertion);
+        assert(is_bool($responseSigned));
 
         $assertion = self::decryptAssertion($idpMetadata, $spMetadata, $assertion);
         self::decryptAttributes($idpMetadata, $spMetadata, $assertion);
@@ -890,8 +909,9 @@ class Message
      *
      * @throws \SimpleSAML\Error\Exception if there is no supported encryption key in the metadata of this entity.
      */
-    public static function getEncryptionKey(Configuration $metadata): XMLSecurityKey
+    public static function getEncryptionKey(Configuration $metadata)
     {
+
         $sharedKey = $metadata->getString('sharedkey', null);
         if ($sharedKey !== null) {
             $key = new XMLSecurityKey(XMLSecurityKey::AES128_CBC);

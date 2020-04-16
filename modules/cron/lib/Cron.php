@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\cron;
 
 use SimpleSAML\Configuration;
@@ -38,7 +36,7 @@ class Cron
      * @return array the tag, and summary information from the run.
      * @throws \Exception If an invalid tag specified
      */
-    public function runTag(string $tag): array
+    public function runTag($tag)
     {
         if (!$this->isValidTag($tag)) {
             throw new \Exception("Invalid cron tag '$tag''");
@@ -63,7 +61,7 @@ class Cron
      * @param string $tag
      * @return bool
      */
-    public function isValidTag(string $tag): bool
+    public function isValidTag($tag)
     {
         if (!is_null($this->cronconfig->getValue('allowed_tags'))) {
             return in_array($tag, $this->cronconfig->getArray('allowed_tags'), true);

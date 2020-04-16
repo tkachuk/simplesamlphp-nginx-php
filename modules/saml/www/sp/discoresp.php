@@ -4,8 +4,6 @@
  * Handler for response from IdP discovery service.
  */
 
-use Webmozart\Assert\Assert;
-
 if (!array_key_exists('AuthID', $_REQUEST)) {
     throw new \SimpleSAML\Error\BadRequest('Missing AuthID to discovery service response handler');
 }
@@ -18,7 +16,7 @@ if (!array_key_exists('idpentityid', $_REQUEST)) {
 $state = \SimpleSAML\Auth\State::loadState($_REQUEST['AuthID'], 'saml:sp:sso');
 
 // Find authentication source
-Assert::keyExists($state, 'saml:sp:AuthId');
+assert(array_key_exists('saml:sp:AuthId', $state));
 $sourceId = $state['saml:sp:AuthId'];
 
 $source = \SimpleSAML\Auth\Source::getById($sourceId);

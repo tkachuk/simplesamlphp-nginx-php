@@ -4,8 +4,6 @@
  * Assertion consumer service handler for SAML 2.0 SP authentication client.
  */
 
-use Webmozart\Assert\Assert;
-
 if (!array_key_exists('PATH_INFO', $_SERVER)) {
     throw new \SimpleSAML\Error\BadRequest('Missing authentication source ID in assertion consumer service URL');
 }
@@ -54,11 +52,17 @@ if ($issuer === null) {
         throw new Exception('Missing <saml:Issuer> in message delivered to AssertionConsumerService.');
     }
 }
-$issuer = $issuer->getValue();
+
+if ($issuer instanceof \SAML2\XML\saml\Issuer) {
+    $issuer = $issuer->getValue();
+    if ($issuer === null) {
+        // no issuer found in the assertions
+        throw new Exception('Missing <saml:Issuer> in message delivered to AssertionConsumerService.');
+    }
+}
 
 $session = \SimpleSAML\Session::getSessionFromRequest();
 $prevAuth = $session->getAuthData($sourceId, 'saml:sp:prevAuth');
-/** @psalm-var string $issuer */
 if ($prevAuth !== null && $prevAuth['id'] === $response->getId() && $prevAuth['issuer'] === $issuer) {
     /* OK, it looks like this message has the same issuer
      * and ID as the SP session we already have active. We
@@ -95,7 +99,7 @@ if (!empty($stateId)) {
 
 if ($state) {
     // check that the authentication source is correct
-    Assert::keyExists($state, 'saml:sp:AuthId');
+    assert(array_key_exists('saml:sp:AuthId', $state));
     if ($state['saml:sp:AuthId'] !== $sourceId) {
         throw new \SimpleSAML\Error\Exception(
             'The authentication source id in the URL does not match the authentication source which sent the request.'
@@ -103,7 +107,7 @@ if ($state) {
     }
 
     // check that the issuer is the one we are expecting
-    Assert::keyExists($state, 'ExpectedIssuer');
+    assert(array_key_exists('ExpectedIssuer', $state));
     if ($state['ExpectedIssuer'] !== $issuer) {
         $idpMetadata = $source->getIdPMetadata($issuer);
         $idplist = $idpMetadata->getArrayize('IDPList', []);
@@ -139,7 +143,6 @@ try {
     // the status of the response wasn't "success"
     $e = $e->toException();
     \SimpleSAML\Auth\State::throwException($state, $e);
-    return;
 }
 
 $authenticatingAuthority = null;
@@ -263,4 +266,4 @@ if (isset($state['\SimpleSAML\Auth\Source.ReturnURL'])) {
 $state['PersistentAuthData'][] = 'saml:sp:prevAuth';
 
 $source->handleResponse($state, $issuer, $attributes);
-Assert::true(false);
+assert(false);

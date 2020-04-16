@@ -19,7 +19,13 @@ First we need to create the module directory:
     cd modules
     mkdir mymodule
 
-Since this is a custom module, it should always be enabled in the configuration.
+Since this is a custom module, it should always be enabled.
+Therefore we create a `default-enable` file in the module.
+We do that by copying the `default-enable` file from the `core` module.
+
+    cd mymodule
+    cp ../core/default-enable .
+
 Now that we have our own module, we can move on to creating an authentication source.
 
 

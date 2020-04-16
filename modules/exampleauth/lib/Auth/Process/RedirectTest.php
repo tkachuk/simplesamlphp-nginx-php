@@ -1,13 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\exampleauth\Auth\Process;
 
 use SimpleSAML\Auth;
 use SimpleSAML\Module;
 use SimpleSAML\Utils;
-use Webmozart\Assert\Assert;
 
 /**
  * A simple processing filter for testing that redirection works as it should.
@@ -21,9 +18,10 @@ class RedirectTest extends \SimpleSAML\Auth\ProcessingFilter
      * @param array &$state  The state we should update.
      * @return void
      */
-    public function process(array &$state): void
+    public function process(&$state)
     {
-        Assert::keyExists($state, 'Attributes');
+        assert(is_array($state));
+        assert(array_key_exists('Attributes', $state));
 
         // To check whether the state is saved correctly
         $state['Attributes']['RedirectTest1'] = ['OK'];

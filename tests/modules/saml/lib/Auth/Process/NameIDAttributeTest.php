@@ -1,6 +1,11 @@
 <?php
 
-declare(strict_types=1);
+/**
+ * Test for the saml:NameIDAttribute filter.
+ *
+ * @author Eugene Venter <eugene@catalyst.net.nz>
+ * @package SimpleSAMLphp
+ */
 
 namespace SimpleSAML\Test\Module\saml\Auth\Process;
 
@@ -9,12 +14,6 @@ use SimpleSAML\Module\saml\Auth\Process\NameIDAttribute;
 use SAML2\XML\saml\NameID;
 use SAML2\Constants;
 
-/**
- * Test for the saml:NameIDAttribute filter.
- *
- * @author Eugene Venter <eugene@catalyst.net.nz>
- * @package SimpleSAMLphp
- */
 class NameIDAttributeTest extends TestCase
 {
     /**
@@ -24,7 +23,7 @@ class NameIDAttributeTest extends TestCase
      * @param array $request  The request state.
      * @return array  The state array after processing.
      */
-    private function processFilter(array $config, array $request): array
+    private function processFilter(array $config, array $request)
     {
         $filter = new NameIDAttribute($config, null);
         $filter->process($request);

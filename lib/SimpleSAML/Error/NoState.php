@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Error;
 
 /**
@@ -18,7 +16,7 @@ class NoState extends Error
      */
     public function __construct()
     {
-        $this->includeTemplate = 'core:no_state.twig';
+        $this->includeTemplate = 'core:no_state.tpl.php';
         parent::__construct('NOSTATE');
     }
 }

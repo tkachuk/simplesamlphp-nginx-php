@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Error;
 
 use SimpleSAML\Locale\Translate;
@@ -20,7 +18,7 @@ class ErrorCodes
      *
      * @return array A map from error code to error code title
      */
-    final public static function defaultGetAllErrorCodeTitles(): array
+    final public static function defaultGetAllErrorCodeTitles()
     {
         return [
             'ACSPARAMS' => Translate::noop('{errors:title_ACSPARAMS}'),
@@ -67,7 +65,7 @@ class ErrorCodes
      *
      * @return array A map from error code to error code title
      */
-    public static function getAllErrorCodeTitles(): array
+    public static function getAllErrorCodeTitles()
     {
         return self::defaultGetAllErrorCodeTitles();
     }
@@ -78,7 +76,7 @@ class ErrorCodes
      *
      * @return array A map from error code to error code description
      */
-    final public static function defaultGetAllErrorCodeDescriptions(): array
+    final public static function defaultGetAllErrorCodeDescriptions()
     {
         return [
             'ACSPARAMS' => Translate::noop('{errors:descr_ACSPARAMS}'),
@@ -124,7 +122,7 @@ class ErrorCodes
      *
      * @return array A map from error code to error code description
      */
-    public static function getAllErrorCodeDescriptions(): array
+    public static function getAllErrorCodeDescriptions()
     {
         return self::defaultGetAllErrorCodeDescriptions();
     }
@@ -137,7 +135,7 @@ class ErrorCodes
      *
      * @return array An array containing both errorcode maps.
      */
-    public static function getAllErrorCodeMessages(): array
+    public static function getAllErrorCodeMessages()
     {
         return [
             'title' => self::getAllErrorCodeTitles(),
@@ -153,7 +151,7 @@ class ErrorCodes
      *
      * @return string A string to translate
      */
-    public static function getErrorCodeTitle(string $errorCode): string
+    public static function getErrorCodeTitle($errorCode)
     {
         $errorCodeTitles = self::getAllErrorCodeTitles();
         return $errorCodeTitles[$errorCode];
@@ -167,7 +165,7 @@ class ErrorCodes
      *
      * @return string A string to translate
      */
-    public static function getErrorCodeDescription(string $errorCode): string
+    public static function getErrorCodeDescription($errorCode)
     {
         $errorCodeDescriptions = self::getAllErrorCodeDescriptions();
         return $errorCodeDescriptions[$errorCode];
@@ -183,7 +181,7 @@ class ErrorCodes
      *
      * @return array An array containing both errorcode strings.
      */
-    public static function getErrorCodeMessage(string $errorCode): array
+    public static function getErrorCodeMessage($errorCode)
     {
         return [
             'title' => self::getErrorCodeTitle($errorCode),

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\IdP;
 
 use SimpleSAML\Error;
@@ -32,7 +30,7 @@ interface LogoutHandlerInterface
      * @param string $assocId The association that started the logout.
      * @return void
      */
-    public function startLogout(array &$state, string $assocId): void;
+    public function startLogout(array &$state, $assocId);
 
 
     /**
@@ -45,5 +43,5 @@ interface LogoutHandlerInterface
      * @param \SimpleSAML\Error\Exception|null $error The error that occurred during session termination (if any).
      * @return void
      */
-    public function onResponse(string $assocId, ?string $relayState, Error\Exception $error = null): void;
+    public function onResponse($assocId, $relayState, Error\Exception $error = null);
 }

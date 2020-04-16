@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test\Utils;
 
 use PHPUnit\Framework\TestCase;
@@ -21,7 +19,7 @@ class ClearStateTestCase extends TestCase
     /**
      * @return void
      */
-    public static function setUpBeforeClass(): void
+    public static function setUpBeforeClass()
     {
         if (!self::$stateClearer) {
             self::$stateClearer = new StateClearer();
@@ -33,7 +31,7 @@ class ClearStateTestCase extends TestCase
     /**
      * @return void
      */
-    protected function setUp(): void
+    protected function setUp()
     {
         self::clearState();
     }
@@ -42,7 +40,7 @@ class ClearStateTestCase extends TestCase
     /**
      * @return void
      */
-    public static function tearDownAfterClass(): void
+    public static function tearDownAfterClass()
     {
         self::clearState();
     }

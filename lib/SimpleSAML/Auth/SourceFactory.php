@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Auth;
 
 interface SourceFactory
@@ -9,7 +7,7 @@ interface SourceFactory
     /**
      * @param array $info
      * @param array $config
-     * @return \SimpleSAML\Auth\Source
+     * @return Source
      */
-    public function create(array $info, array $config): Source;
+    public function create(array $info, array $config);
 }

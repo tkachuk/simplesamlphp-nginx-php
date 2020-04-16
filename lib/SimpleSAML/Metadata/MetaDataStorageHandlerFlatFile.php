@@ -1,11 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Metadata;
 
 use SimpleSAML\Configuration;
-use Webmozart\Assert\Assert;
 
 /**
  * This file defines a flat file metadata source.
@@ -44,8 +41,10 @@ class MetaDataStorageHandlerFlatFile extends MetaDataStorageSource
      *
      * @param array $config An associative array with the configuration for this handler.
      */
-    protected function __construct(array $config)
+    protected function __construct($config)
     {
+        assert(is_array($config));
+
         // get the configuration
         $globalConfig = Configuration::getInstance();
 
@@ -76,7 +75,7 @@ class MetaDataStorageHandlerFlatFile extends MetaDataStorageSource
      *     or null if we are unable to load metadata from the given file.
      * @throws \Exception If the metadata set cannot be loaded.
      */
-    private function load(string $set): ?array
+    private function load($set)
     {
         $metadatasetfile = $this->directory . $set . '.php';
 
@@ -84,7 +83,6 @@ class MetaDataStorageHandlerFlatFile extends MetaDataStorageSource
             return null;
         }
 
-        /** @psalm-var mixed $metadata   We cannot be sure what the include below will do with this var */
         $metadata = [];
 
         include($metadatasetfile);
@@ -106,12 +104,13 @@ class MetaDataStorageHandlerFlatFile extends MetaDataStorageSource
      * @return array An associative array with the metadata. Each element in the array is an entity, and the
      *         key is the entity id.
      */
-    public function getMetadataSet(string $set): array
+    public function getMetadataSet($set)
     {
         if (array_key_exists($set, $this->cachedMetadata)) {
             return $this->cachedMetadata[$set];
         }
 
+        /** @var array|null $metadataSet */
         $metadataSet = $this->load($set);
         if ($metadataSet === null) {
             $metadataSet = [];

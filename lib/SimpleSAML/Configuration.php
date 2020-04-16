@@ -1,13 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML;
 
 use SAML2\Constants;
 use SimpleSAML\Error;
 use SimpleSAML\Utils;
-use Webmozart\Assert\Assert;
 
 /**
  * Configuration of SimpleSAMLphp
@@ -22,7 +19,8 @@ class Configuration implements Utils\ClearableState
      *
      * @var string
      */
-    public const REQUIRED_OPTION = '___REQUIRED_OPTION___';
+    const REQUIRED_OPTION = '___REQUIRED_OPTION___';
+
 
     /**
      * Associative array with mappings from instance-names to configuration objects.
@@ -30,6 +28,7 @@ class Configuration implements Utils\ClearableState
      * @var array
      */
     private static $instance = [];
+
 
     /**
      * Configuration directories.
@@ -41,6 +40,7 @@ class Configuration implements Utils\ClearableState
      */
     private static $configDirs = [];
 
+
     /**
      * Cache of loaded configuration files.
      *
@@ -50,12 +50,14 @@ class Configuration implements Utils\ClearableState
      */
     private static $loadedConfigs = [];
 
+
     /**
      * The configuration array.
      *
      * @var array
      */
     private $configuration;
+
 
     /**
      * The location which will be given when an error occurs.
@@ -64,12 +66,14 @@ class Configuration implements Utils\ClearableState
      */
     private $location;
 
+
     /**
      * The file this configuration was loaded from.
      *
      * @var string|null
      */
     private $filename = null;
+
 
     /**
      * Temporary property that tells if the deprecated getBaseURL() method has been called or not.
@@ -85,12 +89,14 @@ class Configuration implements Utils\ClearableState
      * @param array $config The configuration array.
      * @param string $location The location which will be given when an error occurs.
      */
-    public function __construct(array $config, string $location)
+    public function __construct($config, $location)
     {
+        assert(is_array($config));
+        assert(is_string($location));
+
         $this->configuration = $config;
         $this->location = $location;
     }
-
 
     /**
      * Load the given configuration file.
@@ -103,14 +109,16 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If the configuration file is invalid or missing.
      */
-    private static function loadFromFile(string $filename, bool $required): Configuration
+    private static function loadFromFile($filename, $required)
     {
+        assert(is_string($filename));
+        assert(is_bool($required));
+
         if (array_key_exists($filename, self::$loadedConfigs)) {
             return self::$loadedConfigs[$filename];
         }
 
         if (file_exists($filename)) {
-            /** @psalm-var mixed $config */
             $config = 'UNINITIALIZED';
 
             // the file initializes a variable named '$config'
@@ -184,11 +192,13 @@ class Configuration implements Utils\ClearableState
      * @param string $configSet The configuration set. Defaults to 'simplesaml'.
      * @return void
      */
-    public static function setConfigDir(string $path, string $configSet = 'simplesaml'): void
+    public static function setConfigDir($path, $configSet = 'simplesaml')
     {
+        assert(is_string($path));
+        assert(is_string($configSet));
+
         self::$configDirs[$configSet] = $path;
     }
-
 
     /**
      * Store a pre-initialized configuration.
@@ -204,9 +214,12 @@ class Configuration implements Utils\ClearableState
      */
     public static function setPreLoadedConfig(
         Configuration $config,
-        string $filename = 'config.php',
-        string $configSet = 'simplesaml'
-    ): void {
+        $filename = 'config.php',
+        $configSet = 'simplesaml'
+    ) {
+        assert(is_string($filename));
+        assert(is_string($configSet));
+
         if (!array_key_exists($configSet, self::$configDirs)) {
             if ($configSet !== 'simplesaml') {
                 throw new \Exception('Configuration set \'' . $configSet . '\' not initialized.');
@@ -231,10 +244,11 @@ class Configuration implements Utils\ClearableState
      * @return \SimpleSAML\Configuration The Configuration object.
      * @throws \Exception If the configuration set is not initialized.
      */
-    public static function getConfig(
-        string $filename = 'config.php',
-        string $configSet = 'simplesaml'
-    ): Configuration {
+    public static function getConfig($filename = 'config.php', $configSet = 'simplesaml')
+    {
+        assert(is_string($filename));
+        assert(is_string($configSet));
+
         if (!array_key_exists($configSet, self::$configDirs)) {
             if ($configSet !== 'simplesaml') {
                 throw new \Exception('Configuration set \'' . $configSet . '\' not initialized.');
@@ -260,10 +274,11 @@ class Configuration implements Utils\ClearableState
      * @return \SimpleSAML\Configuration A configuration object.
      * @throws \Exception If the configuration set is not initialized.
      */
-    public static function getOptionalConfig(
-        string $filename = 'config.php',
-        string $configSet = 'simplesaml'
-    ): Configuration {
+    public static function getOptionalConfig($filename = 'config.php', $configSet = 'simplesaml')
+    {
+        assert(is_string($filename));
+        assert(is_string($configSet));
+
         if (!array_key_exists($configSet, self::$configDirs)) {
             if ($configSet !== 'simplesaml') {
                 throw new \Exception('Configuration set \'' . $configSet . '\' not initialized.');
@@ -289,11 +304,11 @@ class Configuration implements Utils\ClearableState
      *
      * @return \SimpleSAML\Configuration The configuration object.
      */
-    public static function loadFromArray(
-        array $config,
-        string $location = '[ARRAY]',
-        ?string $instance = null
-    ): Configuration {
+    public static function loadFromArray($config, $location = '[ARRAY]', $instance = null)
+    {
+        assert(is_array($config));
+        assert(is_string($location));
+
         $c = new Configuration($config, $location);
         if ($instance !== null) {
             self::$instance[$instance] = $c;
@@ -317,8 +332,10 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If the configuration with $instancename name is not initialized.
      */
-    public static function getInstance(string $instancename = 'simplesaml'): Configuration
+    public static function getInstance($instancename = 'simplesaml')
     {
+        assert(is_string($instancename));
+
         // check if the instance exists already
         if (array_key_exists($instancename, self::$instance)) {
             return self::$instance[$instancename];
@@ -339,13 +356,77 @@ class Configuration implements Utils\ClearableState
 
 
     /**
+     * Initialize a instance name with the given configuration file.
+     *
+     * TODO: remove.
+     *
+     * @param string $path
+     * @param string $instancename
+     * @param string $configfilename
+     * @return \SimpleSAML\Configuration
+     *
+     * @see setConfigDir()
+     * @deprecated This function is superseeded by the setConfigDir function.
+     */
+    public static function init($path, $instancename = 'simplesaml', $configfilename = 'config.php')
+    {
+        assert(is_string($path));
+        assert(is_string($instancename));
+        assert(is_string($configfilename));
+
+        if ($instancename === 'simplesaml') {
+            // for backwards compatibility
+            self::setConfigDir($path, 'simplesaml');
+        }
+
+        // check if we already have loaded the given config - return the existing instance if we have
+        if (array_key_exists($instancename, self::$instance)) {
+            return self::$instance[$instancename];
+        }
+
+        self::$instance[$instancename] = self::loadFromFile($path . '/' . $configfilename, true);
+        return self::$instance[$instancename];
+    }
+
+
+    /**
+     * Load a configuration file which is located in the same directory as this configuration file.
+     *
+     * TODO: remove.
+     *
+     * @param string $instancename
+     * @param string $filename
+     * @return \SimpleSAML\Configuration
+     *
+     * @see getConfig()
+     * @deprecated This function is superseeded by the getConfig() function.
+     */
+    public function copyFromBase($instancename, $filename)
+    {
+        assert(is_string($instancename));
+        assert(is_string($filename));
+        assert($this->filename !== null);
+
+        // check if we already have loaded the given config - return the existing instance if we have
+        if (array_key_exists($instancename, self::$instance)) {
+            return self::$instance[$instancename];
+        }
+
+        $dir = dirname($this->filename);
+
+        self::$instance[$instancename] = self::loadFromFile($dir . '/' . $filename, true);
+        return self::$instance[$instancename];
+    }
+
+
+    /**
      * Retrieve the current version of SimpleSAMLphp.
      *
      * @return string
      */
-    public function getVersion(): string
+    public function getVersion()
     {
-        return 'master';
+        return '1.18.5';
     }
 
 
@@ -361,7 +442,7 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If the required option cannot be retrieved.
      */
-    public function getValue(string $name, $default = null)
+    public function getValue($name, $default = null)
     {
         // return the default value if the option is unset
         if (!array_key_exists($name, $this->configuration)) {
@@ -385,7 +466,7 @@ class Configuration implements Utils\ClearableState
      *
      * @return boolean If the value is set in this configuration.
      */
-    public function hasValue(string $name): bool
+    public function hasValue($name)
     {
         return array_key_exists($name, $this->configuration);
     }
@@ -398,7 +479,7 @@ class Configuration implements Utils\ClearableState
      *
      * @return boolean If any of the keys in $names exist in the configuration
      */
-    public function hasValueOneOf(array $names): bool
+    public function hasValueOneOf($names)
     {
         foreach ($names as $name) {
             if ($this->hasValue($name)) {
@@ -406,6 +487,35 @@ class Configuration implements Utils\ClearableState
             }
         }
         return false;
+    }
+
+
+    /**
+     * Retrieve the absolute path of the SimpleSAMLphp installation, relative to the root of the website.
+     *
+     * For example: simplesaml/
+     *
+     * The path will always end with a '/' and never have a leading slash.
+     *
+     * @return string The absolute path relative to the root of the website.
+     *
+     * @throws \SimpleSAML\Error\CriticalConfigurationError If the format of 'baseurlpath' is incorrect.
+     *
+     * @deprecated This method will be removed in SimpleSAMLphp 2.0. Please use getBasePath() instead.
+     */
+    public function getBaseURL()
+    {
+        if (!$this->deprecated_base_url_used) {
+            $this->deprecated_base_url_used = true;
+            Logger::warning(
+                "\SimpleSAML\Configuration::getBaseURL() is deprecated, please use getBasePath() instead."
+            );
+        }
+        if (preg_match('/^\*(.*)$/D', $this->getString('baseurlpath', 'simplesaml/'), $matches)) {
+            // deprecated behaviour, will be removed in the future
+            return Utils\HTTP::getFirstPathElement(false) . $matches[1];
+        }
+        return ltrim($this->getBasePath(), '/');
     }
 
 
@@ -418,7 +528,7 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \SimpleSAML\Error\CriticalConfigurationError If the format of 'baseurlpath' is incorrect.
      */
-    public function getBasePath(): string
+    public function getBasePath()
     {
         $baseURL = $this->getString('baseurlpath', 'simplesaml/');
 
@@ -463,11 +573,13 @@ class Configuration implements Utils\ClearableState
      * @return string|null $path if $path is an absolute path, or $path prepended with the base directory of this
      * SimpleSAMLphp installation. We will return NULL if $path is null.
      */
-    public function resolvePath(?string $path): ?string
+    public function resolvePath($path)
     {
         if ($path === null) {
             return null;
         }
+
+        assert(is_string($path));
 
         return Utils\System::resolvePath($path, $this->getBaseDir());
     }
@@ -487,7 +599,7 @@ class Configuration implements Utils\ClearableState
      *
      * @return string|null The path configuration option with name $name, or $default if the option was not found.
      */
-    public function getPathValue(string $name, ?string $default = null): ?string
+    public function getPathValue($name, $default = null)
     {
         // return the default value if the option is unset
         if (!array_key_exists($name, $this->configuration)) {
@@ -514,7 +626,7 @@ class Configuration implements Utils\ClearableState
      * @return string The absolute path to the base directory for this SimpleSAMLphp installation. This path will
      * always end with a slash.
      */
-    public function getBaseDir(): string
+    public function getBaseDir()
     {
         // check if a directory is configured in the configuration file
         $dir = $this->getString('basedir', null);
@@ -529,13 +641,13 @@ class Configuration implements Utils\ClearableState
 
         // the directory wasn't set in the configuration file, path is <base directory>/lib/SimpleSAML/Configuration.php
         $dir = __FILE__;
-        Assert::same(basename($dir), 'Configuration.php');
+        assert(basename($dir) === 'Configuration.php');
 
         $dir = dirname($dir);
-        Assert::same(basename($dir), 'SimpleSAML');
+        assert(basename($dir) === 'SimpleSAML');
 
         $dir = dirname($dir);
-        Assert::same(basename($dir), 'lib');
+        assert(basename($dir) === 'lib');
 
         $dir = dirname($dir);
 
@@ -562,8 +674,10 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If the option is not boolean.
      */
-    public function getBoolean(string $name, $default = self::REQUIRED_OPTION)
+    public function getBoolean($name, $default = self::REQUIRED_OPTION)
     {
+        assert(is_string($name));
+
         $ret = $this->getValue($name, $default);
 
         if ($ret === $default) {
@@ -598,8 +712,10 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If the option is not a string.
      */
-    public function getString(string $name, $default = self::REQUIRED_OPTION)
+    public function getString($name, $default = self::REQUIRED_OPTION)
     {
+        assert(is_string($name));
+
         $ret = $this->getValue($name, $default);
 
         if ($ret === $default) {
@@ -634,8 +750,10 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If the option is not an integer.
      */
-    public function getInteger(string $name, $default = self::REQUIRED_OPTION)
+    public function getInteger($name, $default = self::REQUIRED_OPTION)
     {
+        assert(is_string($name));
+
         $ret = $this->getValue($name, $default);
 
         if ($ret === $default) {
@@ -674,8 +792,12 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If the option is not in the range specified.
      */
-    public function getIntegerRange(string $name, int $minimum, int $maximum, $default = self::REQUIRED_OPTION)
+    public function getIntegerRange($name, $minimum, $maximum, $default = self::REQUIRED_OPTION)
     {
+        assert(is_string($name));
+        assert(is_int($minimum));
+        assert(is_int($maximum));
+
         $ret = $this->getInteger($name, $default);
 
         if ($ret === $default) {
@@ -716,8 +838,11 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If the option does not have any of the allowed values.
      */
-    public function getValueValidate(string $name, array $allowedValues, $default = self::REQUIRED_OPTION)
+    public function getValueValidate($name, $allowedValues, $default = self::REQUIRED_OPTION)
     {
+        assert(is_string($name));
+        assert(is_array($allowedValues));
+
         $ret = $this->getValue($name, $default);
         if ($ret === $default) {
             // the option wasn't found, or it matches the default value. In any case, return this value
@@ -758,8 +883,10 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If the option is not an array.
      */
-    public function getArray(string $name, $default = self::REQUIRED_OPTION)
+    public function getArray($name, $default = self::REQUIRED_OPTION)
     {
+        assert(is_string($name));
+
         $ret = $this->getValue($name, $default);
 
         if ($ret === $default) {
@@ -785,10 +912,12 @@ class Configuration implements Utils\ClearableState
      *                       required if this parameter isn't given. The default value can be any value, including
      *                       null.
      *
-     * @return mixed The option with the given name, or $default if the option isn't found and $default is specified.
+     * @return array The option with the given name, or $default if the option isn't found and $default is specified.
      */
-    public function getArrayize(string $name, $default = self::REQUIRED_OPTION)
+    public function getArrayize($name, $default = self::REQUIRED_OPTION)
     {
+        assert(is_string($name));
+
         $ret = $this->getValue($name, $default);
 
         if ($ret === $default) {
@@ -814,12 +943,14 @@ class Configuration implements Utils\ClearableState
      *                       required if this parameter isn't given. The default value can be any value, including
      *                       null.
      *
-     * @return mixed The option with the given name, or $default if the option isn't found and $default is specified.
+     * @return array The option with the given name, or $default if the option isn't found and $default is specified.
      *
      * @throws \Exception If the option is not a string or an array of strings.
      */
-    public function getArrayizeString(string $name, $default = self::REQUIRED_OPTION)
+    public function getArrayizeString($name, $default = self::REQUIRED_OPTION)
     {
+        assert(is_string($name));
+
         $ret = $this->getArrayize($name, $default);
 
         if ($ret === $default) {
@@ -855,13 +986,14 @@ class Configuration implements Utils\ClearableState
      *                        This function will only return null if $default is set to null and the option
      *                        doesn't exist.
      *
-     * @return \SimpleSAML\Configuration|null The option with the given name,
-     *   or $default if the option isn't found and $default is specified.
+     * @return mixed The option with the given name, or $default if the option isn't found and $default is specified.
      *
      * @throws \Exception If the option is not an array.
      */
-    public function getConfigItem(string $name, $default = []): ?Configuration
+    public function getConfigItem($name, $default = [])
     {
+        assert(is_string($name));
+
         $ret = $this->getValue($name, $default);
 
         if ($ret === null) {
@@ -882,14 +1014,59 @@ class Configuration implements Utils\ClearableState
 
 
     /**
+     * Retrieve an array of arrays as an array of \SimpleSAML\Configuration objects.
+     *
+     * This function will retrieve an option containing an array of arrays, and create an array of
+     * \SimpleSAML\Configuration objects from that array. The indexes in the new array will be the same as the original
+     * indexes, but the values will be \SimpleSAML\Configuration objects.
+     *
+     * An exception will be thrown if this option isn't an array of arrays, or if this option isn't found, and no
+     * default value is given.
+     *
+     * @param string $name The name of the option.
+     *
+     * @return array The array of \SimpleSAML\Configuration objects.
+     *
+     * @throws \Exception If the value of this element is not an array.
+     *
+     * @deprecated Very specific function, will be removed in a future release; use getConfigItem or getArray instead
+     */
+    public function getConfigList($name)
+    {
+        assert(is_string($name));
+
+        $ret = $this->getValue($name, []);
+
+        if (!is_array($ret)) {
+            throw new \Exception(
+                $this->location . ': The option ' . var_export($name, true) .
+                ' is not an array.'
+            );
+        }
+
+        $out = [];
+        foreach ($ret as $index => $config) {
+            $newLoc = $this->location . '[' . var_export($name, true) . '][' .
+                var_export($index, true) . ']';
+            if (!is_array($config)) {
+                throw new \Exception($newLoc . ': The value of this element was expected to be an array.');
+            }
+            $out[$index] = self::loadFromArray($config, $newLoc);
+        }
+
+        return $out;
+    }
+
+
+    /**
      * Retrieve list of options.
      *
      * This function returns the name of all options which are defined in this
      * configuration file, as an array of strings.
      *
-     * @return string[] Name of all options defined in this configuration file.
+     * @return array Name of all options defined in this configuration file.
      */
-    public function getOptions(): array
+    public function getOptions()
     {
         return array_keys($this->configuration);
     }
@@ -900,7 +1077,7 @@ class Configuration implements Utils\ClearableState
      *
      * @return array An associative array with all configuration options and values.
      */
-    public function toArray(): array
+    public function toArray()
     {
         return $this->configuration;
     }
@@ -918,8 +1095,10 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If the default binding is missing for this endpoint type.
      */
-    private function getDefaultBinding(string $endpointType): string
+    private function getDefaultBinding($endpointType)
     {
+        assert(is_string($endpointType));
+
         $set = $this->getString('metadata-set');
         switch ($set . ':' . $endpointType) {
             case 'saml20-idp-remote:SingleSignOnService':
@@ -930,6 +1109,10 @@ class Configuration implements Utils\ClearableState
                 return Constants::BINDING_HTTP_POST;
             case 'saml20-idp-remote:ArtifactResolutionService':
                 return Constants::BINDING_SOAP;
+            case 'shib13-idp-remote:SingleSignOnService':
+                return 'urn:mace:shibboleth:1.0:profiles:AuthnRequest';
+            case 'shib13-sp-remote:AssertionConsumerService':
+                return 'urn:oasis:names:tc:SAML:1.0:profiles:browser-post';
             default:
                 throw new \Exception('Missing default binding for ' . $endpointType . ' in ' . $set);
         }
@@ -945,8 +1128,10 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If any element of the configuration options for this endpoint type is incorrect.
      */
-    public function getEndpoints(string $endpointType): array
+    public function getEndpoints($endpointType)
     {
+        assert(is_string($endpointType));
+
         $loc = $this->location . '[' . var_export($endpointType, true) . ']:';
 
         if (!array_key_exists($endpointType, $this->configuration)) {
@@ -1016,19 +1201,18 @@ class Configuration implements Utils\ClearableState
      * Find an endpoint of the given type, using a list of supported bindings as a way to prioritize.
      *
      * @param string $endpointType The endpoint type.
-     * @param string[] $bindings Sorted array of acceptable bindings.
+     * @param array  $bindings Sorted array of acceptable bindings.
      * @param mixed  $default The default value to return if no matching endpoint is found. If no default is provided,
      *     an exception will be thrown.
      *
-     * @return mixed|null The default endpoint.
+     * @return array|null The default endpoint, or null if no acceptable endpoints are used.
      *
      * @throws \Exception If no supported endpoint is found.
      */
-    public function getEndpointPrioritizedByBinding(
-        string $endpointType,
-        array $bindings,
-        $default = self::REQUIRED_OPTION
-    ) {
+    public function getEndpointPrioritizedByBinding($endpointType, array $bindings, $default = self::REQUIRED_OPTION)
+    {
+        assert(is_string($endpointType));
+
         $endpoints = $this->getEndpoints($endpointType);
 
         foreach ($bindings as $binding) {
@@ -1052,7 +1236,7 @@ class Configuration implements Utils\ClearableState
      * Find the default endpoint of the given type.
      *
      * @param string $endpointType The endpoint type.
-     * @param string[]|null $bindings Array with acceptable bindings. Can be null if any binding is allowed.
+     * @param array  $bindings Array with acceptable bindings. Can be null if any binding is allowed.
      * @param mixed  $default The default value to return if no matching endpoint is found. If no default is provided,
      *     an exception will be thrown.
      *
@@ -1060,8 +1244,10 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If no supported endpoint is found and no $default parameter is specified.
      */
-    public function getDefaultEndpoint(string $endpointType, array $bindings = null, $default = self::REQUIRED_OPTION)
+    public function getDefaultEndpoint($endpointType, array $bindings = null, $default = self::REQUIRED_OPTION)
     {
+        assert(is_string($endpointType));
+
         $endpoints = $this->getEndpoints($endpointType);
 
         $defaultEndpoint = Utils\Config\Metadata::getDefaultEndpoint($endpoints, $bindings);
@@ -1091,8 +1277,10 @@ class Configuration implements Utils\ClearableState
      *
      * @throws \Exception If the translation is not an array or a string, or its index or value are not strings.
      */
-    public function getLocalizedString(string $name, $default = self::REQUIRED_OPTION)
+    public function getLocalizedString($name, $default = self::REQUIRED_OPTION)
     {
+        assert(is_string($name));
+
         $ret = $this->getValue($name, $default);
         if ($ret === $default) {
             // the option wasn't found, or it matches the default value. In any case, return this value
@@ -1137,8 +1325,11 @@ class Configuration implements Utils\ClearableState
      * @throws \SimpleSAML\Error\Exception If the file does not contain a valid PEM-encoded certificate, or there is no
      * certificate in the metadata.
      */
-    public function getPublicKeys(?string $use = null, bool $required = false, string $prefix = ''): array
+    public function getPublicKeys($use = null, $required = false, $prefix = '')
     {
+        assert(is_bool($required));
+        assert(is_string($prefix));
+
         if ($this->hasValue($prefix . 'keys')) {
             $ret = [];
             foreach ($this->getArray($prefix . 'keys') as $key) {
@@ -1198,7 +1389,6 @@ class Configuration implements Utils\ClearableState
         }
     }
 
-
     /**
      * Clear any configuration information cached.
      * Allows for configuration files to be changed and reloaded during a given request. Most useful
@@ -1206,7 +1396,7 @@ class Configuration implements Utils\ClearableState
      *
      * @return void
      */
-    public static function clearInternalState(): void
+    public static function clearInternalState()
     {
         self::$configDirs = [];
         self::$instance = [];

@@ -51,7 +51,7 @@ if (array_key_exists('multiauth:preselect', $state)) {
 }
 
 $globalConfig = \SimpleSAML\Configuration::getInstance();
-$t = new \SimpleSAML\XHTML\Template($globalConfig, 'multiauth:selectsource.twig');
+$t = new \SimpleSAML\XHTML\Template($globalConfig, 'multiauth:selectsource.tpl.php');
 
 $defaultLanguage = $globalConfig->getString('language.default', 'en');
 $language = $t->getTranslator()->getLanguage()->getLanguage();
@@ -81,5 +81,5 @@ if ($as !== null) {
 } else {
     $t->data['preferred'] = null;
 }
-$t->send();
+$t->show();
 exit();

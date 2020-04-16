@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Metadata;
 
 use SimpleSAML\Configuration;
@@ -35,7 +33,7 @@ class MetaDataStorageHandlerXML extends MetaDataStorageSource
      *
      * @throws \Exception If neither the 'file' or 'url' options are defined in the configuration.
      */
-    protected function __construct(array $config)
+    protected function __construct($config)
     {
         $src = $srcXml = null;
         if (array_key_exists('file', $config)) {
@@ -65,6 +63,16 @@ class MetaDataStorageHandlerXML extends MetaDataStorageSource
             throw new \Exception("Neither source file path/URI nor string data provided");
         }
         foreach ($entities as $entityId => $entity) {
+            $md = $entity->getMetadata1xSP();
+            if ($md !== null) {
+                $SP1x[$entityId] = $md;
+            }
+
+            $md = $entity->getMetadata1xIdP();
+            if ($md !== null) {
+                $IdP1x[$entityId] = $md;
+            }
+
             $md = $entity->getMetadata20SP();
             if ($md !== null) {
                 $SP20[$entityId] = $md;
@@ -82,6 +90,8 @@ class MetaDataStorageHandlerXML extends MetaDataStorageSource
         }
 
         $this->metadata = [
+            'shib13-sp-remote'          => $SP1x,
+            'shib13-idp-remote'         => $IdP1x,
             'saml20-sp-remote'          => $SP20,
             'saml20-idp-remote'         => $IdP20,
             'attributeauthority-remote' => $AAD,
@@ -97,7 +107,7 @@ class MetaDataStorageHandlerXML extends MetaDataStorageSource
      *
      * @return array An associative array with all entities in the given set.
      */
-    public function getMetadataSet(string $set): array
+    public function getMetadataSet($set)
     {
         if (array_key_exists($set, $this->metadata)) {
             return $this->metadata[$set];

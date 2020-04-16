@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test\Module\core\Auth\Process;
 
 use SimpleSAML\Utils\HttpAdapter;
@@ -11,7 +9,7 @@ use SimpleSAML\Utils\HttpAdapter;
  */
 class CardinalitySingleTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var \SimpleSAML\Utils\HttpAdapter|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \SimpleSAML\Utils\HttpAdapter|\PHPUnit_Framework_MockObject_MockObject */
     private $http;
 
 
@@ -22,7 +20,7 @@ class CardinalitySingleTest extends \PHPUnit\Framework\TestCase
      * @param  array $request The request state.
      * @return array  The state array after processing.
      */
-    private function processFilter(array $config, array $request): array
+    private function processFilter(array $config, array $request)
     {
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -39,7 +37,7 @@ class CardinalitySingleTest extends \PHPUnit\Framework\TestCase
     /**
      * @return void
      */
-    protected function setUp(): void
+    protected function setUp()
     {
         \SimpleSAML\Configuration::loadFromArray([], '[ARRAY]', 'simplesaml');
         $this->http = $this->getMockBuilder(HttpAdapter::class)

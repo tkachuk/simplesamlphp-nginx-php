@@ -1,12 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\core\Stats\Output;
 
 use SimpleSAML\Configuration;
 use SimpleSAML\Error;
-use Webmozart\Assert\Assert;
 
 /**
  * Statistics logger that writes to a set of log files
@@ -58,8 +55,10 @@ class File extends \SimpleSAML\Stats\Output
      * @param string $date  The date for the log file.
      * @return void
      */
-    private function openLog(string $date): void
+    private function openLog($date)
     {
+        assert(is_string($date));
+
         if ($this->file !== null && $this->file !== false) {
             fclose($this->file);
             $this->file = null;
@@ -85,9 +84,9 @@ class File extends \SimpleSAML\Stats\Output
      * @param array $data  The event.
      * @return void
      */
-    public function emit(array $data): void
+    public function emit(array $data)
     {
-        Assert::notNull($data['time']);
+        assert(isset($data['time']));
 
         $time = $data['time'];
         $milliseconds = (int) (($time - (int) $time) * 1000);

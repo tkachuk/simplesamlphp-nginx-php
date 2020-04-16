@@ -1,6 +1,11 @@
 <?php
 
-declare(strict_types=1);
+/**
+ * Test for the SQLNameID helper class.
+ *
+ * @author Pavel Brousek <brousek@ics.muni.cz>
+ * @package SimpleSAMLphp
+ */
 
 namespace SimpleSAML\Test\Module\saml\IdP;
 
@@ -10,12 +15,6 @@ use SimpleSAML\Error;
 use SimpleSAML\Module\saml\IdP\SQLNameID;
 use SimpleSAML\Store;
 
-/**
- * Test for the SQLNameID helper class.
- *
- * @author Pavel Brousek <brousek@ics.muni.cz>
- * @package SimpleSAMLphp
- */
 class SQLNameIDTest extends TestCase
 {
     /**
@@ -97,7 +96,7 @@ class SQLNameIDTest extends TestCase
 
     /**
      * @param \SimpleSAML\Configuration|\SimpleSAML\Store $service
-     * @param class-string $className
+     * @param string $className
      * @return void
      */
     protected function clearInstance($service, $className)

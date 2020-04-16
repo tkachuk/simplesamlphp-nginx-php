@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Metadata;
 
 use RobRichards\XMLSecLibs\XMLSecurityKey;
@@ -26,12 +24,13 @@ class Signer
      *
      * @param \SimpleSAML\Configuration $config Our \SimpleSAML\Configuration instance.
      * @param array                     $entityMetadata The metadata of the entity.
-     * @param string                    $type A string which describes the type entity this is, e.g. 'SAML 2 IdP'
+     * @param string                    $type A string which describes the type entity this is, e.g. 'SAML 2 IdP' or
+     *     'Shib 1.3 SP'.
      *
      * @return array An associative array with the keys 'privatekey', 'certificate', and optionally 'privatekey_pass'.
      * @throws \Exception If the key and certificate used to sign is unknown.
      */
-    private static function findKeyCert(Configuration $config, array $entityMetadata, string $type): array
+    private static function findKeyCert($config, $entityMetadata, $type)
     {
         // first we look for metadata.privatekey and metadata.certificate in the metadata
         if (
@@ -125,12 +124,13 @@ class Signer
      *
      * @param \SimpleSAML\Configuration $config Our \SimpleSAML\Configuration instance.
      * @param array                     $entityMetadata The metadata of the entity.
-     * @param string                    $type A string which describes the type entity this is, e.g. 'SAML 2 IdP'
+     * @param string                    $type A string which describes the type entity this is, e.g. 'SAML 2 IdP' or
+     *     'Shib 1.3 SP'.
      *
      * @return boolean True if metadata signing is enabled, false otherwise.
      * @throws \Exception If the value of the 'metadata.sign.enable' option is not a boolean.
      */
-    private static function isMetadataSigningEnabled(Configuration $config, array $entityMetadata, string $type): bool
+    private static function isMetadataSigningEnabled($config, $entityMetadata, $type)
     {
         // first check the metadata for the entity
         if (array_key_exists('metadata.sign.enable', $entityMetadata)) {
@@ -145,7 +145,9 @@ class Signer
             return $entityMetadata['metadata.sign.enable'];
         }
 
-        return $config->getBoolean('metadata.sign.enable', false);
+        $enabled = $config->getBoolean('metadata.sign.enable', false);
+
+        return $enabled;
     }
 
 
@@ -164,11 +166,8 @@ class Signer
      *
      * @throws \SimpleSAML\Error\CriticalConfigurationError
      */
-    private static function getMetadataSigningAlgorithm(
-        Configuration $config,
-        array $entityMetadata,
-        string $type
-    ): array {
+    private static function getMetadataSigningAlgorithm($config, $entityMetadata, $type)
+    {
         // configure the algorithm to use
         if (array_key_exists('metadata.sign.algorithm', $entityMetadata)) {
             if (!is_string($entityMetadata['metadata.sign.algorithm'])) {
@@ -224,7 +223,7 @@ class Signer
      * @return string The $metadataString with the signature embedded.
      * @throws \Exception If the certificate or private key cannot be loaded, or the metadata doesn't parse properly.
      */
-    public static function sign(string $metadataString, array $entityMetadata, string $type): string
+    public static function sign($metadataString, $entityMetadata, $type)
     {
         $config = Configuration::getInstance();
 

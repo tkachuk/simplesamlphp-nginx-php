@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test\Web;
 
 use PHPUnit\Framework\TestCase;
@@ -42,7 +40,7 @@ class IndexTest extends TestCase
      * The setup method that is run before any tests in this class.
      * @return void
      */
-    protected function setup(): void
+    protected function setup()
     {
         $this->server = new BuiltInServer('configLoader');
         $this->server_addr = $this->server->start();
@@ -116,7 +114,7 @@ class IndexTest extends TestCase
      * The tear down method that is executed after all tests in this class.
      * @return void
      */
-    protected function tearDown(): void
+    protected function tearDown()
     {
         unlink($this->shared_file);
         $this->server->stop();

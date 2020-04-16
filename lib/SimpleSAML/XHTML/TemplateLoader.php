@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\XHTML;
 
 use SimpleSAML\Module;
@@ -24,8 +22,6 @@ class TemplateLoader extends \Twig\Loader\FilesystemLoader
      * @param string $name
      * @param bool $throw
      * @return string|false|null
-     *
-     * NOTE: cannot typehint due to upstream restrictions
      */
     protected function findTemplate($name, $throw = true)
     {
@@ -46,11 +42,15 @@ class TemplateLoader extends \Twig\Loader\FilesystemLoader
      * @return array An array with the corresponding namespace and name of the template. The namespace defaults to
      * \Twig\Loader\FilesystemLoader::MAIN_NAMESPACE, if none was specified in $name.
      */
-    protected function parseModuleName(string $name, string $default = self::MAIN_NAMESPACE): array
+    protected function parseModuleName($name, $default = self::MAIN_NAMESPACE)
     {
         if (strpos($name, ':')) {
             // we have our old SSP format
             list($namespace, $shortname) = explode(':', $name, 2);
+            $shortname = strtr($shortname, [
+                '.tpl.php' => '.twig',
+                '.php' => '.twig',
+            ]);
             return [$namespace, $shortname];
         }
         return [$default, $name];
@@ -65,7 +65,7 @@ class TemplateLoader extends \Twig\Loader\FilesystemLoader
      *
      * @throws \InvalidArgumentException If the module is not enabled or it has no templates directory.
      */
-    public static function getModuleTemplateDir(string $module): string
+    public static function getModuleTemplateDir($module)
     {
         if (!Module::isModuleEnabled($module)) {
             throw new \InvalidArgumentException('The module \'' . $module . '\' is not enabled.');

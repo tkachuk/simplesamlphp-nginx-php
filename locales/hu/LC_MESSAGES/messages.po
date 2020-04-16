@@ -114,6 +114,9 @@ msgstr "Mivel hibakereső módban van, láthatja az elküldendő üzenet tartalm
 msgid "{errors:descr_RESPONSESTATUSNOSUCCESS}"
 msgstr "Hiba történt az azonosító szervezet (IdP) oldalán. Ismeretlen állapotkód."
 
+msgid "{admin:metadata_shib13-idp}"
+msgstr "Shib 1.3 IdP Metaadatok"
+
 msgid "{login:help_text}"
 msgstr ""
 "Ajaj! - Felhasználói neve és jelszava nélkül nem tudja azonosítani magát,"
@@ -212,6 +215,9 @@ msgstr "Kijelentkezés..."
 
 msgid "{login:error_wrongpassword}"
 msgstr "Hibás felhasználói név vagy jelszó!"
+
+msgid "{admin:metaover_group_metadata.shib13-sp-remote}"
+msgstr "Shib 1.3 alkalmazásszolgáltató (távoli)"
 
 msgid "{login:remember_username}"
 msgstr "Emlékezzen a felhasználónevemre"
@@ -443,6 +449,9 @@ msgstr "Üzenet küldése"
 msgid "{errors:title_RESPONSESTATUSNOSUCCESS}"
 msgstr "Hiba történt az azonosító szervezet (IdP) oldalán"
 
+msgid "{admin:metadata_shib13-sp}"
+msgstr "Shib 1.3 SP Metaadatok"
+
 msgid "{admin:metaover_intro}"
 msgstr "A SAML entitások részleteiért kattintson a SAML entitás fejlécére"
 
@@ -516,6 +525,9 @@ msgstr "Oldal nem található"
 msgid "{logout:logged_out_text}"
 msgstr "Sikeresen kijelentkezett. Köszönjük, hogy használta a szolgáltatást."
 
+msgid "{admin:metaover_group_metadata.shib13-sp-hosted}"
+msgstr "Shib 1.3 alkalmazásszolgálató (helyi)"
+
 msgid "{admin:metadata_cert_intro}"
 msgstr "PEM formátumú X509 tanúsítvány letöltése."
 
@@ -542,11 +554,8 @@ msgstr ""
 "félrekonfigurálásával kapcsolatos. Kérjük, keresse meg a bejelentkező "
 "szolgáltatás adminisztrátorát, és küldje el neki a fenti hibaüzenetet!"
 
-msgid "{attributes:attribute_mobile}"
-msgstr "Mobil"
-
-msgid "{attributes:attribute_preferredlanguage}"
-msgstr "Elsődleges nyelv"
+msgid "{admin:metaover_group_metadata.shib13-idp-hosted}"
+msgstr "Shib 1.3 személyazonosság-szolgáltató (helyi)"
 
 msgid "{errors:descr_NOTVALIDCERT}"
 msgstr "Nem található hiteles tanúsítvány"
@@ -579,6 +588,9 @@ msgstr "Hiányzó tanúsítvány."
 
 msgid "{errors:title_LOGOUTINFOLOST}"
 msgstr "Elveszett kijelentkezési információk"
+
+msgid "{admin:metaover_group_metadata.shib13-idp-remote}"
+msgstr "Shib 1.3 személyazonosság-szolgáltató (távoli)"
 
 msgid "{errors:descr_CONFIG}"
 msgstr "Valószínűleg helytelenül lett konfigurálva a SimpleSAMLphp"

@@ -1,5 +1,8 @@
 <?php
 
+//var_dump($_REQUEST);
+//die;
+
 require_once('_include.php');
 
 $config = \SimpleSAML\Configuration::getInstance();

@@ -1,15 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test\XML;
 
-use DOMDocument;
-use DOMElement;
-use Exception;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
 use SimpleSAML\Configuration;
 use SimpleSAML\Test\SigningTestCase;
 use SimpleSAML\XML\Signer;
@@ -75,7 +69,7 @@ NOWDOC;
     {
         $res = new Signer([]);
 
-        $this->addToAssertionCount(1);
+        $this->assertNotNull($res);
     }
 
 
@@ -84,14 +78,12 @@ NOWDOC;
      */
     public function testSignBasic()
     {
-        $node = new DOMDocument();
+        $node = new \DOMDocument();
         $node->loadXML('<?xml version="1.0"?><node>value</node>');
-
-        /** @psalm-var DOMElement $element */
         $element = $node->getElementsByTagName("node")->item(0);
 
-        $doc = new DOMDocument();
-        $insertInto = $doc->appendChild(new DOMElement('insert'));
+        $doc = new \DOMDocument();
+        $insertInto = $doc->appendChild(new \DOMElement('insert'));
 
         $signer = new Signer([]);
         $signer->loadPrivateKey($this->good_private_key_file, null, true);
@@ -99,8 +91,8 @@ NOWDOC;
 
         $res = $doc->saveXML();
 
-        $this->assertStringContainsString('DigestValue', $res);
-        $this->assertStringContainsString('SignatureValue', $res);
+        $this->assertContains('DigestValue', $res);
+        $this->assertContains('SignatureValue', $res);
     }
 
 
@@ -125,14 +117,12 @@ NOWDOC;
      */
     public function testSignWithCertificate()
     {
-        $node = new DOMDocument();
+        $node = new \DOMDocument();
         $node->loadXML('<?xml version="1.0"?><node>value</node>');
-
-        /** @psalm-var DOMElement $element */
         $element = $node->getElementsByTagName("node")->item(0);
 
-        $doc = new DOMDocument();
-        $insertInto = $doc->appendChild(new DOMElement('insert'));
+        $doc = new \DOMDocument();
+        $insertInto = $doc->appendChild(new \DOMElement('insert'));
 
         $signer = new Signer([]);
         $signer->loadPrivateKey($this->good_private_key_file, null, true);
@@ -143,8 +133,8 @@ NOWDOC;
 
         $expected = self::getCertificateValue($this->good_certificate);
 
-        $this->assertStringContainsString('X509Certificate', $res);
-        $this->assertStringContainsString($expected, $res);
+        $this->assertContains('X509Certificate', $res);
+        $this->assertContains($expected, $res);
     }
 
 
@@ -155,14 +145,12 @@ NOWDOC;
     {
         $this->other_certificate_file = $this->certdir . DIRECTORY_SEPARATOR . self::OTHER_CERTIFICATE;
 
-        $node = new DOMDocument();
+        $node = new \DOMDocument();
         $node->loadXML('<?xml version="1.0"?><node>value</node>');
-
-        /** @psalm-var DOMElement $element */
         $element = $node->getElementsByTagName("node")->item(0);
 
-        $doc = new DOMDocument();
-        $insertInto = $doc->appendChild(new DOMElement('insert'));
+        $doc = new \DOMDocument();
+        $insertInto = $doc->appendChild(new \DOMElement('insert'));
 
         $signer = new Signer([]);
         $signer->loadPrivateKey($this->good_private_key_file, null, true);
@@ -175,9 +163,9 @@ NOWDOC;
         $expected1 = self::getCertificateValue($this->good_certificate);
         $expected2 = self::getCertificateValue($this->other_certificate);
 
-        $this->assertStringContainsString('X509Certificate', $res);
-        $this->assertStringContainsString($expected1, $res);
-        $this->assertStringContainsString($expected2, $res);
+        $this->assertContains('X509Certificate', $res);
+        $this->assertContains($expected1, $res);
+        $this->assertContains($expected2, $res);
     }
 
 
@@ -186,31 +174,29 @@ NOWDOC;
      */
     public function testSignMissingPrivateKey()
     {
-        $node = new DOMDocument();
+        $node = new \DOMDocument();
         $node->loadXML('<?xml version="1.0"?><node>value</node>');
-
-        /** @psalm-var DOMElement $element */
         $element = $node->getElementsByTagName("node")->item(0);
 
-        $doc = new DOMDocument();
-        $insertInto = $doc->appendChild(new DOMElement('insert'));
+        $doc = new \DOMDocument();
+        $insertInto = $doc->appendChild(new \DOMElement('insert'));
 
         $signer = new Signer([]);
 
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $signer->sign($element, $insertInto);
     }
 
 
     /**
      * @param \SimpleSAML\Configuration $service
-     * @param class-string $className
+     * @param string $className
      * @param mixed|null $value
      * @return void
      */
     protected function clearInstance(Configuration $service, $className, $value = null)
     {
-        $reflectedClass = new ReflectionClass($className);
+        $reflectedClass = new \ReflectionClass($className);
         $reflectedInstance = $reflectedClass->getProperty('instance');
         $reflectedInstance->setAccessible(true);
         $reflectedInstance->setValue($service, $value);

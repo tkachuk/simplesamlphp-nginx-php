@@ -1,13 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test\Utils;
 
-use InvalidArgumentException;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
 use SimpleSAML\Configuration;
 use SimpleSAML\Utils\System;
 
@@ -30,7 +26,7 @@ class SystemTest extends TestCase
     /**
      * @return void
      */
-    public function setUp(): void
+    public function setUp()
     {
         $this->root = vfsStream::setup(
             self::ROOTDIRNAME,
@@ -52,7 +48,7 @@ class SystemTest extends TestCase
     {
         $res = System::getOS();
 
-        $this->assertIsInt($res);
+        $this->assertInternalType("int", $res);
     }
 
 
@@ -161,6 +157,20 @@ class SystemTest extends TestCase
     /**
      * @covers \SimpleSAML\Utils\System::writeFile
      * @test
+     * @deprecated Test becomes obsolete as soon as the codebase is fully type hinted
+     * @return void
+     */
+    public function testWriteFileInvalidArguments()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        /** @psalm-suppress NullArgument */
+        System::writeFile(null, null, null);
+    }
+
+
+    /**
+     * @covers \SimpleSAML\Utils\System::writeFile
+     * @test
      * @return void
      */
     public function testWriteFileBasic()
@@ -174,7 +184,7 @@ class SystemTest extends TestCase
 
         $this->assertFileExists($filename);
 
-        $this->clearInstance($config, Configuration::class);
+        $this->clearInstance($config, '\SimpleSAML\Configuration');
     }
 
 
@@ -198,7 +208,7 @@ class SystemTest extends TestCase
 
         $this->assertEquals($expected, $res);
 
-        $this->clearInstance($config, Configuration::class);
+        $this->clearInstance($config, '\SimpleSAML\Configuration');
     }
 
 
@@ -222,7 +232,7 @@ class SystemTest extends TestCase
 
         $this->assertEquals($expected, $res);
 
-        $this->clearInstance($config, Configuration::class);
+        $this->clearInstance($config, '\SimpleSAML\Configuration');
     }
 
 
@@ -242,7 +252,7 @@ class SystemTest extends TestCase
         $this->assertEquals($expected, $res);
         $this->assertFileExists($res);
 
-        $this->clearInstance($config, Configuration::class);
+        $this->clearInstance($config, '\SimpleSAML\Configuration');
     }
 
 
@@ -262,7 +272,7 @@ class SystemTest extends TestCase
         $this->assertEquals($expected, $res);
         $this->assertFileExists($res);
 
-        $this->clearInstance($config, Configuration::class);
+        $this->clearInstance($config, '\SimpleSAML\Configuration');
     }
 
 
@@ -288,7 +298,7 @@ class SystemTest extends TestCase
         $this->expectException(\SimpleSAML\Error\Exception::class);
         System::getTempDir();
 
-        $this->clearInstance($config, Configuration::class);
+        $this->clearInstance($config, '\SimpleSAML\Configuration');
     }
 
 
@@ -296,7 +306,7 @@ class SystemTest extends TestCase
      * @param string $directory
      * @return \SimpleSAML\Configuration
      */
-    private function setConfigurationTempDir(string $directory): Configuration
+    private function setConfigurationTempDir($directory)
     {
         $config = Configuration::loadFromArray([
             'tempdir' => $directory,
@@ -308,12 +318,12 @@ class SystemTest extends TestCase
 
     /**
      * @param \SimpleSAML\Configuration $service
-     * @param class-string $className
+     * @param string $className
      * @return void
      */
     protected function clearInstance(Configuration $service, $className)
     {
-        $reflectedClass = new ReflectionClass($className);
+        $reflectedClass = new \ReflectionClass($className);
         $reflectedInstance = $reflectedClass->getProperty('instance');
         $reflectedInstance->setAccessible(true);
         $reflectedInstance->setValue($service, null);

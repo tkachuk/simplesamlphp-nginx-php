@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\core\Auth;
 
 use SAML2\Constants;
@@ -11,7 +9,6 @@ use SimpleSAML\Error;
 use SimpleSAML\Logger;
 use SimpleSAML\Module;
 use SimpleSAML\Utils\HTTP;
-use Webmozart\Assert\Assert;
 
 /**
  * Helper class for username/password authentication.
@@ -50,7 +47,7 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
      *
      * @var array
      */
-    protected $loginLinks = [];
+    protected $loginLinks;
 
     /**
      * Storage for authsource config option remember.username.enabled
@@ -100,8 +97,11 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
      * @param array $info  Information about this authentication source.
      * @param array &$config  Configuration for this authentication source.
      */
-    public function __construct(array $info, array &$config)
+    public function __construct($info, &$config)
     {
+        assert(is_array($info));
+        assert(is_array($config));
+
         if (isset($config['core:loginpage_links'])) {
             $this->loginLinks = $config['core:loginpage_links'];
         }
@@ -132,17 +132,17 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
      * @param string|null $forcedUsername  The forced username.
      * @return void
      */
-    public function setForcedUsername(?string $forcedUsername): void
+    public function setForcedUsername($forcedUsername)
     {
-        Assert::nullOrString($forcedUsername);
+        assert(is_string($forcedUsername) || $forcedUsername === null);
         $this->forcedUsername = $forcedUsername;
     }
 
     /**
      * Return login links from configuration
-     * @return string[]
+     * @return array
      */
-    public function getLoginLinks(): array
+    public function getLoginLinks()
     {
         return $this->loginLinks;
     }
@@ -152,7 +152,7 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
      * Getter for the authsource config option remember.username.enabled
      * @return bool
      */
-    public function getRememberUsernameEnabled(): bool
+    public function getRememberUsernameEnabled()
     {
         return $this->rememberUsernameEnabled;
     }
@@ -162,7 +162,7 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
      * Getter for the authsource config option remember.username.checked
      * @return bool
      */
-    public function getRememberUsernameChecked(): bool
+    public function getRememberUsernameChecked()
     {
         return $this->rememberUsernameChecked;
     }
@@ -172,7 +172,7 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
      * Check if the "remember me" feature is enabled.
      * @return bool TRUE if enabled, FALSE otherwise.
      */
-    public function isRememberMeEnabled(): bool
+    public function isRememberMeEnabled()
     {
         return $this->rememberMeEnabled;
     }
@@ -182,7 +182,7 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
      * Check if the "remember me" checkbox should be checked.
      * @return bool TRUE if enabled, FALSE otherwise.
      */
-    public function isRememberMeChecked(): bool
+    public function isRememberMeChecked()
     {
         return $this->rememberMeChecked;
     }
@@ -197,8 +197,10 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
      * @param array &$state  Information about the current authentication.
      * @return void
      */
-    public function authenticate(array &$state): void
+    public function authenticate(&$state)
     {
+        assert(is_array($state));
+
         /*
          * Save the identifier of this authentication source, so that we can
          * retrieve it later. This allows us to call the login()-function on
@@ -235,6 +237,7 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
             }
 
             $attributes = $this->login($username, $password);
+            assert(is_array($attributes));
             $state['Attributes'] = $attributes;
 
             return;
@@ -252,7 +255,7 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
         HTTP::redirectTrustedURL($url, $params);
 
         // The previous function never returns, so this code is never executed.
-        assert::true(false);
+        assert(false);
     }
 
 
@@ -267,9 +270,9 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
      *
      * @param string $username  The username the user wrote.
      * @param string $password  The password the user wrote.
-     * @return array Associative array with the user's attributes.
+     * @return array  Associative array with the user's attributes.
      */
-    abstract protected function login(string $username, string $password): array;
+    abstract protected function login($username, $password);
 
 
     /**
@@ -284,14 +287,18 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
      * @param string $password  The password the user wrote.
      * @return void
      */
-    public static function handleLogin(string $authStateId, string $username, string $password): void
+    public static function handleLogin($authStateId, $username, $password)
     {
+        assert(is_string($authStateId));
+        assert(is_string($username));
+        assert(is_string($password));
+
         // Here we retrieve the state array we saved in the authenticate-function.
         /** @var array $state */
         $state = Auth\State::loadState($authStateId, self::STAGEID);
 
         // Retrieve the authentication source we are executing.
-        Assert::keyExists($state, self::AUTHID);
+        assert(array_key_exists(self::AUTHID, $state));
 
         /** @var \SimpleSAML\Module\core\Auth\UserPassBase|null $source */
         $source = Auth\Source::getById($state[self::AUTHID]);
@@ -315,6 +322,7 @@ abstract class UserPassBase extends \SimpleSAML\Auth\Source
         Logger::stats('User \'' . $username . '\' successfully authenticated from ' . $_SERVER['REMOTE_ADDR']);
 
         // Save the attributes we received from the login-function in the $state-array
+        assert(is_array($attributes));
         $state['Attributes'] = $attributes;
 
         // Return control to SimpleSAMLphp after successful authentication.

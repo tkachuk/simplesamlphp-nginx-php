@@ -1,13 +1,15 @@
 <?php
-
-/**
+/*
  * The configuration of SimpleSAMLphp
+ *
  */
+
+use SimpleSAML\Logger;
 
 $config = [
 
     /*******************************
-     | BASIC CONFIGURATION OPTIONS |
+    | BASIC CONFIGURATION OPTIONS |
      *******************************/
 
     /*
@@ -34,21 +36,21 @@ $config = [
      * relative to an application protected by SimpleSAMLphp.
      */
     //'application' => [
-        /*
-         * The 'baseURL' configuration option allows you to specify a protocol,
-         * host and optionally a port that serves as the canonical base for all
-         * your application's URLs. This is useful when the environment
-         * observed in the server differs from the one observed by end users,
-         * for example, when using a load balancer to offload TLS.
-         *
-         * Note that this configuration option does not allow setting a path as
-         * part of the URL. If your setup involves URL rewriting or any other
-         * tricks that would result in SimpleSAMLphp observing a URL for your
-         * application's scripts different than the canonical one, you will
-         * need to compute the right URLs yourself and pass them dynamically
-         * to SimpleSAMLphp's API.
-         */
-        //'baseURL' => 'https://example.com',
+    /*
+     * The 'baseURL' configuration option allows you to specify a protocol,
+     * host and optionally a port that serves as the canonical base for all
+     * your application's URLs. This is useful when the environment
+     * observed in the server differs from the one observed by end users,
+     * for example, when using a load balancer to offload TLS.
+     *
+     * Note that this configuration option does not allow setting a path as
+     * part of the URL. If your setup involves URL rewriting or any other
+     * tricks that would result in SimpleSAMLphp observing a URL for your
+     * application's scripts different than the canonical one, you will
+     * need to compute the right URLs yourself and pass them dynamically
+     * to SimpleSAMLphp's API.
+     */
+    //'baseURL' => 'https://example.com',
     //],
 
     /*
@@ -119,7 +121,7 @@ $config = [
 
 
     /**********************************
-     | SECURITY CONFIGURATION OPTIONS |
+    | SECURITY CONFIGURATION OPTIONS |
      **********************************/
 
     /*
@@ -130,7 +132,7 @@ $config = [
      * A possible way to generate a random salt is by running the following command from a unix shell:
      * LC_CTYPE=C tr -c -d '0123456789abcdefghijklmnopqrstuvwxyz' </dev/urandom | dd bs=32 count=1 2>/dev/null;echo
      */
-    'secretsalt' => 'defaultsecretsalt',
+    'secretsalt' => 'l2ml23ml12m3l12m3l12m31kl231',
 
     /*
      * This password must be kept secret, and modified from the default value 123.
@@ -138,7 +140,7 @@ $config = [
      * metadata listing and diagnostics pages.
      * You can also put a hash here; run "bin/pwgen.php" to generate one.
      */
-    'auth.adminpassword' => '123',
+    'auth.adminpassword' => 'qwerty',
 
     /*
      * Set this options to true if you want to require administrator password to access the web interface
@@ -214,7 +216,7 @@ $config = [
 
 
     /************************
-     | ERRORS AND DEBUGGING |
+    | ERRORS AND DEBUGGING |
      ************************/
 
     /*
@@ -226,7 +228,7 @@ $config = [
      * alternatively a hashed array where the keys are the actions and their
      * corresponding values are booleans enabling or disabling each particular action.
      *
-     * SimpleSAMLphp provides some pre-defined actions, though modules could add new
+     * SimpleSAMLphp provides some pre-defined actiones, though modules could add new
      * actions here. Refer to the documentation of every module to learn if they
      * allow you to set any more debugging actions.
      *
@@ -276,7 +278,7 @@ $config = [
 
 
     /**************************
-     | LOGGING AND STATISTICS |
+    | LOGGING AND STATISTICS |
      **************************/
 
     /*
@@ -370,7 +372,7 @@ $config = [
 
 
     /***********************
-     | PROXY CONFIGURATION |
+    | PROXY CONFIGURATION |
      ***********************/
 
     /*
@@ -391,7 +393,7 @@ $config = [
 
 
     /**************************
-     | DATABASE CONFIGURATION |
+    | DATABASE CONFIGURATION |
      **************************/
 
     /*
@@ -405,13 +407,13 @@ $config = [
      * Ensure that you have the required PDO database driver installed
      * for your connection string.
      */
-    'database.dsn' => 'mysql:host=localhost;dbname=saml',
+    'database.dsn' => 'mysql:host=mysql;dbname=saml',
 
     /*
      * SQL database credentials
      */
-    'database.username' => 'simplesamlphp',
-    'database.password' => 'secret',
+    'database.username' => 'samluser',
+    'database.password' => 'samlpassword',
     'database.options' => [],
 
     /*
@@ -453,7 +455,7 @@ $config = [
 
 
     /*************
-     | PROTOCOLS |
+    | PROTOCOLS |
      *************/
 
     /*
@@ -461,13 +463,24 @@ $config = [
      * one of the functionalities below, but in some cases you could run multiple functionalities.
      * In example when you are setting up a federation bridge.
      */
-    'enable.saml20-idp' => false,
+    'enable.saml20-idp' => true,
+    'enable.shib13-idp' => false,
     'enable.adfs-idp' => false,
+
+    /*
+     * Whether SimpleSAMLphp should sign the response or the assertion in SAML 1.1 authentication
+     * responses.
+     *
+     * The default is to sign the assertion element, but that can be overridden by setting this
+     * option to TRUE. It can also be overridden on a pr. SP basis by adding an option with the
+     * same name to the metadata of the SP.
+     */
+    'shib13.signresponse' => true,
 
 
 
     /***********
-     | MODULES |
+    | MODULES |
      ***********/
 
     /*
@@ -480,17 +493,19 @@ $config = [
      *      'consent' => false, // Setting to FALSE disables.
      *      'core' => null, // Unset or NULL uses default.
      * ],
+     *
      */
 
-     'module.enable' => [
-         'exampleauth' => false,
-         'core' => true,
-         'saml' => true
-     ],
+    'module.enable' => [
+           'exampleauth' => true, // Setting to TRUE enables.
+//           'consent' => false, // Setting to FALSE disables.
+//           'core' => null, // Unset or NULL uses default.
+      ],
+
 
 
     /*************************
-     | SESSION CONFIGURATION |
+    | SESSION CONFIGURATION |
      *************************/
 
     /*
@@ -607,7 +622,7 @@ $config = [
 
 
     /**************************
-     | MEMCACHE CONFIGURATION |
+    | MEMCACHE CONFIGURATION |
      **************************/
 
     /*
@@ -729,7 +744,7 @@ $config = [
 
 
     /*************************************
-     | LANGUAGE AND INTERNATIONALIZATION |
+    | LANGUAGE AND INTERNATIONALIZATION |
      *************************************/
 
     /*
@@ -762,8 +777,6 @@ $config = [
             'se' => ['nb', 'no', 'nn', 'en'],
             'nr' => ['zu', 'en'],
             'nd' => ['zu', 'en'],
-            'tw' => ['st', 'en'],
-            'nso' => ['st', 'en'],
         ],
     ],
 
@@ -773,7 +786,7 @@ $config = [
     'language.available' => [
         'en', 'no', 'nn', 'se', 'da', 'de', 'sv', 'fi', 'es', 'ca', 'fr', 'it', 'nl', 'lb',
         'cs', 'sl', 'lt', 'hr', 'hu', 'pl', 'pt', 'pt-br', 'tr', 'ja', 'zh', 'zh-tw', 'ru',
-        'et', 'he', 'id', 'sr', 'lv', 'ro', 'eu', 'el', 'af', 'zu', 'xh', 'st',
+        'et', 'he', 'id', 'sr', 'lv', 'ro', 'eu', 'el', 'af', 'zu', 'xh',
     ],
     'language.rtl' => ['ar', 'dv', 'fa', 'ur', 'he'],
     'language.default' => 'en',
@@ -836,7 +849,7 @@ $config = [
 
 
     /**************
-     | APPEARANCE |
+    | APPEARANCE |
      **************/
 
     /*
@@ -916,7 +929,7 @@ $config = [
 
 
     /*********************
-     | DISCOVERY SERVICE |
+    | DISCOVERY SERVICE |
      *********************/
 
     /*
@@ -947,11 +960,12 @@ $config = [
 
 
     /*************************************
-     | AUTHENTICATION PROCESSING FILTERS |
+    | AUTHENTICATION PROCESSING FILTERS |
      *************************************/
 
     /*
      * Authentication processing filters that will be executed for all IdPs
+     * Both Shibboleth and SAML 2.0
      */
     'authproc.idp' => [
         /* Enable the authproc filter below to add URN prefixes to all attributes
@@ -1007,6 +1021,7 @@ $config = [
 
     /*
      * Authentication processing filters that will be executed for all SPs
+     * Both Shibboleth and SAML 2.0
      */
     'authproc.sp' => [
         /*
@@ -1037,7 +1052,7 @@ $config = [
 
 
     /**************************
-     | METADATA CONFIGURATION |
+    | METADATA CONFIGURATION |
      **************************/
 
     /*
@@ -1127,7 +1142,7 @@ $config = [
      * ],
      */
     'metadata.sources' => [
-        ['type' => 'flatfile'],
+        ['type' => 'pdo'],
     ],
 
     /*
@@ -1151,10 +1166,11 @@ $config = [
     'metadata.sign.privatekey' => null,
     'metadata.sign.privatekey_pass' => null,
     'metadata.sign.certificate' => null,
+    'metadata.sign.algorithm' => null,
 
 
     /****************************
-     | DATA STORE CONFIGURATION |
+    | DATA STORE CONFIGURATION |
      ****************************/
 
     /*

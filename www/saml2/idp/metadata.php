@@ -2,15 +2,12 @@
 
 require_once('../../_include.php');
 
-use Symfony\Component\VarExporter\VarExporter;
-
 use SAML2\Constants;
 use SimpleSAML\Module;
 use SimpleSAML\Utils\Auth as Auth;
 use SimpleSAML\Utils\Crypto as Crypto;
 use SimpleSAML\Utils\HTTP as HTTP;
 use SimpleSAML\Utils\Config\Metadata as Metadata;
-use Webmozart\Assert\Assert;
 
 // load SimpleSAMLphp configuration and metadata
 $config = \SimpleSAML\Configuration::getInstance();
@@ -58,7 +55,7 @@ try {
 
     if ($idpmeta->hasValue('https.certificate')) {
         $httpsCert = Crypto::loadPublicKey($idpmeta, true, 'https.');
-        Assert::notNull($httpsCert['certData']);
+        assert(isset($httpsCert['certData']));
         $availableCerts['https.crt'] = $httpsCert;
         $keys[] = [
             'type'            => 'X509Certificate',
@@ -212,7 +209,7 @@ try {
 
     $metaxml = $metaBuilder->getEntityDescriptorText();
 
-    $metaflat = '$metadata[' . var_export($idpentityid, true) . '] = ' . VarExporter::export($metaArray) . ';';
+    $metaflat = '$metadata[' . var_export($idpentityid, true) . '] = ' . var_export($metaArray, true) . ';';
 
     // sign the metadata if enabled
     $metaxml = \SimpleSAML\Metadata\Signer::sign($metaxml, $idpmeta->toArray(), 'SAML 2 IdP');
@@ -238,7 +235,7 @@ try {
         $t->data['metaurl'] = HTTP::getSelfURLNoQuery();
         $t->data['metadata'] = htmlspecialchars($metaxml);
         $t->data['metadataflat'] = htmlspecialchars($metaflat);
-        $t->send();
+        $t->show();
     } else {
         header('Content-Type: application/xml');
 

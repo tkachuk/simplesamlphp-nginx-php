@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test\Utils;
 
 use SimpleSAML\Configuration;
@@ -16,7 +14,7 @@ class EMailTest extends ClearStateTestCase
     /**
      * @return void
      */
-    public function setUp(): void
+    public function setUp()
     {
         parent::setUp();
 

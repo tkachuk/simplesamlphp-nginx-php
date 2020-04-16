@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test\Module\multiauth\Auth\Source;
 
 use PHPUnit\Framework\TestCase;
@@ -20,7 +18,7 @@ class MultiAuthTest extends \SimpleSAML\Test\Utils\ClearStateTestCase
     /**
      * @return void
      */
-    public function setUp(): void
+    public function setUp()
     {
         $this->config = Configuration::loadFromArray(
             ['module.enable' => ['multiauth' => true]],

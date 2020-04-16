@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Utils;
 
 /**
@@ -25,7 +23,7 @@ class Net
      * @author Brook Schofield, GÉANT
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function ipCIDRcheck(string $cidr, string $ip = null): bool
+    public static function ipCIDRcheck($cidr, $ip = null)
     {
         if ($ip === null) {
             $ip = $_SERVER['REMOTE_ADDR'];
@@ -75,8 +73,8 @@ class Net
 
             $ip_mask = ~((1 << (32 - $iteration_mask)) - 1);
 
-            $ip_net_mask = intval($ip_net[$i]) & $ip_mask;
-            $ip_ip_mask = intval($ip_ip[$i]) & $ip_mask;
+            $ip_net_mask = $ip_net[$i] & $ip_mask;
+            $ip_ip_mask = $ip_ip[$i] & $ip_mask;
 
             if ($ip_ip_mask != $ip_net_mask) {
                 return false;

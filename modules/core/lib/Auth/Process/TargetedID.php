@@ -1,13 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\core\Auth\Process;
 
 use SAML2\Constants;
 use SAML2\XML\saml\NameID;
 use SimpleSAML\Utils;
-use Webmozart\Assert\Assert;
 
 /**
  * Filter to generate the eduPersonTargetedID attribute.
@@ -61,9 +58,11 @@ class TargetedID extends \SimpleSAML\Auth\ProcessingFilter
      * @param array &$config  Configuration information about this filter.
      * @param mixed $reserved  For future use.
      */
-    public function __construct(array &$config, $reserved)
+    public function __construct(&$config, $reserved)
     {
         parent::__construct($config, $reserved);
+
+        assert(is_array($config));
 
         if (array_key_exists('attributename', $config)) {
             $this->attribute = $config['attributename'];
@@ -87,9 +86,10 @@ class TargetedID extends \SimpleSAML\Auth\ProcessingFilter
      * @param array &$state  The current state.
      * @return void
      */
-    public function process(array &$state): void
+    public function process(&$state)
     {
-        Assert::keyExists($state, 'Attributes');
+        assert(is_array($state));
+        assert(array_key_exists('Attributes', $state));
 
         if ($this->attribute === null) {
             if (!array_key_exists('UserID', $state)) {
@@ -160,8 +160,10 @@ class TargetedID extends \SimpleSAML\Auth\ProcessingFilter
      * @param array $metadata  The metadata of the entity.
      * @return string  The unique identifier for the entity.
      */
-    private static function getEntityId(array $metadata): string
+    private static function getEntityId($metadata)
     {
+        assert(is_array($metadata));
+
         $id = '';
 
         if (array_key_exists('metadata-set', $metadata)) {

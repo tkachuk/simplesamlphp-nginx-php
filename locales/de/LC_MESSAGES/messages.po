@@ -122,6 +122,9 @@ msgstr ""
 "Der Identity Provider gab einen Fehler zurück (Der Statuscode in der "
 "SAML-Antwort war nicht \"Erfolg\")"
 
+msgid "{admin:metadata_shib13-idp}"
+msgstr "Shib 1.3 IdP Metadaten"
+
 msgid "{login:help_text}"
 msgstr ""
 "Tut uns leid - Ohne Nutzername und Passwort können Sie sich nicht "
@@ -224,6 +227,9 @@ msgstr "Abmeldung läuft..."
 
 msgid "{login:error_wrongpassword}"
 msgstr "Falscher Nutzername oder Passwort."
+
+msgid "{admin:metaover_group_metadata.shib13-sp-remote}"
+msgstr "Shib 1.3 Service Provider (entfernt)"
 
 msgid "{errors:descr_PROCESSAUTHNREQUEST}"
 msgstr ""
@@ -464,6 +470,9 @@ msgstr "Sende Nachricht"
 msgid "{errors:title_RESPONSESTATUSNOSUCCESS}"
 msgstr "Fehlermeldung vom Identity Provider erhalten"
 
+msgid "{admin:metadata_shib13-sp}"
+msgstr "Shib 1.3 SP Metadaten"
+
 msgid "{admin:metaover_intro}"
 msgstr ""
 "Um sich Details für eine SAML-Entität anzusehen, klicken Sie auf die "
@@ -536,6 +545,9 @@ msgstr "Seite nicht gefunden"
 msgid "{logout:logged_out_text}"
 msgstr "Sie wurden abgemeldet. Danke, dass Sie diesen Dienst verwendet haben."
 
+msgid "{admin:metaover_group_metadata.shib13-sp-hosted}"
+msgstr "Shib 1.3 Service Provider (gehosted)"
+
 msgid "{admin:metadata_cert_intro}"
 msgstr "Die X509-Zertifikate als PEM-kodierte Dateien herunterladen."
 
@@ -566,11 +578,8 @@ msgstr ""
 "Kontaktieren Sie bitte den Administrator dieses Dienstes und teilen die "
 "obige Fehlermeldung mit."
 
-msgid "{attributes:attribute_mobile}"
-msgstr "Mobiltelefon"
-
-msgid "{attributes:attribute_preferredlanguage}"
-msgstr "Bevorzugte Sprache"
+msgid "{admin:metaover_group_metadata.shib13-idp-hosted}"
+msgstr "Shib 1.3 Identity Provider (gehosted)"
 
 msgid "{errors:descr_NOTVALIDCERT}"
 msgstr "Sie haben kein gültiges Zertifikat benutzt."
@@ -609,6 +618,9 @@ msgstr "Kein Zertifikat"
 
 msgid "{errors:title_LOGOUTINFOLOST}"
 msgstr "Abmeldeinformation verloren gegangen"
+
+msgid "{admin:metaover_group_metadata.shib13-idp-remote}"
+msgstr "Shib 1.3 Identity Provider (entfernt)"
 
 msgid "{errors:descr_CONFIG}"
 msgstr "SimpleSAMLphp scheint falsch konfiguriert zu sein."

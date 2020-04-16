@@ -1,7 +1,5 @@
 <?php
 
-use Symfony\Component\VarExporter\VarExporter;
-
 if (!array_key_exists('PATH_INFO', $_SERVER)) {
     throw new \SimpleSAML\Error\BadRequest('Missing authentication source id in metadata URL');
 }
@@ -274,16 +272,16 @@ if (isset($metaArray20['attributes']) && is_array($metaArray20['attributes'])) {
 $xml = \SimpleSAML\Metadata\Signer::sign($xml, $spconfig->toArray(), 'SAML 2 SP');
 
 if (array_key_exists('output', $_REQUEST) && $_REQUEST['output'] == 'xhtml') {
-    $t = new \SimpleSAML\XHTML\Template($config, 'metadata.twig', 'admin');
+    $t = new \SimpleSAML\XHTML\Template($config, 'metadata.tpl.php', 'admin');
 
     $t->data['clipboard.js'] = true;
     $t->data['header'] = 'saml20-sp'; // TODO: Replace with headerString in 2.0
     $t->data['headerString'] = \SimpleSAML\Locale\Translate::noop('metadata_saml20-sp');
     $t->data['metadata'] = htmlspecialchars($xml);
     $t->data['metadataflat'] = '$metadata[' . var_export($entityId, true)
-        . '] = ' . VarExporter::export($metaArray20) . ';';
+        . '] = ' . var_export($metaArray20, true) . ';';
     $t->data['metaurl'] = $source->getMetadataURL();
-    $t->send();
+    $t->show();
 } else {
     header('Content-Type: application/samlmetadata+xml');
     echo($xml);

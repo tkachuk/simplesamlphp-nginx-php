@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test\Utils;
 
 /**
@@ -46,7 +44,6 @@ class StateClearer
         $this->backups['$_GET'] = $_GET;
         $this->backups['$_POST'] = $_POST;
         $this->backups['$_SERVER'] = $_SERVER;
-        /** @psalm-var array|null $_SESSION */
         $this->backups['$_SESSION'] = isset($_SESSION) ? $_SESSION : [];
         $this->backups['$_REQUEST'] = $_REQUEST;
     }

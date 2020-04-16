@@ -1,12 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\exampleauth\Auth\Source;
 
 use SimpleSAML\Error;
 use SimpleSAML\Utils;
-use Webmozart\Assert\Assert;
 
 /**
  * Example authentication source - username & password.
@@ -35,8 +32,11 @@ class UserPass extends \SimpleSAML\Module\core\Auth\UserPassBase
      * @param array $info  Information about this authentication source.
      * @param array $config  Configuration.
      */
-    public function __construct(array $info, array $config)
+    public function __construct($info, $config)
     {
+        assert(is_array($info));
+        assert(is_array($config));
+
         // Call the parent constructor first, as required by the interface
         parent::__construct($info, $config);
 
@@ -83,8 +83,11 @@ class UserPass extends \SimpleSAML\Module\core\Auth\UserPassBase
      * @param string $password  The password the user wrote.
      * @return array  Associative array with the users attributes.
      */
-    protected function login(string $username, string $password): array
+    protected function login($username, $password)
     {
+        assert(is_string($username));
+        assert(is_string($password));
+
         $userpass = $username . ':' . $password;
         if (!array_key_exists($userpass, $this->users)) {
             throw new Error\Error('WRONGUSERPASS');

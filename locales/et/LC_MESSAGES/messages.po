@@ -115,6 +115,9 @@ msgstr ""
 "Identiteedipakkuja vastas tõrkega (SAML-vastuse olekukood polnud "
 "positiivne)."
 
+msgid "{admin:metadata_shib13-idp}"
+msgstr "Shib 1.3 IdP metaandmed"
+
 msgid "{login:help_text}"
 msgstr ""
 "Paha lugu! Ilma kasutajatunnust ja parooli teadmata pole võimalik seda "
@@ -213,6 +216,9 @@ msgstr "Välja logimine..."
 
 msgid "{login:error_wrongpassword}"
 msgstr "Kasutajatunnus või parool pole õige."
+
+msgid "{admin:metaover_group_metadata.shib13-sp-remote}"
+msgstr "Shib 1.3 teenusepakkuja (kaug)"
 
 msgid "{errors:descr_PROCESSAUTHNREQUEST}"
 msgstr ""
@@ -441,6 +447,9 @@ msgstr "Teate saatmine"
 msgid "{errors:title_RESPONSESTATUSNOSUCCESS}"
 msgstr "Identiteedipakkujalt saadi tõrge"
 
+msgid "{admin:metadata_shib13-sp}"
+msgstr "Shib 1.3 SP metaandmed"
+
 msgid "{admin:metaover_intro}"
 msgstr "SAML olemi detailide vaatamiseks klõpsa SAML olemi päisel."
 
@@ -511,6 +520,9 @@ msgstr "Lehekülge ei leitud"
 msgid "{logout:logged_out_text}"
 msgstr "Sa oled välja logitud."
 
+msgid "{admin:metaover_group_metadata.shib13-sp-hosted}"
+msgstr "Shib 1.3 teenusepakkuja (hostitud)"
+
 msgid "{admin:metadata_cert_intro}"
 msgstr "Lae alla X509 sertifikaadid PEM kodeeringus failidena."
 
@@ -538,11 +550,8 @@ msgstr ""
 "valesti seadistamise tõttu. Võta ühendust selle sisselogimisteenuse "
 "administraatoriga ja saada talle ülalolev veateade."
 
-msgid "{attributes:attribute_mobile}"
-msgstr "Mobiil"
-
-msgid "{attributes:attribute_preferredlanguage}"
-msgstr "Eelistatud keel"
+msgid "{admin:metaover_group_metadata.shib13-idp-hosted}"
+msgstr "Shib 1.3 identiteedipakkuja (hostitud)"
 
 msgid "{errors:descr_NOTVALIDCERT}"
 msgstr "Sa ei esitanud kehtivat sertifikaati."
@@ -573,6 +582,9 @@ msgstr "Sertifikaat puudub"
 
 msgid "{errors:title_LOGOUTINFOLOST}"
 msgstr "Väljalogimisinfo läks kaotsi"
+
+msgid "{admin:metaover_group_metadata.shib13-idp-remote}"
+msgstr "Shib 1.3 identiteedipakkuja (kaug)"
 
 msgid "{errors:descr_CONFIG}"
 msgstr "Paistab, et SimpleSAMLphp on vigaselt seadistatud."

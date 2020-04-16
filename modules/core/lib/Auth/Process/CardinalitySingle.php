@@ -1,14 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\core\Auth\Process;
 
 use SimpleSAML\Auth;
 use SimpleSAML\Logger;
 use SimpleSAML\Module;
 use SimpleSAML\Utils;
-use Webmozart\Assert\Assert;
 
 /**
  * Filter to ensure correct cardinality of single-valued attributes
@@ -47,9 +44,10 @@ class CardinalitySingle extends \SimpleSAML\Auth\ProcessingFilter
      * @param mixed $reserved  For future use.
      * @param \SimpleSAML\Utils\HttpAdapter $http  HTTP utility service (handles redirects).
      */
-    public function __construct(array &$config, $reserved, Utils\HttpAdapter $http = null)
+    public function __construct(&$config, $reserved, Utils\HttpAdapter $http = null)
     {
         parent::__construct($config, $reserved);
+        assert(is_array($config));
 
         $this->http = $http ? : new Utils\HttpAdapter();
 
@@ -85,9 +83,10 @@ class CardinalitySingle extends \SimpleSAML\Auth\ProcessingFilter
      * @param array &$request  The current request
      * @return void
      */
-    public function process(array &$request): void
+    public function process(&$request)
     {
-        Assert::keyExists($request, 'Attributes');
+        assert(is_array($request));
+        assert(array_key_exists("Attributes", $request));
 
         if (
             array_key_exists('Source', $request)

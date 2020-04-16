@@ -1,13 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML;
 
 use SAML2\XML\saml\AttributeValue;
 use SimpleSAML\Error;
 use SimpleSAML\Utils;
-use Webmozart\Assert\Assert;
 
 /**
  * The Session class holds information about a user session, and everything attached to it.
@@ -48,10 +45,8 @@ class Session implements \Serializable, Utils\ClearableState
      * This variable holds the instance of the session - Singleton approach.
      *
      * Warning: do not set the instance manually, call Session::load() instead.
-     *
-     * @var \SimpleSAML\Session|null
      */
-    private static $instance = null;
+    private static $instance;
 
     /**
      * The global configuration.
@@ -150,7 +145,7 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @param boolean $transient Whether to create a transient session or not.
      */
-    private function __construct(bool $transient = false)
+    private function __construct($transient = false)
     {
         $this->setConfiguration(Configuration::getInstance());
 
@@ -179,8 +174,9 @@ class Session implements \Serializable, Utils\ClearableState
             $this->markDirty();
 
             // initialize data for session check function if defined
-            $checkFunction = self::$config->getValue('session.check_function', null);
-            if (is_callable($checkFunction)) {
+            $checkFunction = self::$config->getArray('session.check_function', null);
+            if (isset($checkFunction)) {
+                assert(is_callable($checkFunction));
                 call_user_func($checkFunction, $this, true);
             }
         }
@@ -193,7 +189,7 @@ class Session implements \Serializable, Utils\ClearableState
      * @param Configuration $config
      * @return void
      */
-    public function setConfiguration(Configuration $config): void
+    public function setConfiguration(Configuration $config)
     {
         self::$config = $config;
     }
@@ -206,11 +202,10 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return string The serialized representation of this session object.
      */
-    public function serialize(): string
+    public function serialize()
     {
         return serialize(get_object_vars($this));
     }
-
 
     /**
      * Unserialize a session object and load it..
@@ -219,9 +214,6 @@ class Session implements \Serializable, Utils\ClearableState
      * be serializable in its original form (e.g.: DOM objects).
      *
      * @param string $serialized The serialized representation of a session that we want to restore.
-     * @return void
-     *
-     * Cannot typehint param as string due to upstream restrictions
      */
     public function unserialize($serialized)
     {
@@ -243,12 +235,11 @@ class Session implements \Serializable, Utils\ClearableState
                 foreach ($values as $idx => $value) {
                     // this should be originally a DOMNodeList
                     /* @var \SAML2\XML\saml\AttributeValue $value */
-                    $this->authData[$authority]['Attributes'][$attribute][$idx] = $value->getElement()->childNodes;
+                    $this->authData[$authority]['Attributes'][$attribute][$idx] = $value->element->childNodes;
                 }
             }
         }
     }
-
 
     /**
      * Retrieves the current session. Creates a new session if there's not one.
@@ -256,7 +247,7 @@ class Session implements \Serializable, Utils\ClearableState
      * @return Session The current session.
      * @throws \Exception When session couldn't be initialized and the session fallback is disabled by configuration.
      */
-    public static function getSessionFromRequest(): Session
+    public static function getSessionFromRequest()
     {
         // check if we already have initialized the session
         if (isset(self::$instance)) {
@@ -322,17 +313,18 @@ class Session implements \Serializable, Utils\ClearableState
         return self::$instance;
     }
 
-
     /**
      * Get a session from the session handler.
      *
      * @param string|null $sessionId The session we should get, or null to get the current session.
      *
-     * @return \SimpleSAML\Session|null The session that is stored in the session handler,
-     *   or null if the session wasn't found.
+     * @return Session|null The session that is stored in the session handler, or null if the session wasn't
+     * found.
      */
-    public static function getSession(string $sessionId = null): ?Session
+    public static function getSession($sessionId = null)
     {
+        assert(is_string($sessionId) || $sessionId === null);
+
         $sh = SessionHandler::getSessionHandler();
 
         if ($sessionId === null) {
@@ -354,6 +346,8 @@ class Session implements \Serializable, Utils\ClearableState
             return null;
         }
 
+        assert($session instanceof self);
+
         if ($checkToken) {
             $globalConfig = Configuration::getInstance();
 
@@ -373,8 +367,9 @@ class Session implements \Serializable, Utils\ClearableState
             }
 
             // run session check function if defined
-            $checkFunction = $globalConfig->getValue('session.check_function', null);
-            if (is_callable($checkFunction)) {
+            $checkFunction = $globalConfig->getArray('session.check_function', null);
+            if (isset($checkFunction)) {
+                assert(is_callable($checkFunction));
                 $check = call_user_func($checkFunction, $session);
                 if ($check !== true) {
                     Logger::warning('Session did not pass check function.');
@@ -388,7 +383,6 @@ class Session implements \Serializable, Utils\ClearableState
         return $session;
     }
 
-
     /**
      * Load a given session as the current one.
      *
@@ -396,16 +390,15 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * Warning: never set self::$instance yourself, call this method instead.
      *
-     * @param \SimpleSAML\Session $session The session to load.
-     * @return \SimpleSAML\Session The session we just loaded, just for convenience.
+     * @param Session $session The session to load.
+     * @return Session The session we just loaded, just for convenience.
      */
-    private static function load(Session $session): Session
+    private static function load(Session $session)
     {
         Logger::setTrackId($session->getTrackID());
         self::$instance = $session;
         return self::$instance;
     }
-
 
     /**
      * Use a transient session.
@@ -415,7 +408,7 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return void
      */
-    public static function useTransientSession(): void
+    public static function useTransientSession()
     {
         if (isset(self::$instance)) {
             // we already have a session, don't bother with a transient session
@@ -425,18 +418,17 @@ class Session implements \Serializable, Utils\ClearableState
         self::load(new Session(true));
     }
 
-
     /**
      * Create a new session and cache it.
      *
      * @param string $sessionId The new session we should create.
      * @return void
      */
-    public static function createSession(string $sessionId): void
+    public static function createSession($sessionId)
     {
+        assert(is_string($sessionId));
         self::$sessions[$sessionId] = null;
     }
-
 
     /**
      * Save the session to the store.
@@ -448,7 +440,7 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return void
      */
-    public function save(): void
+    public function save()
     {
         // clean out old data
         $this->expireData();
@@ -474,7 +466,6 @@ class Session implements \Serializable, Utils\ClearableState
         }
     }
 
-
     /**
      * Save the current session and clean any left overs that could interfere with the normal application behaviour.
      *
@@ -483,7 +474,7 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return void
      */
-    public function cleanup(): void
+    public function cleanup()
     {
         $this->save();
         $sh = SessionHandler::getSessionHandler();
@@ -492,7 +483,6 @@ class Session implements \Serializable, Utils\ClearableState
         }
     }
 
-
     /**
      * Mark this session as dirty.
      *
@@ -500,7 +490,7 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return void
      */
-    public function markDirty(): void
+    public function markDirty()
     {
         if ($this->isTransient()) {
             return;
@@ -515,40 +505,38 @@ class Session implements \Serializable, Utils\ClearableState
         $this->callback_registered = header_register_callback([$this, 'save']);
     }
 
-
     /**
      * Destroy the session.
      *
      * Destructor for this class. It will save the session to the session handler
      * in case the session has been marked as dirty. Do nothing otherwise.
+     *
+     * @return void
      */
     public function __destruct()
     {
         $this->save();
     }
 
-
     /**
      * Retrieve the session ID of this session.
      *
-     * @return string|null  The session ID, or NULL for transient sessions.
+     * @return string|null  The session ID, or null if this is a transient session.
      */
-    public function getSessionId(): ?string
+    public function getSessionId()
     {
         return $this->sessionId;
     }
-
 
     /**
      * Retrieve if session is transient.
      *
      * @return boolean The session transient flag.
      */
-    public function isTransient(): bool
+    public function isTransient()
     {
         return $this->transient;
     }
-
 
     /**
      * Get a unique ID that will be permanent for this session.
@@ -556,22 +544,20 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return string The unique ID.
      */
-    public function getTrackID(): string
+    public function getTrackID()
     {
         return $this->trackid;
     }
-
 
     /**
      * Get remember me expire time.
      *
      * @return integer|null The remember me expire time.
      */
-    public function getRememberMeExpire(): ?int
+    public function getRememberMeExpire()
     {
         return $this->rememberMeExpire;
     }
-
 
     /**
      * Set remember me expire time.
@@ -579,8 +565,10 @@ class Session implements \Serializable, Utils\ClearableState
      * @param int $expire Unix timestamp when remember me session cookies expire.
      * @return void
      */
-    public function setRememberMeExpire(int $expire = null): void
+    public function setRememberMeExpire($expire = null)
     {
+        assert(is_int($expire) || $expire === null);
+
         if ($expire === null) {
             $expire = time() + self::$config->getInteger('session.rememberme.lifetime', 14 * 86400);
         }
@@ -590,20 +578,22 @@ class Session implements \Serializable, Utils\ClearableState
         $this->updateSessionCookies($cookieParams);
     }
 
-
     /**
      * Marks the user as logged in with the specified authority.
      *
      * If the user already has logged in, the user will be logged out first.
      *
      * @param string     $authority The authority the user logged in with.
-     * @param array      $data The authentication data for this authority.
+     * @param array|null $data The authentication data for this authority.
      * @return void
      *
      * @throws Error\CannotSetCookie If the authentication token cannot be set for some reason.
      */
-    public function doLogin(string $authority, array $data = []): void
+    public function doLogin($authority, array $data = null)
     {
+        assert(is_string($authority));
+        assert(is_array($data) || $data === null);
+
         Logger::debug('Session: doLogin("' . $authority . '")');
 
         $this->markDirty();
@@ -611,6 +601,10 @@ class Session implements \Serializable, Utils\ClearableState
         if (isset($this->authData[$authority])) {
             // we are already logged in, log the user out first
             $this->doLogout($authority);
+        }
+
+        if ($data === null) {
+            $data = [];
         }
 
         $data['Authority'] = $authority;
@@ -642,11 +636,8 @@ class Session implements \Serializable, Utils\ClearableState
                     continue;
                 }
 
-                /** @psalm-var \DOMNode $node   We made sure value has at least 1 item in the check above */
-                $node = $value->item(0);
-
                 // create an AttributeValue object and save it to 'RawAttributes', using same attribute name and index
-                $attrval = new AttributeValue($node->parentNode);
+                $attrval = new AttributeValue($value->item(0)->parentNode);
                 $data['RawAttributes'][$attribute][$idx] = $attrval;
             }
         }
@@ -684,7 +675,6 @@ class Session implements \Serializable, Utils\ClearableState
         }
     }
 
-
     /**
      * Marks the user as logged out.
      *
@@ -693,7 +683,7 @@ class Session implements \Serializable, Utils\ClearableState
      * @param string $authority The authentication source we are logging out of.
      * @return void
      */
-    public function doLogout(string $authority): void
+    public function doLogout($authority)
     {
         Logger::debug('Session: doLogout(' . var_export($authority, true) . ')');
 
@@ -713,7 +703,6 @@ class Session implements \Serializable, Utils\ClearableState
         }
     }
 
-
     /**
      * This function calls all registered logout handlers.
      *
@@ -722,9 +711,10 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @throws \Exception If the handler is not a valid function or method.
      */
-    private function callLogoutHandlers(string $authority): void
+    private function callLogoutHandlers($authority)
     {
-        Assert::notNull($this->authData[$authority]);
+        assert(is_string($authority));
+        assert(isset($this->authData[$authority]));
 
         if (empty($this->authData[$authority]['LogoutHandlers'])) {
             return;
@@ -749,7 +739,6 @@ class Session implements \Serializable, Utils\ClearableState
         unset($this->authData[$authority]['LogoutHandlers']);
     }
 
-
     /**
      * Is the session representing an authenticated user, and is the session still alive.
      * This function will return false after the user has timed out.
@@ -758,8 +747,10 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return bool True if the user has a valid session, false if not.
      */
-    public function isValid(string $authority): bool
+    public function isValid($authority)
     {
+        assert(is_string($authority));
+
         if (!isset($this->authData[$authority])) {
             Logger::debug(
                 'Session: ' . var_export($authority, true) .
@@ -778,22 +769,23 @@ class Session implements \Serializable, Utils\ClearableState
         return true;
     }
 
-
     /**
      * Update session cookies.
      *
      * @param array $params The parameters for the cookies.
      * @return void
      */
-    public function updateSessionCookies(array $params = []): void
+    public function updateSessionCookies($params = null)
     {
+        assert(is_null($params) || is_array($params));
+
         $sessionHandler = SessionHandler::getSessionHandler();
 
         if ($this->sessionId !== null) {
             $sessionHandler->setCookie($sessionHandler->getSessionCookieName(), $this->sessionId, $params);
         }
 
-        $params = array_merge($sessionHandler->getCookieParams(), $params);
+        $params = array_merge($sessionHandler->getCookieParams(), is_array($params) ? $params : []);
 
         if ($this->authToken !== null) {
             Utils\HTTP::setCookie(
@@ -804,7 +796,6 @@ class Session implements \Serializable, Utils\ClearableState
         }
     }
 
-
     /**
      * Set the lifetime for authentication source.
      *
@@ -812,8 +803,11 @@ class Session implements \Serializable, Utils\ClearableState
      * @param int    $expire The number of seconds authentication source is valid.
      * @return void
      */
-    public function setAuthorityExpire(string $authority, int $expire = null): void
+    public function setAuthorityExpire($authority, $expire = null)
     {
+        assert(isset($this->authData[$authority]));
+        assert(is_int($expire) || $expire === null);
+
         $this->markDirty();
 
         if ($expire === null) {
@@ -822,7 +816,6 @@ class Session implements \Serializable, Utils\ClearableState
 
         $this->authData[$authority]['Expire'] = $expire;
     }
-
 
     /**
      * This function registers a logout handler.
@@ -834,9 +827,9 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @throws \Exception If the handler is not a valid function or method.
      */
-    public function registerLogoutHandler(string $authority, string $classname, string $functionname): void
+    public function registerLogoutHandler($authority, $classname, $functionname)
     {
-        Assert::notNull($this->authData[$authority]);
+        assert(isset($this->authData[$authority]));
 
         $logout_handler = [$classname, $functionname];
 
@@ -851,7 +844,6 @@ class Session implements \Serializable, Utils\ClearableState
         $this->markDirty();
     }
 
-
     /**
      * Delete data from the data store.
      *
@@ -861,8 +853,11 @@ class Session implements \Serializable, Utils\ClearableState
      * @param string $id The identifier of the data.
      * @return void
      */
-    public function deleteData(string $type, string $id): void
+    public function deleteData($type, $id)
     {
+        assert(is_string($type));
+        assert(is_string($id));
+
         if (!array_key_exists($type, $this->dataStore)) {
             return;
         }
@@ -870,7 +865,6 @@ class Session implements \Serializable, Utils\ClearableState
         unset($this->dataStore[$type][$id]);
         $this->markDirty();
     }
-
 
     /**
      * This function stores data in the data store.
@@ -889,9 +883,11 @@ class Session implements \Serializable, Utils\ClearableState
      * @throws \Exception If the data couldn't be stored.
      *
      */
-    public function setData(string $type, string $id, $data, $timeout = null): void
+    public function setData($type, $id, $data, $timeout = null)
     {
-        Assert::true(is_int($timeout) || $timeout === null || $timeout === self::DATA_TIMEOUT_SESSION_END);
+        assert(is_string($type));
+        assert(is_string($id));
+        assert(is_int($timeout) || $timeout === null || $timeout === self::DATA_TIMEOUT_SESSION_END);
 
         if ($timeout === null) {
             // use the default timeout
@@ -927,13 +923,12 @@ class Session implements \Serializable, Utils\ClearableState
         $this->markDirty();
     }
 
-
     /**
      * This function removes expired data from the data store.
      *
      * @return void
      */
-    private function expireData(): void
+    private function expireData()
     {
         $ct = time();
 
@@ -952,7 +947,6 @@ class Session implements \Serializable, Utils\ClearableState
         }
     }
 
-
     /**
      * This function retrieves data from the data store.
      *
@@ -964,8 +958,11 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return mixed The data of the given type with the given id or null if the data doesn't exist in the data store.
      */
-    public function getData(string $type, ?string $id)
+    public function getData($type, $id)
     {
+        assert(is_string($type));
+        assert($id === null || is_string($id));
+
         if ($id === null) {
             return null;
         }
@@ -981,7 +978,6 @@ class Session implements \Serializable, Utils\ClearableState
         return $this->dataStore[$type][$id]['data'];
     }
 
-
     /**
      * This function retrieves all data of the specified type from the data store.
      *
@@ -995,8 +991,10 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return array An associative array with all data of the given type.
      */
-    public function getDataOfType(string $type): array
+    public function getDataOfType($type)
     {
+        assert(is_string($type));
+
         if (!array_key_exists($type, $this->dataStore)) {
             return [];
         }
@@ -1009,7 +1007,6 @@ class Session implements \Serializable, Utils\ClearableState
         return $ret;
     }
 
-
     /**
      * Get the current persistent authentication state.
      *
@@ -1017,15 +1014,16 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return array|null  The current persistent authentication state, or null if not authenticated.
      */
-    public function getAuthState(string $authority): ?array
+    public function getAuthState($authority)
     {
+        assert(is_string($authority));
+
         if (!isset($this->authData[$authority])) {
             return null;
         }
 
         return $this->authData[$authority];
     }
-
 
     /**
      * Check whether the session cookie is set.
@@ -1034,12 +1032,11 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return bool  true if it was set, false if not.
      */
-    public function hasSessionCookie(): bool
+    public function hasSessionCookie()
     {
         $sh = SessionHandler::getSessionHandler();
         return $sh->hasSessionCookie();
     }
-
 
     /**
      * Add an SP association for an IdP.
@@ -1050,10 +1047,11 @@ class Session implements \Serializable, Utils\ClearableState
      * @param array  $association The association we should add.
      * @return void
      */
-    public function addAssociation(string $idp, array $association): void
+    public function addAssociation($idp, array $association)
     {
-        Assert::notNull($association['id']);
-        Assert::notNull($association['Handler']);
+        assert(is_string($idp));
+        assert(isset($association['id']));
+        assert(isset($association['Handler']));
 
         if (!isset($this->associations)) {
             $this->associations = [];
@@ -1068,7 +1066,6 @@ class Session implements \Serializable, Utils\ClearableState
         $this->markDirty();
     }
 
-
     /**
      * Retrieve the associations for an IdP.
      *
@@ -1078,8 +1075,10 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return array  The IdP associations.
      */
-    public function getAssociations(string $idp): array
+    public function getAssociations($idp)
     {
+        assert(is_string($idp));
+
         if (!isset($this->associations)) {
             $this->associations = [];
         }
@@ -1102,7 +1101,6 @@ class Session implements \Serializable, Utils\ClearableState
         return $this->associations[$idp];
     }
 
-
     /**
      * Remove an SP association for an IdP.
      *
@@ -1112,8 +1110,11 @@ class Session implements \Serializable, Utils\ClearableState
      * @param string $associationId The id of the association.
      * @return void
      */
-    public function terminateAssociation(string $idp, string $associationId): void
+    public function terminateAssociation($idp, $associationId)
     {
+        assert(is_string($idp));
+        assert(is_string($associationId));
+
         if (!isset($this->associations)) {
             return;
         }
@@ -1127,7 +1128,6 @@ class Session implements \Serializable, Utils\ClearableState
         $this->markDirty();
     }
 
-
     /**
      * Retrieve authentication data.
      *
@@ -1136,22 +1136,24 @@ class Session implements \Serializable, Utils\ClearableState
      *
      * @return mixed  The value, or null if the value wasn't found.
      */
-    public function getAuthData(string $authority, string $name)
+    public function getAuthData($authority, $name)
     {
+        assert(is_string($authority));
+        assert(is_string($name));
+
         if (!isset($this->authData[$authority][$name])) {
             return null;
         }
         return $this->authData[$authority][$name];
     }
 
-
     /**
      * Retrieve a list of authorities (authentication sources) that are currently valid within
      * this session.
      *
-     * @return string[] An array containing every authority currently valid. Empty if none available.
+     * @return mixed An array containing every authority currently valid. Empty if none available.
      */
-    public function getAuthorities(): array
+    public function getAuthorities()
     {
         $authorities = [];
         foreach (array_keys($this->authData) as $authority) {
@@ -1167,7 +1169,7 @@ class Session implements \Serializable, Utils\ClearableState
      * Clear any configuration information cached
      * @return void
      */
-    public static function clearInternalState(): void
+    public static function clearInternalState()
     {
         self::$config = null;
         self::$instance = null;

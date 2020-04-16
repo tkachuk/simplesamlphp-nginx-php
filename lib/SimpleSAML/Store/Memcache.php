@@ -1,12 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Store;
 
 use SimpleSAML\Configuration;
 use SimpleSAML\Store;
-use Webmozart\Assert\Assert;
 
 /**
  * A memcache based data store.
@@ -40,8 +37,11 @@ class Memcache extends Store
      * @param string $key The key.
      * @return mixed|null The value.
      */
-    public function get(string $type, string $key)
+    public function get($type, $key)
     {
+        assert(is_string($type));
+        assert(is_string($key));
+
         return \SimpleSAML\Memcache::get($this->prefix . '.' . $type . '.' . $key);
     }
 
@@ -55,9 +55,11 @@ class Memcache extends Store
      * @param int|null $expire The expiration time (unix timestamp), or NULL if it never expires.
      * @return void
      */
-    public function set(string $type, string $key, $value, ?int $expire = null): void
+    public function set($type, $key, $value, $expire = null)
     {
-        Assert::nullOrGreaterThan($expire, 2592000);
+        assert(is_string($type));
+        assert(is_string($key));
+        assert($expire === null || (is_int($expire) && $expire > 2592000));
 
         if ($expire === null) {
             $expire = 0;
@@ -74,8 +76,11 @@ class Memcache extends Store
      * @param string $key The key.
      * @return void
      */
-    public function delete(string $type, string $key): void
+    public function delete($type, $key)
     {
+        assert(is_string($type));
+        assert(is_string($key));
+
         \SimpleSAML\Memcache::delete($this->prefix . '.' . $type . '.' . $key);
     }
 }

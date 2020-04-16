@@ -1,12 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test;
 
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
 use SimpleSAML\Configuration;
 
 /**
@@ -191,7 +188,7 @@ NOWDOC;
     /**
      * @return void
      */
-    public function setUp(): void
+    public function setUp()
     {
         $this->root = vfsStream::setup(
             self::ROOTDIRNAME,
@@ -208,7 +205,7 @@ NOWDOC;
         $this->good_private_key_file = $this->certdir . DIRECTORY_SEPARATOR . self::GOOD_PRIVATE_KEY;
         $this->good_certificate_file = $this->certdir . DIRECTORY_SEPARATOR . self::GOOD_CERTIFICATE;
 
-        $this->config = Configuration::loadFromArray([
+        $this->config = \SimpleSAML\Configuration::loadFromArray([
             'certdir' => $this->certdir,
         ], '[ARRAY]', 'simplesaml');
     }
@@ -217,21 +214,21 @@ NOWDOC;
     /**
      * @return void
      */
-    public function tearDown(): void
+    public function tearDown()
     {
-        $this->clearInstance($this->config, Configuration::class, []);
+        $this->clearInstance($this->config, '\SimpleSAML\Configuration', []);
     }
 
 
     /**
      * @param \SimpleSAML\Configuration $service
-     * @param class-string $className
+     * @param string $className
      * @param mixed|null $value
      * @return void
      */
     protected function clearInstance(Configuration $service, $className, $value = null)
     {
-        $reflectedClass = new ReflectionClass($className);
+        $reflectedClass = new \ReflectionClass($className);
         $reflectedInstance = $reflectedClass->getProperty('instance');
         $reflectedInstance->setAccessible(true);
         $reflectedInstance->setValue($service, $value);

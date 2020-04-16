@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Error;
 
 /**
@@ -35,7 +33,7 @@ class ConfigurationError extends Error
      * @param string|null $file The configuration file that originated this error.
      * @param array|null $config The configuration array that led to this problem.
      */
-    public function __construct(string $reason = null, string $file = null, array $config = null)
+    public function __construct($reason = null, $file = null, array $config = null)
     {
         $file_str = '';
         $reason_str = '.';
@@ -61,7 +59,7 @@ class ConfigurationError extends Error
      *
      * @return null|string The reason for this exception.
      */
-    public function getReason(): ?string
+    public function getReason()
     {
         return $this->reason;
     }
@@ -72,7 +70,7 @@ class ConfigurationError extends Error
      *
      * @return null|string The configuration file that caused this exception.
      */
-    public function getConfFile(): ?string
+    public function getConfFile()
     {
         return $this->config_file;
     }

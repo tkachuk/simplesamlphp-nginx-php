@@ -1,13 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\saml\Auth\Process;
 
 use SAML2\Constants;
 use SimpleSAML\Error;
 use SimpleSAML\Logger;
-use Webmozart\Assert\Assert;
 
 /**
  * Authentication processing filter to generate a persistent NameID.
@@ -61,9 +58,10 @@ class SQLPersistentNameID extends \SimpleSAML\Module\saml\BaseNameIDGenerator
      *
      * @throws \SimpleSAML\Error\Exception If the 'attribute' option is not specified.
      */
-    public function __construct(array $config, $reserved)
+    public function __construct($config, $reserved)
     {
         parent::__construct($config, $reserved);
+        assert(is_array($config));
 
         $this->format = Constants::NAMEID_PERSISTENT;
 
@@ -98,7 +96,7 @@ class SQLPersistentNameID extends \SimpleSAML\Module\saml\BaseNameIDGenerator
      *
      * @throws \SimpleSAML\Module\saml\Error if the NameID creation policy is invalid.
      */
-    protected function getValue(array &$state): ?string
+    protected function getValue(array &$state)
     {
         if (!isset($state['saml:NameIDFormat']) && !$this->allowUnspecified) {
             Logger::debug(

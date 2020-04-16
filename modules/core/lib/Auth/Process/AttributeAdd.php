@@ -1,10 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\core\Auth\Process;
-
-use Webmozart\Assert\Assert;
 
 /**
  * Filter to add attributes.
@@ -37,9 +33,11 @@ class AttributeAdd extends \SimpleSAML\Auth\ProcessingFilter
      * @param array &$config  Configuration information about this filter.
      * @param mixed $reserved  For future use.
      */
-    public function __construct(array &$config, $reserved)
+    public function __construct(&$config, $reserved)
     {
         parent::__construct($config, $reserved);
+
+        assert(is_array($config));
 
         foreach ($config as $name => $values) {
             if (is_int($name)) {
@@ -75,9 +73,10 @@ class AttributeAdd extends \SimpleSAML\Auth\ProcessingFilter
      * @param array &$request  The current request
      * @return void
      */
-    public function process(array &$request): void
+    public function process(&$request)
     {
-        Assert::keyExists($request, 'Attributes');
+        assert(is_array($request));
+        assert(array_key_exists('Attributes', $request));
 
         $attributes = &$request['Attributes'];
 

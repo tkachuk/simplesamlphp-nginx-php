@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Stats;
 
 use SimpleSAML\Configuration;
@@ -29,7 +27,6 @@ abstract class Output
      * Write a stats event.
      *
      * @param array $data The event.
-     * @return void
      */
-    abstract public function emit(array $data): void;
+    abstract public function emit(array $data);
 }

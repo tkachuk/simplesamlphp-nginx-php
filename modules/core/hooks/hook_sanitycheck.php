@@ -1,19 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
-use Webmozart\Assert\Assert;
-
 /**
  * Hook to do sanitycheck
  *
  * @param array &$hookinfo  hookinfo
  * @return void
  */
-function core_hook_sanitycheck(array &$hookinfo): void
+function core_hook_sanitycheck(&$hookinfo)
 {
-    Assert::keyExists($hookinfo, 'errors');
-    Assert::keyExists($hookinfo, 'info');
+    assert(is_array($hookinfo));
+    assert(array_key_exists('errors', $hookinfo));
+    assert(array_key_exists('info', $hookinfo));
 
     $config = \SimpleSAML\Configuration::getInstance();
 
@@ -29,7 +26,7 @@ function core_hook_sanitycheck(array &$hookinfo): void
         $hookinfo['info'][] = '[core] In config.php technicalcontact_email is set properly';
     }
 
-    if (version_compare(phpversion(), '7.2', '>=')) {
+    if (version_compare(phpversion(), '5.6', '>=')) {
         $hookinfo['info'][] = '[core] You are running a PHP version suitable for SimpleSAMLphp.';
     } else {
         $hookinfo['errors'][] = '[core] You are running an old PHP installation. ' .

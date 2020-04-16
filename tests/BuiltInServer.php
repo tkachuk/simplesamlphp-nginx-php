@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test;
 
 use SimpleSAML\Utils\System;
@@ -206,14 +204,8 @@ class BuiltInServer
             CURLOPT_HEADER => 1,
         ]);
         curl_setopt_array($ch, $curlopts);
-
-        /** @psalm-var array|false $resp  RETURNTRANSFER was set to true */
+        /** @var mixed $resp */
         $resp = curl_exec($ch);
-
-        if ($resp === false) {
-            throw new \Exception("Unable to contact: " . $url);
-        }
-
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         list($header, $body) = explode("\r\n\r\n", $resp, 2);
         $raw_headers = explode("\r\n", $header);

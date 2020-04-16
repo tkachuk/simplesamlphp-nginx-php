@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Utils;
 
 use SimpleSAML\Configuration;
@@ -29,7 +27,7 @@ class HTTP
      *
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    private static function getSecurePOSTRedirectURL(string $destination, array $data): string
+    private static function getSecurePOSTRedirectURL($destination, $data)
     {
         $session = Session::getSessionFromRequest();
         $id = self::savePOSTData($session, $destination, $data);
@@ -58,7 +56,7 @@ class HTTP
      *
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    private static function getServerHost(): string
+    private static function getServerHost()
     {
         if (array_key_exists('HTTP_HOST', $_SERVER)) {
             $current = $_SERVER['HTTP_HOST'];
@@ -88,7 +86,7 @@ class HTTP
      *
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function getServerHTTPS(): bool
+    public static function getServerHTTPS()
     {
         if (!array_key_exists('HTTPS', $_SERVER)) {
             // not an https-request
@@ -113,7 +111,7 @@ class HTTP
      *
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function getServerPort(): string
+    public static function getServerPort()
     {
         $default_port = self::getServerHTTPS() ? '443' : '80';
         $port = isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : $default_port;
@@ -135,7 +133,7 @@ class HTTP
      *
      * @return boolean True if the given URL is valid, false otherwise.
      */
-    public static function isValidURL(string $url): bool
+    public static function isValidURL($url)
     {
         $url = filter_var($url, FILTER_VALIDATE_URL);
         if ($url === false) {
@@ -173,12 +171,11 @@ class HTTP
      * @author Mads Freek Petersen
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    private static function redirect(string $url, array $parameters = []): void
+    private static function redirect($url, $parameters = [])
     {
-        if (empty($url)) {
+        if (!is_string($url) || empty($url) || !is_array($parameters)) {
             throw new \InvalidArgumentException('Invalid input parameters.');
         }
-
         if (!self::isValidURL($url)) {
             throw new Error\Exception('Invalid destination URL.');
         }
@@ -249,7 +246,7 @@ class HTTP
      * @author Andjelko Horvat
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    private static function savePOSTData(Session $session, string $destination, array $data): string
+    private static function savePOSTData(Session $session, $destination, $data)
     {
         // generate a random ID to avoid replay attacks
         $id = Random::generateID();
@@ -278,13 +275,18 @@ class HTTP
      * @author Andreas Solberg, UNINETT AS <andreas.solberg@uninett.no>
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function addURLParameters(string $url, array $parameters): string
+    public static function addURLParameters($url, $parameters)
     {
+        if (!is_string($url) || !is_array($parameters)) {
+            throw new \InvalidArgumentException('Invalid input parameters.');
+        }
+
         $queryStart = strpos($url, '?');
         if ($queryStart === false) {
             $oldQuery = [];
             $url .= '?';
         } else {
+            /** @var string|false $oldQuery */
             $oldQuery = substr($url, $queryStart + 1);
             if ($oldQuery === false) {
                 $oldQuery = [];
@@ -294,6 +296,7 @@ class HTTP
             $url = substr($url, 0, $queryStart + 1);
         }
 
+        /** @var array $oldQuery */
         $query = array_merge($oldQuery, $parameters);
         $url .= http_build_query($query, '', '&');
 
@@ -312,8 +315,12 @@ class HTTP
      *
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function checkSessionCookie(?string $retryURL = null): void
+    public static function checkSessionCookie($retryURL = null)
     {
+        if (!is_null($retryURL) && !is_string($retryURL)) {
+            throw new \InvalidArgumentException('Invalid input parameters.');
+        }
+
         $session = Session::getSessionFromRequest();
         if ($session->hasSessionCookie()) {
             return;
@@ -333,7 +340,7 @@ class HTTP
      * Check if a URL is valid and is in our list of allowed URLs.
      *
      * @param string $url The URL to check.
-     * @param string[] $trustedSites An optional white list of domains. If none specified, the 'trusted.url.domains'
+     * @param array  $trustedSites An optional white list of domains. If none specified, the 'trusted.url.domains'
      * configuration directive will be used.
      *
      * @return string The normalized URL itself if it is allowed. An empty string if the $url parameter is empty as
@@ -343,7 +350,7 @@ class HTTP
      *
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function checkURLAllowed(string $url, array $trustedSites = null): string
+    public static function checkURLAllowed($url, array $trustedSites = null)
     {
         if (empty($url)) {
             return '';
@@ -435,8 +442,12 @@ class HTTP
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      * @author Marco Ferrante, University of Genova <marco@csita.unige.it>
      */
-    public static function fetch(string $url, array $context = [], bool $getHeaders = false)
+    public static function fetch($url, $context = [], $getHeaders = false)
     {
+        if (!is_string($url)) {
+            throw new \InvalidArgumentException('Invalid input parameters.');
+        }
+
         $config = Configuration::getInstance();
 
         $proxy = $config->getString('proxy', null);
@@ -487,8 +498,14 @@ class HTTP
 
         // data and headers
         if ($getHeaders) {
+            /**
+             * @psalm-suppress UndefinedVariable    Remove when Psalm >= 3.0.17
+             */
             if (!empty($http_response_header)) {
                 $headers = [];
+                /**
+                 * @psalm-suppress UndefinedVariable    Remove when Psalm >= 3.0.17
+                 */
                 foreach ($http_response_header as $h) {
                     if (preg_match('@^HTTP/1\.[01]\s+\d{3}\s+@', $h)) {
                         $headers = []; // reset
@@ -522,7 +539,7 @@ class HTTP
      *
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function getAcceptLanguage(): array
+    public static function getAcceptLanguage()
     {
         if (!array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER)) {
             // no Accept-Language header, return an empty set
@@ -586,7 +603,7 @@ class HTTP
      *
      * @return string The guessed base path that should correspond to the root installation of SimpleSAMLphp.
      */
-    public static function guessBasePath(): string
+    public static function guessBasePath()
     {
         if (!array_key_exists('REQUEST_URI', $_SERVER) || !array_key_exists('SCRIPT_FILENAME', $_SERVER)) {
             return '/';
@@ -621,7 +638,7 @@ class HTTP
      *
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function getBaseURL(): string
+    public static function getBaseURL()
     {
         $globalConfig = Configuration::getInstance();
         $baseURL = $globalConfig->getString('baseurlpath', 'simplesaml/');
@@ -670,7 +687,7 @@ class HTTP
      *
      * @author Andreas Solberg, UNINETT AS <andreas.solberg@uninett.no>
      */
-    public static function getFirstPathElement(bool $leadingSlash = true): string
+    public static function getFirstPathElement($leadingSlash = true)
     {
         if (preg_match('|^/(.*?)/|', $_SERVER['SCRIPT_NAME'], $matches)) {
             return ($leadingSlash ? '/' : '') . $matches[1];
@@ -691,8 +708,12 @@ class HTTP
      * @author Andjelko Horvat
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function getPOSTRedirectURL(string $destination, array $data): string
+    public static function getPOSTRedirectURL($destination, $data)
     {
+        if (!is_string($destination) || !is_array($data)) {
+            throw new \InvalidArgumentException('Invalid input parameters.');
+        }
+
         $config = Configuration::getInstance();
         $allowed = $config->getBoolean('enable.http_post', false);
 
@@ -719,12 +740,11 @@ class HTTP
      *
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function getSelfHost(): string
+    public static function getSelfHost()
     {
         $decomposed = explode(':', self::getSelfHostWithNonStandardPort());
         return array_shift($decomposed);
     }
-
 
     /**
      * Retrieve our own host, including the port in case the it is not standard for the protocol in use. That is port
@@ -738,7 +758,7 @@ class HTTP
      * @author Andreas Solberg, UNINETT AS <andreas.solberg@uninett.no>
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function getSelfHostWithNonStandardPort(): string
+    public static function getSelfHostWithNonStandardPort()
     {
         $url = self::getBaseURL();
 
@@ -760,7 +780,7 @@ class HTTP
      * @author Andreas Solberg, UNINETT AS <andreas.solberg@uninett.no>
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function getSelfHostWithPath(): string
+    public static function getSelfHostWithPath()
     {
         $baseurl = explode("/", self::getBaseURL());
         $elements = array_slice($baseurl, 3 - count($baseurl), count($baseurl) - 4);
@@ -784,7 +804,7 @@ class HTTP
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function getSelfURL(): string
+    public static function getSelfURL()
     {
         $cfg = Configuration::getInstance();
         $baseDir = $cfg->getBaseDir();
@@ -796,7 +816,7 @@ class HTTP
         // convert that relative path to an HTTP query
         $url_path = str_replace(DIRECTORY_SEPARATOR, '/', $rel_path);
         // find where the relative path starts in the current request URI
-        $uri_pos = (!empty($url_path)) ? strpos($_SERVER['REQUEST_URI'] ?? '', $url_path) : false;
+        $uri_pos = (!empty($url_path)) ? strpos($_SERVER['REQUEST_URI'], $url_path) : false;
 
         if ($cur_path == $rel_path || $uri_pos === false) {
             /*
@@ -847,7 +867,7 @@ class HTTP
      * @author Andreas Solberg, UNINETT AS <andreas.solberg@uninett.no>
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function getSelfURLHost(): string
+    public static function getSelfURLHost()
     {
         $url = self::getSelfURL();
 
@@ -867,7 +887,7 @@ class HTTP
      * @author Andreas Solberg, UNINETT AS <andreas.solberg@uninett.no>
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function getSelfURLNoQuery(): string
+    public static function getSelfURLNoQuery()
     {
         $url = self::getSelfURL();
         $pos = strpos($url, '?');
@@ -886,7 +906,7 @@ class HTTP
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function isHTTPS(): bool
+    public static function isHTTPS()
     {
         return strpos(self::getSelfURL(), 'https://') === 0;
     }
@@ -904,8 +924,12 @@ class HTTP
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function normalizeURL(string $url): string
+    public static function normalizeURL($url)
     {
+        if (!is_string($url)) {
+            throw new \InvalidArgumentException('Invalid input parameters.');
+        }
+
         $url = self::resolveURL($url, self::getSelfURL());
 
         // verify that the URL is to a http or https site
@@ -932,8 +956,12 @@ class HTTP
      *
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function parseQueryString(string $query_string): array
+    public static function parseQueryString($query_string)
     {
+        if (!is_string($query_string)) {
+            throw new \InvalidArgumentException('Invalid input parameters.');
+        }
+
         $res = [];
         if (empty($query_string)) {
             return $res;
@@ -975,8 +1003,12 @@ class HTTP
      *
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function redirectTrustedURL(string $url, array $parameters = []): void
+    public static function redirectTrustedURL($url, $parameters = [])
     {
+        if (!is_string($url) || !is_array($parameters)) {
+            throw new \InvalidArgumentException('Invalid input parameters.');
+        }
+
         $url = self::normalizeURL($url);
         self::redirect($url, $parameters);
     }
@@ -1003,8 +1035,12 @@ class HTTP
      *
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function redirectUntrustedURL(string $url, array $parameters = []): void
+    public static function redirectUntrustedURL($url, $parameters = [])
     {
+        if (!is_string($url) || !is_array($parameters)) {
+            throw new \InvalidArgumentException('Invalid input parameters.');
+        }
+
         $url = self::checkURLAllowed($url);
         self::redirect($url, $parameters);
     }
@@ -1031,10 +1067,14 @@ class HTTP
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function resolveURL(string $url, string $base = null): string
+    public static function resolveURL($url, $base = null)
     {
         if ($base === null) {
             $base = self::getBaseURL();
+        }
+
+        if (!is_string($url) || !is_string($base)) {
+            throw new \InvalidArgumentException('Invalid input parameters.');
         }
 
         if (!preg_match('/^((((\w+:)\/\/[^\/]+)(\/[^?#]*))(?:\?[^#]*)?)(?:#.*)?/', $base, $baseParsed)) {
@@ -1108,13 +1148,24 @@ class HTTP
      * @author Andjelko Horvat
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function setCookie(string $name, ?string $value, array $params = null, bool $throw = true): void
+    public static function setCookie($name, $value, $params = null, $throw = true)
     {
+        if (
+            !(is_string($name) // $name must be a string
+            && (is_string($value)
+            || is_null($value)) // $value can be a string or null
+            && (is_array($params)
+            || is_null($params)) // $params can be an array or null
+            && is_bool($throw)) // $throw must be boolean
+        ) {
+            throw new \InvalidArgumentException('Invalid input parameters.');
+        }
+
         $default_params = [
             'lifetime' => 0,
             'expire'   => null,
             'path'     => '/',
-            'domain'   => '',
+            'domain'   => null,
             'secure'   => false,
             'httponly' => true,
             'raw'      => false,
@@ -1153,7 +1204,7 @@ class HTTP
         if (version_compare(PHP_VERSION, '7.3.0', '>=')) {
             /* use the new options array for PHP >= 7.3 */
             if ($params['raw']) {
-                /** @psalm-suppress InvalidArgument */
+                /** @psalm-suppress InvalidArgument  Remove when Psalm >= 3.4.10 */
                 $success = @setrawcookie(
                     $name,
                     $value,
@@ -1167,7 +1218,7 @@ class HTTP
                     ]
                 );
             } else {
-                /** @psalm-suppress InvalidArgument */
+                /** @psalm-suppress InvalidArgument  Remove when Psalm >= 3.4.10 */
                 $success = @setcookie(
                     $name,
                     $value,
@@ -1238,8 +1289,11 @@ class HTTP
      * @author Andjelko Horvat
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function submitPOSTData(string $destination, array $data): void
+    public static function submitPOSTData($destination, $data)
     {
+        if (!is_string($destination) || !is_array($data)) {
+            throw new \InvalidArgumentException('Invalid input parameters.');
+        }
         if (!self::isValidURL($destination)) {
             throw new Error\Exception('Invalid destination URL.');
         }
@@ -1252,10 +1306,10 @@ class HTTP
             self::redirect(self::getSecurePOSTRedirectURL($destination, $data));
         }
 
-        $p = new Template($config, 'post.twig');
+        $p = new Template($config, 'post.php');
         $p->data['destination'] = $destination;
         $p->data['post'] = $data;
-        $p->send();
+        $p->show();
         exit(0);
     }
 }

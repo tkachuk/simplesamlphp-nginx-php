@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Utils;
 
 use SimpleSAML\Configuration;
@@ -28,8 +26,7 @@ class System
     /**
      * This function returns the Operating System we are running on.
      *
-     * @return int|false A predefined constant identifying the OS we are running on.
-     *                   False if we are unable to determine it.
+     * @return mixed A predefined constant identifying the OS we are running on. False if we are unable to determine it.
      *
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
@@ -74,7 +71,7 @@ class System
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
      */
-    public static function getTempDir(): string
+    public static function getTempDir()
     {
         $globalConfig = Configuration::getInstance();
 
@@ -124,7 +121,7 @@ class System
      *
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function resolvePath(string $path, string $base = null): string
+    public static function resolvePath($path, $base = null)
     {
         if ($base === null) {
             $config = Configuration::getInstance();
@@ -182,8 +179,6 @@ class System
      * @param string $data The data we should write to the file.
      * @param int    $mode The permissions to apply to the file. Defaults to 0600.
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException If any of the input parameters doesn't have the proper types.
      * @throws Error\Exception If the file cannot be saved, permissions cannot be changed or it is not
      *     possible to write to the target file.
@@ -192,9 +187,15 @@ class System
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      * @author Andjelko Horvat
      * @author Jaime Perez, UNINETT AS <jaime.perez@uninett.no>
+     *
+     * @return void
      */
-    public static function writeFile(string $filename, string $data, int $mode = 0600): void
+    public static function writeFile($filename, $data, $mode = 0600)
     {
+        if (!is_string($filename) || !is_string($data) || !is_numeric($mode)) {
+            throw new \InvalidArgumentException('Invalid input parameters');
+        }
+
         $tmpFile = self::getTempDir() . DIRECTORY_SEPARATOR . rand();
 
         $res = @file_put_contents($tmpFile, $data);
@@ -239,7 +240,7 @@ class System
      *
      * @return bool
      */
-    private static function pathContainsDriveLetter(string $path): bool
+    private static function pathContainsDriveLetter($path)
     {
         $letterAsciiValue = ord(strtoupper(substr($path, 0, 1)));
         return substr($path, 1, 1) === ':'
@@ -251,7 +252,7 @@ class System
      * @param string $path
      * @return bool
      */
-    private static function pathContainsStreamWrapper(string $path): bool
+    private static function pathContainsStreamWrapper($path)
     {
         return preg_match('/^[\w\d]*:\/{2}/', $path) === 1;
     }

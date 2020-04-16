@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Error;
 
 use SimpleSAML\Configuration;
@@ -9,7 +7,6 @@ use SimpleSAML\Logger;
 use SimpleSAML\Session;
 use SimpleSAML\Utils;
 use SimpleSAML\XHTML\Template;
-use Webmozart\Assert\Assert;
 
 /**
  * Class that wraps SimpleSAMLphp errors in exceptions.
@@ -69,7 +66,6 @@ class Error extends Exception
      */
     protected $includeTemplate = null;
 
-
     /**
      * Constructor for this error.
      *
@@ -80,9 +76,9 @@ class Error extends Exception
      * @param \Exception $cause The exception which caused this fatal error (if any). Optional.
      * @param int|null  $httpCode The HTTP response code to use. Optional.
      */
-    public function __construct($errorCode, \Exception $cause = null, ?int $httpCode = null)
+    public function __construct($errorCode, \Exception $cause = null, $httpCode = null)
     {
-        Assert::true(is_string($errorCode) || is_array($errorCode));
+        assert(is_string($errorCode) || is_array($errorCode));
 
         if (is_array($errorCode)) {
             $this->parameters = $errorCode;
@@ -122,7 +118,7 @@ class Error extends Exception
      *
      * @return string  The error code.
      */
-    public function getErrorCode(): string
+    public function getErrorCode()
     {
         return $this->errorCode;
     }
@@ -133,7 +129,7 @@ class Error extends Exception
      *
      * @return array  The parameters.
      */
-    public function getParameters(): array
+    public function getParameters()
     {
         return $this->parameters;
     }
@@ -144,7 +140,7 @@ class Error extends Exception
      *
      * @return string  The error title tag.
      */
-    public function getDictTitle(): string
+    public function getDictTitle()
     {
         return $this->dictTitle;
     }
@@ -155,7 +151,7 @@ class Error extends Exception
      *
      * @return string  The error description tag.
      */
-    public function getDictDescr(): string
+    public function getDictDescr()
     {
         return $this->dictDescr;
     }
@@ -167,7 +163,7 @@ class Error extends Exception
      * This should be overridden by subclasses who want a different return code than 500 Internal Server Error.
      * @return void
      */
-    protected function setHTTPCode(): void
+    protected function setHTTPCode()
     {
         http_response_code($this->httpCode);
     }
@@ -178,7 +174,7 @@ class Error extends Exception
      *
      * @return array  The array with the error report data.
      */
-    protected function saveError(): array
+    protected function saveError()
     {
         $data = $this->format(true);
         $emsg = array_shift($data);
@@ -221,8 +217,10 @@ class Error extends Exception
      * This method displays a standard SimpleSAMLphp error page and exits.
      * @return void
      */
-    public function show(): void
+    public function show()
     {
+        $this->setHTTPCode();
+
         // log the error message
         $this->logError();
 
@@ -263,15 +261,16 @@ class Error extends Exception
 
         $show_function = $config->getArray('errors.show_function', null);
         if (isset($show_function)) {
-            Assert::isCallable($show_function);
-            $this->setHTTPCode();
+            assert(is_callable($show_function));
             call_user_func($show_function, $config, $data);
-            Assert::true(false);
+            assert(false);
         } else {
-            $t = new Template($config, 'error.twig', 'errors');
-            $t->setStatusCode($this->httpCode);
+            $t = new Template($config, 'error.php', 'errors');
+            $translator = $t->getTranslator();
             $t->data = array_merge($t->data, $data);
-            $t->send();
+            $t->data['dictTitleTranslated'] = $translator->t($t->data['dictTitle']);
+            $t->data['dictDescrTranslated'] = $translator->t($t->data['dictDescr'], $t->data['parameters']);
+            $t->show();
         }
 
         exit;

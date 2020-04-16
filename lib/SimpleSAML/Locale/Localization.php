@@ -7,8 +7,6 @@
  * @package SimpleSAMLphp
  */
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Locale;
 
 use Gettext\Translations;
@@ -89,7 +87,6 @@ class Localization
      */
     public $i18nBackend;
 
-
     /**
      * Constructor
      *
@@ -103,7 +100,11 @@ class Localization
         $this->localeDir = $locales;
         $this->language = new Language($configuration);
         $this->langcode = $this->language->getPosixLanguage($this->language->getLanguage());
-        $this->i18nBackend = self::GETTEXT_I18N_BACKEND;
+        $this->i18nBackend = (
+            $this->configuration->getBoolean('usenewui', false)
+            ? self::GETTEXT_I18N_BACKEND
+            : self::SSP_I18N_BACKEND
+        );
         $this->setupL10N();
     }
 
@@ -113,7 +114,7 @@ class Localization
      *
      * @return string
      */
-    public function getLocaleDir(): string
+    public function getLocaleDir()
     {
         return $this->localeDir;
     }
@@ -126,7 +127,7 @@ class Localization
      *
      * @return string
      */
-    public function getDomainLocaleDir(string $domain): string
+    public function getDomainLocaleDir($domain)
     {
         /** @var string $base */
         $base = $this->configuration->resolvePath('modules');
@@ -143,7 +144,7 @@ class Localization
      * @param string $localeDir Absolute path if the module is housed elsewhere
      * @return void
      */
-    public function addModuleDomain(string $module, string $localeDir = null): void
+    public function addModuleDomain($module, $localeDir = null)
     {
         if (!$localeDir) {
             $localeDir = $this->getDomainLocaleDir($module);
@@ -160,13 +161,12 @@ class Localization
      * @param string $domain Domain at location
      * @return void
      */
-    public function addDomain(string $localeDir, string $domain): void
+    public function addDomain($localeDir, $domain)
     {
         $this->localeDomainMap[$domain] = $localeDir;
         Logger::debug("Localization: load domain '$domain' at '$localeDir'");
         $this->loadGettextGettextFromPO($domain);
     }
-
 
     /**
      * Get and check path of localization file
@@ -176,7 +176,7 @@ class Localization
      *
      * @return string
      */
-    public function getLangPath(string $domain = self::DEFAULT_DOMAIN): string
+    public function getLangPath($domain = self::DEFAULT_DOMAIN)
     {
         $langcode = explode('_', $this->langcode);
         $langcode = $langcode[0];
@@ -219,7 +219,7 @@ class Localization
      * Setup the translator
      * @return void
      */
-    private function setupTranslator(): void
+    private function setupTranslator()
     {
         $this->translator = new Translator();
         $this->translator->register();
@@ -238,10 +238,8 @@ class Localization
      *
      * @throws \Exception If something is wrong with the locale file for the domain and activated language
      */
-    private function loadGettextGettextFromPO(
-        string $domain = self::DEFAULT_DOMAIN,
-        bool $catchException = true
-    ): void {
+    private function loadGettextGettextFromPO($domain = self::DEFAULT_DOMAIN, $catchException = true)
+    {
         try {
             $langPath = $this->getLangPath($domain);
         } catch (\Exception $e) {
@@ -273,7 +271,7 @@ class Localization
      *
      * @return bool
      */
-    public function isI18NBackendDefault(): bool
+    public function isI18NBackendDefault()
     {
         if ($this->i18nBackend === $this::SSP_I18N_BACKEND) {
             return true;
@@ -286,7 +284,7 @@ class Localization
      * Set up L18N if configured or fallback to old system
      * @return void
      */
-    private function setupL10N(): void
+    private function setupL10N()
     {
         if ($this->i18nBackend === self::SSP_I18N_BACKEND) {
             Logger::debug("Localization: using old system");
@@ -298,13 +296,12 @@ class Localization
         $this->addDomain($this->localeDir, self::DEFAULT_DOMAIN);
     }
 
-
     /**
      * Show which domains are registered
      *
      * @return array
      */
-    public function getRegisteredDomains(): array
+    public function getRegisteredDomains()
     {
         return $this->localeDomainMap;
     }

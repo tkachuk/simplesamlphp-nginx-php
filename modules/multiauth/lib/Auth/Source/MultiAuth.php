@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\multiauth\Auth\Source;
 
 use SimpleSAML\Auth;
@@ -10,7 +8,6 @@ use SimpleSAML\Error;
 use SimpleSAML\Module;
 use SimpleSAML\Session;
 use SimpleSAML\Utils;
-use Webmozart\Assert\Assert;
 
 /**
  * Authentication source which let the user chooses among a list of
@@ -59,8 +56,11 @@ class MultiAuth extends \SimpleSAML\Auth\Source
      * @param array $info Information about this authentication source.
      * @param array $config Configuration.
      */
-    public function __construct(array $info, array $config)
+    public function __construct($info, $config)
     {
+        assert(is_array($info));
+        assert(is_array($config));
+
         // Call the parent constructor first, as required by the interface
         parent::__construct($info, $config);
 
@@ -80,10 +80,7 @@ class MultiAuth extends \SimpleSAML\Auth\Source
         $defaultLanguage = $globalConfiguration->getString('language.default', 'en');
         $authsources = Configuration::getConfig('authsources.php');
         $this->sources = [];
-
-        /** @psalm-var array $sources */
-        $sources = $config['sources'];
-        foreach ($sources as $source => $info) {
+        foreach ($config['sources'] as $source => $info) {
             if (is_int($source)) {
                 // Backwards compatibility
                 $source = $info;
@@ -136,8 +133,10 @@ class MultiAuth extends \SimpleSAML\Auth\Source
      * @param array &$state Information about the current authentication.
      * @return void
      */
-    public function authenticate(array &$state): void
+    public function authenticate(&$state)
     {
+        assert(is_array($state));
+
         $state[self::AUTHID] = $this->authId;
         $state[self::SOURCESID] = $this->sources;
 
@@ -162,7 +161,7 @@ class MultiAuth extends \SimpleSAML\Auth\Source
         Utils\HTTP::redirectTrustedURL($url, $params);
 
         // The previous function never returns, so this code is never executed
-        Assert::true(false);
+        assert(false);
     }
 
 
@@ -179,8 +178,11 @@ class MultiAuth extends \SimpleSAML\Auth\Source
      * @return void
      * @throws \Exception
      */
-    public static function delegateAuthentication(string $authId, array $state): void
+    public static function delegateAuthentication($authId, $state)
     {
+        assert(is_string($authId));
+        assert(is_array($state));
+
         $as = Auth\Source::getById($authId);
         $valid_sources = array_map(
             /**
@@ -226,8 +228,10 @@ class MultiAuth extends \SimpleSAML\Auth\Source
      * @param array &$state Information about the current logout operation.
      * @return void
      */
-    public function logout(array &$state): void
+    public function logout(&$state)
     {
+        assert(is_array($state));
+
         // Get the source that was used to authenticate
         $session = Session::getSessionFromRequest();
         $authId = $session->getData(self::SESSION_SOURCE, $this->authId);
@@ -250,8 +254,10 @@ class MultiAuth extends \SimpleSAML\Auth\Source
      * @param string $source Name of the authentication source the user selected.
      * @return void
      */
-    public function setPreviousSource(string $source): void
+    public function setPreviousSource($source)
     {
+        assert(is_string($source));
+
         $cookieName = 'multiauth_source_' . $this->authId;
 
         $config = Configuration::getInstance();
@@ -274,7 +280,7 @@ class MultiAuth extends \SimpleSAML\Auth\Source
      * last time or NULL if this is the first time or remembering is disabled.
      * @return string|null
      */
-    public function getPreviousSource(): ?string
+    public function getPreviousSource()
     {
         $cookieName = 'multiauth_source_' . $this->authId;
         if (array_key_exists($cookieName, $_COOKIE)) {

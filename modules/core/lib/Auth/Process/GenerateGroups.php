@@ -1,11 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Module\core\Auth\Process;
 
 use SimpleSAML\Logger;
-use Webmozart\Assert\Assert;
 
 /**
  * Filter to generate a groups attribute based on many of the attributes of the user.
@@ -28,9 +25,11 @@ class GenerateGroups extends \SimpleSAML\Auth\ProcessingFilter
      * @param array &$config  Configuration information about this filter.
      * @param mixed $reserved  For future use.
      */
-    public function __construct(array &$config, $reserved)
+    public function __construct(&$config, $reserved)
     {
         parent::__construct($config, $reserved);
+
+        assert(is_array($config));
 
         if (count($config) === 0) {
             // Use default groups
@@ -58,9 +57,10 @@ class GenerateGroups extends \SimpleSAML\Auth\ProcessingFilter
      * @param array &$request  The current request
      * @return void
      */
-    public function process(array &$request): void
+    public function process(&$request)
     {
-        Assert::keyExists($request, 'Attributes');
+        assert(is_array($request));
+        assert(array_key_exists('Attributes', $request));
 
         $groups = [];
         $attributes = &$request['Attributes'];
@@ -102,8 +102,10 @@ class GenerateGroups extends \SimpleSAML\Auth\ProcessingFilter
      * @param array $attributes  The attributes of the user.
      * @return string|null  The realm of the user, or NULL if we are unable to determine the realm.
      */
-    private static function getRealm(array $attributes): ?string
+    private static function getRealm($attributes)
     {
+        assert(is_array($attributes));
+
         if (!array_key_exists('eduPersonPrincipalName', $attributes)) {
             return null;
         }
@@ -134,8 +136,10 @@ class GenerateGroups extends \SimpleSAML\Auth\ProcessingFilter
      * @param string $string  The string which should be escaped.
      * @return string  The escaped string.
      */
-    private static function escapeIllegalChars(string $string): string
+    private static function escapeIllegalChars($string)
     {
+        assert(is_string($string));
+
         return preg_replace_callback(
             '/([^a-zA-Z0-9_@=.])/',
             /**

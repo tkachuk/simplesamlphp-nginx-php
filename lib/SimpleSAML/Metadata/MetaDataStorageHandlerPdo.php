@@ -1,12 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Metadata;
 
 use SimpleSAML\Database;
 use SimpleSAML\Error;
-use Webmozart\Assert\Assert;
 
 /**
  * Class for handling metadata files stored in a database.
@@ -44,6 +41,10 @@ class MetaDataStorageHandlerPdo extends MetaDataStorageSource
         'saml20-idp-hosted',
         'saml20-idp-remote',
         'saml20-sp-remote',
+        'shib13-idp-hosted',
+        'shib13-idp-remote',
+        'shib13-sp-hosted',
+        'shib13-sp-remote'
     ];
 
 
@@ -58,8 +59,10 @@ class MetaDataStorageHandlerPdo extends MetaDataStorageSource
      *
      * @param array $config An associative array with the configuration for this handler.
      */
-    public function __construct(array $config)
+    public function __construct($config)
     {
+        assert(is_array($config));
+
         $this->db = Database::getInstance();
     }
 
@@ -76,8 +79,10 @@ class MetaDataStorageHandlerPdo extends MetaDataStorageSource
      * @throws \Exception If a database error occurs.
      * @throws \SimpleSAML\Error\Exception If the metadata can be retrieved from the database, but cannot be decoded.
      */
-    private function load(string $set): ?array
+    private function load($set)
     {
+        assert(is_string($set));
+
         $tableName = $this->getTableName($set);
 
         if (!in_array($set, $this->supportedSets, true)) {
@@ -115,8 +120,10 @@ class MetaDataStorageHandlerPdo extends MetaDataStorageSource
      *
      * @return array $metadata An associative array with all the metadata for the given set.
      */
-    public function getMetadataSet(string $set): array
+    public function getMetadataSet($set)
     {
+        assert(is_string($set));
+
         if (array_key_exists($set, $this->cachedMetadata)) {
             return $this->cachedMetadata[$set];
         }
@@ -126,6 +133,7 @@ class MetaDataStorageHandlerPdo extends MetaDataStorageSource
             $metadataSet = [];
         }
 
+        /** @var array $metadataSet */
         foreach ($metadataSet as $entityId => &$entry) {
             $entry = $this->updateEntityID($set, $entityId, $entry);
         }
@@ -133,7 +141,6 @@ class MetaDataStorageHandlerPdo extends MetaDataStorageSource
         $this->cachedMetadata[$set] = $metadataSet;
         return $metadataSet;
     }
-
 
     /**
      * Retrieve a metadata entry.
@@ -144,8 +151,11 @@ class MetaDataStorageHandlerPdo extends MetaDataStorageSource
      * @return array|null An associative array with metadata for the given entity, or NULL if we are unable to
      *         locate the entity.
      */
-    public function getMetaData(string $entityId, string $set): ?array
+    public function getMetaData($entityId, $set)
     {
+        assert(is_string($entityId));
+        assert(is_string($set));
+
         // validate the metadata set is valid
         if (!in_array($set, $this->supportedSets, true)) {
             return null;
@@ -206,7 +216,6 @@ class MetaDataStorageHandlerPdo extends MetaDataStorageSource
         return null;
     }
 
-
     /**
      * Add metadata to the configured database
      *
@@ -216,8 +225,12 @@ class MetaDataStorageHandlerPdo extends MetaDataStorageSource
      *
      * @return bool True/False if entry was successfully added
      */
-    public function addEntry(string $index, string $set, array $entityData): bool
+    public function addEntry($index, $set, $entityData)
     {
+        assert(is_string($index));
+        assert(is_string($set));
+        assert(is_array($entityData));
+
         if (!in_array($set, $this->supportedSets, true)) {
             return false;
         }
@@ -262,8 +275,10 @@ class MetaDataStorageHandlerPdo extends MetaDataStorageSource
      *
      * @return string Replaced table name
      */
-    private function getTableName(string $table): string
+    private function getTableName($table)
     {
+        assert(is_string($table));
+
         return $this->db->applyPrefix(str_replace("-", "_", $this->tablePrefix . $table));
     }
 

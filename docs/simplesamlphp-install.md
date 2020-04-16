@@ -27,7 +27,7 @@ Prerequisites
 -------------
 
  * A web server capable of executing PHP scripts.
- * PHP version >= 7.2.0.
+ * PHP version >= 5.6.0.
  * Support for the following PHP extensions:
    * Always required: `date`, `dom`, `hash`, `libxml`, `openssl`, `pcre`, `SPL`, `zlib`, `json`, `mbstring`
    * When automatically checking for latest versions, and used by some modules: `cURL`
@@ -60,10 +60,6 @@ Go to the directory where you want to install SimpleSAMLphp and extract the arch
 
 ## Upgrading from a previous version of SimpleSAMLphp
 
-Before starting the upgrade, review the relevant
-[upgrade notes](simplesamlphp-upgrade-notes) for any relevant
-changes.
-
 Extract the new version:
 
 ```
@@ -80,9 +76,6 @@ keep reading for other alternatives):
     cp -rv ../simplesamlphp/config config
     cp -rv ../simplesamlphp/metadata metadata
 ```
-
-If you have installed any [third-party modules](https://simplesamlphp.org/modules) or [customised the theme](simplesamlphp-theming.md), 
-you should check whether your third-party modules need upgrading and then copy or replace those directories too.
 
 Replace the old version with the new version:
 
@@ -211,12 +204,8 @@ look like this:
             location ~ ^(?<prefix>/simplesaml)(?<phpfile>.+?\.php)(?<pathinfo>/.*)?$ {
                 include          fastcgi_params;
                 fastcgi_pass     $fastcgi_pass;
-                fastcgi_param SCRIPT_FILENAME $document_root$phpfile;
-
-                # Must be prepended with the baseurlpath
-                fastcgi_param SCRIPT_NAME /simplesaml$phpfile;
-
-                fastcgi_param PATH_INFO $pathinfo if_not_empty;
+                fastcgi_param    SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_param    SCRIPT_NAME /simplesaml$phpfile;
             }
         }
     }
@@ -367,15 +356,6 @@ At the bottom of the installation page there are some green lights. SimpleSAMLph
 required and recommended prerequisites are met. If any of the lights are red, you may have to install some PHP 
 extensions or external PHP packages (e.g. you need the PHP LDAP extension to use the LDAP authentication module).
 
-## Building assets
-
-Run the following commands to build the default theme.
-
-```
-npm install
-npm run build
-```
-
 ## Next steps
 
 You have now successfully installed SimpleSAMLphp, and the next steps depend on whether you want to setup a Service
@@ -391,7 +371,7 @@ in a separate document.
    + [Remote SP reference](simplesamlphp-reference-sp-remote)
    + [Setting up an IdP for G Suite (Google Apps)](simplesamlphp-googleapps)
    + [Advanced Topics](simplesamlphp-idp-more)
- - [Automated Metadata Management](./metarefresh:simplesamlphp-automated_metadata)
+ - [Automated Metadata Management](https://github.com/simplesamlphp/simplesamlphp-module-metarefresh/blob/master/docs/simplesamlphp-automated_metadata.md)
  - [Maintenance and configuration](simplesamlphp-maintenance)
 
 

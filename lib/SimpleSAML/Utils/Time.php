@@ -6,8 +6,6 @@
  * @package SimpleSAMLphp
  */
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Utils;
 
 use SimpleSAML\Configuration;
@@ -32,7 +30,7 @@ class Time
      * @return string The timestamp.
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
-    public static function generateTimestamp(int $instant = null): string
+    public static function generateTimestamp($instant = null)
     {
         if ($instant === null) {
             $instant = time();
@@ -48,10 +46,11 @@ class Time
      *
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      *
-     * @return void
      * @throws \SimpleSAML\Error\Exception If the timezone set in the configuration is invalid.
+     *
+     * @return void
      */
-    public static function initTimezone(): void
+    public static function initTimezone()
     {
         if (self::$tz_initialized) {
             return;
@@ -91,8 +90,12 @@ class Time
      * @throws \InvalidArgumentException If $duration is not a valid ISO 8601 duration or if the input parameters do
      *     not have the right data types.
      */
-    public static function parseDuration(string $duration, int $timestamp = null): int
+    public static function parseDuration($duration, $timestamp = null)
     {
+        if (!(is_string($duration) && (is_int($timestamp) || is_null($timestamp)))) {
+            throw new \InvalidArgumentException('Invalid input parameters');
+        }
+
         // parse the duration. We use a very strict pattern
         $durationRegEx = '#^(-?)P(?:(?:(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)D)?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)' .
             '(?:[.,]\d+)?S)?)?)|(?:(\\d+)W))$#D';

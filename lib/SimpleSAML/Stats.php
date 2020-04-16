@@ -1,10 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML;
-
-use Webmozart\Assert\Assert;
 
 /**
  * Statistics handler class.
@@ -35,11 +31,11 @@ class Stats
     /**
      * Create an output from a configuration object.
      *
-     * @param \SimpleSAML\Configuration $config The configuration.
+     * @param \SimpleSAML\Configuration $config The configuration object.
      *
      * @return mixed A new instance of the configured class.
      */
-    private static function createOutput(Configuration $config)
+    private static function createOutput(\SimpleSAML\Configuration $config)
     {
         $cls = $config->getString('class');
         $cls = Module::resolveClass($cls, 'Stats\Output', '\SimpleSAML\Stats\Output');
@@ -54,14 +50,15 @@ class Stats
      *
      * @return void
      */
-    private static function initOutputs(): void
+    private static function initOutputs()
     {
+
         $config = Configuration::getInstance();
-        $outputCfgs = $config->getArray('statistics.out', []);
+        $outputCfgs = $config->getConfigList('statistics.out');
 
         self::$outputs = [];
         foreach ($outputCfgs as $cfg) {
-            self::$outputs[] = self::createOutput(Configuration::loadFromArray($cfg));
+            self::$outputs[] = self::createOutput($cfg);
         }
     }
 
@@ -74,11 +71,12 @@ class Stats
      *
      * @return void|boolean False if output is not enabled, void otherwise.
      */
-    public static function log(string $event, array $data = [])
+    public static function log($event, array $data = [])
     {
-        Assert::keyNotExists($data, 'op');
-        Assert::keyNotExists($data, 'time');
-        Assert::keyNotExists($data, '_id');
+        assert(is_string($event));
+        assert(!isset($data['op']));
+        assert(!isset($data['time']));
+        assert(!isset($data['_id']));
 
         if (!self::$initialized) {
             self::initOutputs();

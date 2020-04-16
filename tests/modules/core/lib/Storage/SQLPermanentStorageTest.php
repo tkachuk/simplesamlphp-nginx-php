@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test\Module\core\Storage;
 
 use PHPUnit\Framework\TestCase;
@@ -18,7 +16,7 @@ class SQLPermanentStorageTest extends TestCase
     /**
      * @return void
      */
-    public static function setUpBeforeClass(): void
+    public static function setUpBeforeClass()
     {
         // Create instance
         $config = \SimpleSAML\Configuration::loadFromArray([
@@ -31,7 +29,7 @@ class SQLPermanentStorageTest extends TestCase
     /**
      * @return void
      */
-    public static function tearDownAfterClass(): void
+    public static function tearDownAfterClass()
     {
         self::$sql = null;
         unlink(sys_get_temp_dir() . '/sqllite/test.sqlite');

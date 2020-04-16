@@ -1,10 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Error;
-
-use PDOException;
 
 /**
  * Class for saving normal exceptions for serialization.
@@ -41,8 +37,8 @@ class UnserializableException extends Exception
         $msg = $original->getMessage();
         $code = $original->getCode();
 
-        if (!is_int($code)) {
-            // PDOException and possibly others use a string for the code. Filter it out here.
+        if ($original instanceof \PDOException) {
+            // PDOException uses a string as the code. Filter it out here.
             $code = -1;
         }
 
@@ -56,7 +52,7 @@ class UnserializableException extends Exception
      *
      * @return string  The classname.
      */
-    public function getClass(): string
+    public function getClass()
     {
         return $this->class;
     }

@@ -2,7 +2,770 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bd9ec51-9062-48e7-a23a-13a9d38e871e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/simplesamlphp-nginx-php.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/simplesamlphp-nginx-php.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CONTRIBUTING.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COPYING" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SECURITY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TESTING.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/addurnprefix.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/deprecatedSchacNS.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/facebook2name.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/feide-oid.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/linkedin2name.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/name2claim.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/name2oid.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/name2urn.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/newSchacNS.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/oid-feide.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/oid2name.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/oid2urn.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/openid2name.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/removeurnprefix.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/twitter2name.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/urn2name.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/urn2oid.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/attributemap/windowslive2name.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/build-release.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/console" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/importPdoMetadata.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/initMDSPdo.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ldapattrschemaparser.pl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/memcacheSync.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/pwgen.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/translateAttributes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/codecov.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-templates/acl.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-templates/authsources.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-templates/config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/config/nginx/sites-enabled/simplesaml.conf" beforeDir="false" afterPath="$PROJECT_DIR$/docker/config/nginx/sites-enabled/simplesaml.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/conf.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/resources/simplesamlphp-googleapps/googleapps-cert.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/resources/simplesamlphp-googleapps/googleapps-menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/resources/simplesamlphp-googleapps/googleapps-sso.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/resources/simplesamlphp-googleapps/googleapps-ssoconfig.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/resources/simplesamlphp-install/screenshot-installationpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/resources/simplesamlphp-sp/screenshot-example.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-advancedfeatures.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-artifact-idp.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-artifact-sp.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-authproc.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-authsource.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-changelog.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-customauth.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-database.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-ecp-idp.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-errorhandling.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-googleapps.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-hok-idp.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-hok-sp.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-idp-more.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-idp.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-install-repo.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-install.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-maintenance.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-metadata-endpoints.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-metadata-extensions-attributes.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-metadata-extensions-rpi.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-metadata-extensions-ui.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-metadata-pdostoragehandler.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-modules.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-nostate.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-reference-idp-hosted.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-reference-idp-remote.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-reference-sp-remote.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-scoping.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-sp-api.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-sp.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-theming.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-translation.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.10.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.11.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.12.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.13.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.14.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.15.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.16.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.17.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.18.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.19.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.5.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.6.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.7.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.8.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-1.9.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes-2.0.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/simplesamlphp-upgrade-notes.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/extra/simplesamlphp.spec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Auth/AuthenticationFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Auth/ProcessingChain.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Auth/ProcessingFilter.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Auth/Simple.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Auth/Source.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Auth/SourceFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Auth/State.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Command/RouterDebugCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Configuration.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Console/Application.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Database.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/Assertion.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/AuthSource.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/BadRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/BadUserInput.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/CannotSetCookie.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/ConfigurationError.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/CriticalConfigurationError.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/Error.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/ErrorCodes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/Exception.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/InvalidCredential.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/MetadataNotFound.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/NoState.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/NotFound.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/UnserializableException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/UserAborted.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Error/UserNotFound.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/HTTP/RunnableResponse.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/IdP.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/IdP/IFrameLogoutHandler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/IdP/LogoutHandlerInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/IdP/TraditionalLogoutHandler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Kernel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Locale/Language.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Locale/Localization.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Locale/Translate.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Logger.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Logger/ErrorLogLoggingHandler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Logger/FileLoggingHandler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Logger/LoggingHandlerInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Logger/StandardErrorLoggingHandler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Logger/SyslogLoggingHandler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Memcache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Metadata/MetaDataStorageHandler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Metadata/MetaDataStorageHandlerFlatFile.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Metadata/MetaDataStorageHandlerPdo.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Metadata/MetaDataStorageHandlerSerialize.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Metadata/MetaDataStorageHandlerXML.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Metadata/MetaDataStorageSource.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Metadata/SAMLBuilder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Metadata/SAMLParser.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Metadata/Signer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Metadata/Sources/MDQ.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Module.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Session.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/SessionHandler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/SessionHandlerCookie.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/SessionHandlerPHP.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/SessionHandlerStore.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Stats.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Stats/Output.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Store.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Store/Memcache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Store/Redis.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Store/SQL.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/Arrays.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/Attributes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/Auth.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/ClearableState.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/Config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/Config/Metadata.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/Crypto.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/EMail.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/HTTP.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/HttpAdapter.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/Net.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/Random.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/System.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/Time.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/Utils/XML.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/XHTML/IdPDisco.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/XHTML/Template.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/XHTML/TemplateControllerInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/XHTML/TemplateLoader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/XML/Errors.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/XML/Parser.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/XML/Signer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SimpleSAML/XML/Validator.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/_autoload.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/_autoload_modules.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/af/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/af/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ar/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ar/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ca/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ca/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/cs/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/cs/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/da/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/da/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/de/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/de/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/el/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/el/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/en/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/en/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/en/LC_MESSAGES/ssp.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/en/LC_MESSAGES/ssp.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/en/LC_MESSAGES/test.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/es/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/es/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/es/LC_MESSAGES/ssp.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/et/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/et/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/eu/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/eu/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/fa/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/fi/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/fi/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/fr/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/fr/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/he/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/he/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/hr/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/hr/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/hu/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/hu/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/id/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/id/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/it/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/it/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ja/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ja/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/lb/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/lb/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/lt/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/lt/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/lv/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/lv/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nb/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nb/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nb/LC_MESSAGES/ssp.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nb/LC_MESSAGES/ssp.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nb/LC_MESSAGES/test.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nl/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nl/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nn/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nn/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nn/LC_MESSAGES/ssp.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nn/LC_MESSAGES/ssp.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/nn/LC_MESSAGES/test.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/pl/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/pl/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/pt-br/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/pt-br/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/pt/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/pt/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ro/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ro/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ru/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ru/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/se/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/se/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/sl/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/sl/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/sma/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/sr/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/sr/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/st/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/st/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/sv/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/sv/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/tr/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/tr/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ur/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/xh/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/xh/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/zh-tw/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/zh-tw/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/zh/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/zh/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/zu/LC_MESSAGES/attributes.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/zu/LC_MESSAGES/messages.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/metadata-templates/saml20-idp-hosted.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/metadata-templates/saml20-idp-remote.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/metadata-templates/saml20-sp-remote.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/metadata/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/lib/Controller/Config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/lib/Controller/Federation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/lib/Controller/Menu.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/lib/Controller/Test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/routing/routes/routes.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/templates/authsource_list.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/templates/config.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/templates/diagnostics.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/templates/federation.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/templates/includes/menu.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/templates/metadata_converter.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/templates/show_metadata.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/admin/templates/status.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/config/routes/routes.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/default-enable" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_attributeadd.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_attributealter.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_attributecopy.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_attributelimit.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_attributemap.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_attributevaluemap.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_cardinality.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_cardinalitysingle.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_generategroups.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_languageadaptor.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_php.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_scopeattribute.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_scopefromattribute.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_statisticswithattribute.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_targetedid.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/docs/authproc_warnshortssointerval.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/hooks/hook_frontpage.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/hooks/hook_sanitycheck.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/ACL.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/AttributeAdd.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/AttributeAlter.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/AttributeCopy.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/AttributeLimit.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/AttributeMap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/AttributeValueMap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/Cardinality.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/CardinalitySingle.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/ExtendIdPSession.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/GenerateGroups.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/LanguageAdaptor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/PHP.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/ScopeAttribute.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/ScopeFromAttribute.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/StatisticsWithAttribute.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/TargetedID.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Process/WarnShortSSOInterval.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/Source/AdminPassword.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/UserPassBase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Auth/UserPassOrgBase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Controller/Exception.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Controller/Login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Controller/Redirection.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Stats/Output/File.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Stats/Output/Log.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/lib/Storage/SQLPermanentStorage.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/af/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/ar/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/cs/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/da/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/de/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/el/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/en/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/es/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/et/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/eu/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/fi/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/fr/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/he/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/hr/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/hu/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/id/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/it/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/ja/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/lb/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/lt/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/lv/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/nb/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/nl/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/nn/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/pl/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/pt-br/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/pt/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/ro/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/ru/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/sl/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/sr/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/st/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/sv/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/tr/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/xh/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/zh-tw/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/zh/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/locales/zu/LC_MESSAGES/core.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/routing/routes/routes.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/_frontpage_menu.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/authsource_list.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/base.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/cardinality_error.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/frontpage_auth.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/frontpage_config.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/frontpage_federation.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/frontpage_welcome.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/login.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/loginuserpass.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/logout-iframe-wrapper.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/logout-iframe.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/no_cookie.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/no_metadata.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/no_state.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/short_sso_interval.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/templates/show_metadata.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/as_login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/as_logout.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/assets/js/loginuserpass.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/authenticate.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/cardinality_error.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/cleardiscochoices.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/frontpage_auth.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/frontpage_config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/frontpage_federation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/frontpage_welcome.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/idp/logout-iframe-done.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/idp/logout-iframe-post.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/idp/logout-iframe.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/idp/logout-iframe.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/idp/resumelogout.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/login-admin.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/loginuserpass.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/loginuserpassorg.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/no_cookie.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/postredirect.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/short_sso_interval.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core/www/show_metadata.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/bin/cron.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/config-templates/module_cron.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/docs/cron.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/hooks/hook_configpage.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/hooks/hook_cron.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/hooks/hook_frontpage.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/lib/Controller/Cron.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/lib/Cron.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/af/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/ar/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/cs/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/da/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/de/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/el/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/en/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/es/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/et/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/eu/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/fr/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/he/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/hr/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/hu/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/id/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/it/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/ja/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/lt/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/lv/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/nb/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/nl/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/nn/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/pt-br/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/pt/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/ro/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/ru/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/sl/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/sr/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/sv/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/zh-tw/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/locales/zh/LC_MESSAGES/cron.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/routing/routes/routes.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/templates/croninfo-result.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/templates/croninfo.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/www/assets/css/cron.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/www/cron.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cron/www/croninfo.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/exampleauth/default-disable" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/exampleauth/lib/Auth/Process/RedirectTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/exampleauth/lib/Auth/Source/External.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/exampleauth/lib/Auth/Source/StaticSource.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/exampleauth/lib/Auth/Source/UserPass.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/exampleauth/templates/authenticate.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/exampleauth/www/authpage.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/exampleauth/www/redirecttest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/exampleauth/www/resume.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/docs/multiauth.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/lib/Auth/Source/MultiAuth.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/af/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/ar/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/cs/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/da/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/de/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/el/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/en/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/es/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/et/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/eu/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/fi/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/fr/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/he/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/hr/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/hu/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/id/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/it/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/ja/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/lt/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/lv/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/nb/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/nl/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/nn/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/pl/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/pt/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/ro/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/ru/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/sl/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/sr/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/st/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/sv/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/xh/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/zh-tw/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/zh/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/locales/zu/LC_MESSAGES/multiauth.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/templates/selectsource.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/multiauth/www/selectsource.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/docs/authproc_authncontextclassref.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/docs/authproc_expectedauthncontextclassref.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/docs/filterscopes.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/docs/keyrollover.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/docs/nameid.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/docs/nameidattribute.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/docs/sp.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/hooks/hook_metadata_hosted.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Auth/Process/AttributeNameID.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Auth/Process/AuthnContextClassRef.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Auth/Process/ExpectedAuthnContextClassRef.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Auth/Process/FilterScopes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Auth/Process/NameIDAttribute.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Auth/Process/PersistentNameID.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Auth/Process/PersistentNameID2TargetedID.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Auth/Process/SQLPersistentNameID.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Auth/Process/TransientNameID.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Auth/Source/SP.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/BaseNameIDGenerator.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Error.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Error/NoAuthnContext.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Error/NoAvailableIDP.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Error/NoPassive.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Error/NoSupportedIDP.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Error/ProxyCountExceeded.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/IdP/SAML2.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/IdP/SQLNameID.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/Message.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/lib/SP/LogoutStore.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/af/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/ar/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/cs/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/da/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/de/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/el/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/en/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/es/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/et/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/eu/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/fr/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/hr/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/hu/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/id/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/it/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/lt/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/nl/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/nn/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/ro/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/ru/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/sr/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/st/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/sv/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/xh/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/zh-tw/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/zh/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/locales/zu/LC_MESSAGES/saml.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/templates/proxy/invalid_session.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/templates/sp/wrong_authncontextclassref.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/www/disco.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/www/idp/certs.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/www/proxy/invalid_session.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/www/sp/discoresp.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/www/sp/metadata.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/www/sp/saml2-acs.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/www/sp/saml2-logout.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/saml/www/sp/wrong_authncontextclassref.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpunit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/psalm.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routing/routes/routes.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routing/services/console.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routing/services/routing.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routing/services/services.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routing/services/simplesaml.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routing/services/web.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/oasis-sstc-saml-schema-assertion-1.1.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/oasis-sstc-saml-schema-protocol-1.1.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-assertion-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-auth-telephony-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-ip-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-ippword-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-kerberos-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-mobileonefactor-reg-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-mobileonefactor-unreg-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-mobiletwofactor-reg-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-mobiletwofactor-unreg-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-nomad-telephony-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-personal-telephony-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-pgp-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-ppt-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-pword-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-session-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-smartcard-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-smartcardpki-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-softwarepki-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-spki-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-srp-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-sslcert-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-telephony-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-timesync-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-types-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-x509-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-authn-context-xmldsig-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-dce-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-ecp-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-metadata-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-protocol-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-x500-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/saml-schema-xacml-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/xenc-schema.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/xml.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/xmldsig-core-schema.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/default-rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/default.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/logout/logout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/logout/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/style.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/IFrameLogoutHandler.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/_footer.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/_header.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/_table.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/auth_status.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/error.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/errorreport.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/hostnames.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/expander.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/logout.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/mailhtml.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/mailtxt.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/metadata-converter.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/metadata.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sandbox.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/selectidp-dropdown.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/selectidp-links.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/status.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/BuiltInServer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/SigningTestCase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Utils/ClearStateTestCase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Utils/ExitTestException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Utils/ReduceSpillOverTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Utils/SpTester.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Utils/StateClearer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Utils/TestAuthSource.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Utils/TestAuthSourceFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/_autoload_modules.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Auth/SimpleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Auth/SourceTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Auth/StateTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/ConfigurationTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/DatabaseTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Locale/LanguageTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Locale/LocalizationTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Locale/TranslateTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Metadata/MetaDataStorageHandlerTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Metadata/MetaDataStorageSourceTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Metadata/SAMLBuilderTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Metadata/SAMLParserTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Metadata/test-metadata/source1/saml20-sp-remote.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Metadata/test-metadata/source2/saml20-sp-remote/entityB.serialized" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Metadata/test-metadata/source2/saml20-sp-remote/entityInBoth.serialized" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Metadata/test-metadata/source2/saml20-sp-remote/expiredInSrc1InSrc2.serialized" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/ModuleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/SessionHandlerPHPTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Store/RedisTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Store/SQLTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/StoreTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/ArraysTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/AttributesTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/Config/MetadataTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/ConfigTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/CryptoTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/EMailTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/HTTPTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/NetTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/RandomTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/SystemTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/TimeTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/Utils/XMLTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/XML/ErrorsTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/XML/ParserTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/XML/SignerTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lib/SimpleSAML/XML/ValidatorTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/AttributeAddTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/AttributeAlterTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/AttributeCopyTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/AttributeLimitTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/AttributeMapTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/AttributeValueMapTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/CardinalitySingleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/CardinalityTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/PHPTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/ScopeAttributeTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/ScopeFromAttributeTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/Process/TargetedIDTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/UserPassBaseTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Auth/UserPassOrgBaseTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Controller/LoginTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/core/lib/Storage/SQLPermanentStorageTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/multiauth/lib/Auth/Source/MultiAuthTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/saml/lib/Auth/Process/FilterScopesTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/saml/lib/Auth/Process/NameIDAttributeTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/saml/lib/Auth/Source/Auth_Source_SP_Test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/saml/lib/IdP/SAML2Test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/modules/saml/lib/IdP/SQLNameIDTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/routers/configLoader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/www/IndexTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/www/RouterTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/_include.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/admin/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/admin/sandbox.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/css/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/css/post.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/css/src/default-rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/fonts/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/icons/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/icons/ssplogo-fish-small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/js/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/js/post.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/errorreport.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/logout.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/module.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/saml2/idp/ArtifactResolutionService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/saml2/idp/SSOService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/saml2/idp/SingleLogoutService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/saml2/idp/initSLO.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/saml2/idp/metadata.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,74 +782,112 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docker-compose.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/docker/config/php/app.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="33" lean-forward="true" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/core/www/frontpage_welcome.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dockerfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="48" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docker/config/nginx/sites-enabled/simplesaml.conf">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+            <state relative-caret-position="224">
+              <caret line="409" column="51" selection-start-line="409" selection-start-column="47" selection-end-line="409" selection-end-column="51" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config-templates/config.php">
+        <entry file="file://$PROJECT_DIR$/docker-compose.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="33" />
+            <state relative-caret-position="345">
+              <caret line="23" column="39" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/SimpleSAML/Database.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="149" column="13" lean-forward="true" selection-start-line="149" selection-start-column="13" selection-end-line="149" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/metadata/saml20-idp-hosted.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/metadata/saml20-sp-remote.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/authsources.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-72">
+              <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/metadata/saml20-idp-remote.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="8" selection-start-line="8" selection-end-line="77" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Downloads/php-saml-master/demo1/settings_example.php">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="45">
+                <caret line="3" column="16" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="16" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>stylesheet.css</find>
+      <find>secretsalt</find>
+      <find>Password</find>
+      <find>https</find>
+      <find>exampleauth</find>
+      <find>metadata.sources</find>
+      <find>https://example.com</find>
+      <find>default-sp</find>
+      <find>host</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>http</replace>
+      <replace>http://localhost</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -95,100 +896,27 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Dockerfile" />
-        <option value="$PROJECT_DIR$/config/config.php" />
-        <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/modules/core/www/frontpage_welcome.php" />
-        <option value="$PROJECT_DIR$/docker/config/nginx/sites-enabled/simplesaml.conf" />
         <option value="$PROJECT_DIR$/docker/config/php/app.ini" />
+        <option value="$PROJECT_DIR$/Makefile" />
+        <option value="$PROJECT_DIR$/docker/config/apache/sites-enabled/simplesaml.conf" />
+        <option value="$PROJECT_DIR$/docker-compose.yml_apache" />
+        <option value="$PROJECT_DIR$/www/errorreport.php" />
+        <option value="$PROJECT_DIR$/docker/config/nginx/sites-enabled/simplesaml.conf" />
+        <option value="$PROJECT_DIR$/src/css/default.scss" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/modules/exampleauth/enable" />
+        <option value="$PROJECT_DIR$/metadata/saml20-idp-hosted.php" />
+        <option value="$PROJECT_DIR$/metadata/saml20-sp-remote.php" />
+        <option value="$PROJECT_DIR$/config/authsources.php" />
+        <option value="$PROJECT_DIR$/www/index.php" />
+        <option value="$PROJECT_DIR$/docker-compose.yml" />
+        <option value="$PROJECT_DIR$/config/config.php" />
+        <option value="$PROJECT_DIR$/lib/SimpleSAML/Database.php" />
+        <option value="$PROJECT_DIR$/metadata/saml20-idp-remote.php" />
       </list>
     </option>
-  </component>
-  <component name="PhpWorkspaceProjectConfiguration">
-    <include_path>
-      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
-      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
-      <path value="$PROJECT_DIR$/vendor/felixfbecker/language-server-protocol" />
-      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
-      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
-      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
-      <path value="$PROJECT_DIR$/vendor/twig/twig" />
-      <path value="$PROJECT_DIR$/vendor/twig/extensions" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
-      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
-      <path value="$PROJECT_DIR$/vendor/symfony/cache" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
-      <path value="$PROJECT_DIR$/vendor/symfony/framework-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
-      <path value="$PROJECT_DIR$/vendor/webmozart/path-util" />
-      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
-      <path value="$PROJECT_DIR$/vendor/symfony/cache-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/config" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
-      <path value="$PROJECT_DIR$/vendor/robrichards/xmlseclibs" />
-      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
-      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
-      <path value="$PROJECT_DIR$/vendor/netresearch/jsonmapper" />
-      <path value="$PROJECT_DIR$/vendor/simplesamlphp/twig-configurable-i18n" />
-      <path value="$PROJECT_DIR$/vendor/simplesamlphp/composer-module-installer" />
-      <path value="$PROJECT_DIR$/vendor/openlss/lib-array2xml" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
-      <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
-      <path value="$PROJECT_DIR$/vendor/ocramius/package-versions" />
-      <path value="$PROJECT_DIR$/vendor/simplesamlphp/saml2" />
-      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
-      <path value="$PROJECT_DIR$/vendor/mikey179/vfsstream" />
-      <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
-      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
-      <path value="$PROJECT_DIR$/vendor/gettext/gettext" />
-      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
-      <path value="$PROJECT_DIR$/vendor/vimeo/psalm" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
-      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
-      <path value="$PROJECT_DIR$/vendor/gettext/languages" />
-      <path value="$PROJECT_DIR$/vendor/simplesamlphp/simplesamlphp-test-framework" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
-      <path value="$PROJECT_DIR$/vendor/sensiolabs/security-checker" />
-      <path value="$PROJECT_DIR$/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/vendor/psr/cache" />
-      <path value="$PROJECT_DIR$/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/vendor/amphp/byte-stream" />
-      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/vendor/amphp/amp" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
-      <path value="$PROJECT_DIR$/vendor/phpmailer/phpmailer" />
-      <path value="$PROJECT_DIR$/vendor/webmozart/glob" />
-      <path value="$PROJECT_DIR$/vendor/felixfbecker/advanced-json-rpc" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
-    </include_path>
   </component>
   <component name="ProjectConfigurationFiles">
     <option name="files">
@@ -198,10 +926,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="404" />
-    <option name="y" value="48" />
+    <option name="x" value="1" />
+    <option name="y" value="41" />
     <option name="width" value="1680" />
-    <option name="height" value="954" />
+    <option name="height" value="952" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -227,58 +955,7 @@
             <path>
               <item name="simplesamlphp-nginx-php" type="b2602c69:ProjectViewProjectNode" />
               <item name="simplesamlphp-nginx-php" type="462c0819:PsiDirectoryNode" />
-              <item name="config-templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="simplesamlphp-nginx-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simplesamlphp-nginx-php" type="462c0819:PsiDirectoryNode" />
-              <item name="docker" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="simplesamlphp-nginx-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simplesamlphp-nginx-php" type="462c0819:PsiDirectoryNode" />
-              <item name="docker" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="simplesamlphp-nginx-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simplesamlphp-nginx-php" type="462c0819:PsiDirectoryNode" />
-              <item name="docker" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="nginx" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="simplesamlphp-nginx-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simplesamlphp-nginx-php" type="462c0819:PsiDirectoryNode" />
-              <item name="docker" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="nginx" type="462c0819:PsiDirectoryNode" />
-              <item name="sites-enabled" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="simplesamlphp-nginx-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simplesamlphp-nginx-php" type="462c0819:PsiDirectoryNode" />
-              <item name="docker" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="php" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="simplesamlphp-nginx-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simplesamlphp-nginx-php" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="simplesamlphp-nginx-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simplesamlphp-nginx-php" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="simplesamlphp-nginx-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simplesamlphp-nginx-php" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="www" type="462c0819:PsiDirectoryNode" />
+              <item name="metadata" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="simplesamlphp-nginx-php" type="b2602c69:ProjectViewProjectNode" />
@@ -296,8 +973,9 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/docker/config" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/config" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -305,8 +983,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/docker/config" />
+      <recent name="$PROJECT_DIR$/config" />
+      <recent name="$PROJECT_DIR$/www/assets/css" />
+      <recent name="$PROJECT_DIR$/docker/config/apache/sites-enabled" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/docker/config" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -332,15 +1013,15 @@
       <option name="presentableId" value="Default" />
       <updated>1586424848349</updated>
       <workItem from="1586424850069" duration="23000" />
-      <workItem from="1586425134789" duration="3929000" />
+      <workItem from="1586425134789" duration="26214000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3952000" />
+    <option name="totallyTimeSpent" value="26237000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="404" y="48" width="1680" height="954" extended-state="0" />
+    <frame x="1" y="41" width="1680" height="952" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25274727" />
@@ -385,34 +1066,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/index.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="48" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config-templates/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -423,17 +1080,178 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docker/config/nginx/sites-enabled/simplesaml.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docker/config/php/app.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" column="33" lean-forward="true" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml_apache">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/errorreport.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/config/apache/sites-enabled/simplesaml.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/assets/css/src/default-rtl.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="13" lean-forward="true" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/assets/css/post.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/default.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7110">
+          <caret line="474" column="1" selection-start-line="474" selection-start-column="1" selection-end-line="474" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/assets/css/stylesheet.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="47" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/simplesamlphp-idp.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/config/nginx/sites-enabled/simplesaml.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="65" selection-start-line="22" selection-start-column="65" selection-end-line="22" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config-templates/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="22" column="62" selection-end-line="1209" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/exampleauth/default-disable">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/exampleauth/enable">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="20" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/metadata/saml20-idp-hosted.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/metadata/saml20-sp-remote.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="45">
+            <caret line="3" column="16" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="16" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/php-saml-master/demo1/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1167" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/php-saml-master/demo1/settings_example.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="39" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/SimpleSAML/Database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="149" column="13" lean-forward="true" selection-start-line="149" selection-start-column="13" selection-end-line="149" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/authsources.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-72">
+          <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="409" column="51" selection-start-line="409" selection-start-column="47" selection-end-line="409" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/metadata/saml20-idp-remote.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="8" selection-start-line="8" selection-end-line="77" selection-end-column="2" />
         </state>
       </provider>
     </entry>

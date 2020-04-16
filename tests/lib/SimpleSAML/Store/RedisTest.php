@@ -1,12 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Test\Store;
 
 use PHPUnit\Framework\TestCase;
 use Predis\Client;
-use ReflectionClass;
 use SimpleSAML\Configuration;
 use SimpleSAML\Store;
 
@@ -20,7 +17,7 @@ use SimpleSAML\Store;
  */
 class RedisTest extends TestCase
 {
-    /** @var \PHPUnit\Framework\MockObject\MockObject */
+    /** @var \PHPUnit_Framework_MockObject_MockObject */
     protected $mocked_redis;
 
     /** @var \SimpleSAML\Store\Redis */
@@ -33,7 +30,7 @@ class RedisTest extends TestCase
     /**
      * @return void
      */
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->config = [];
 
@@ -42,15 +39,19 @@ class RedisTest extends TestCase
                                    ->disableOriginalConstructor()
                                    ->getMock();
 
+        /** @psalm-suppress UndefinedMethod   Remove when Psalm 3.x is in place */
         $this->mocked_redis->method('get')
                            ->will($this->returnCallback([$this, 'getMocked']));
 
+        /** @psalm-suppress UndefinedMethod   Remove when Psalm 3.x is in place */
         $this->mocked_redis->method('set')
                            ->will($this->returnCallback([$this, 'setMocked']));
 
+        /** @psalm-suppress UndefinedMethod   Remove when Psalm 3.x is in place */
         $this->mocked_redis->method('setex')
                            ->will($this->returnCallback([$this, 'setexMocked']));
 
+        /** @psalm-suppress UndefinedMethod   Remove when Psalm 3.x is in place */
         $this->mocked_redis->method('del')
                            ->will($this->returnCallback([$this, 'delMocked']));
 
@@ -58,6 +59,7 @@ class RedisTest extends TestCase
             return;
         };
 
+        /** @psalm-suppress UndefinedMethod   Remove when Psalm 3.x is in place */
         $this->mocked_redis->method('disconnect')
                            ->will($this->returnCallback($nop));
 
@@ -245,12 +247,12 @@ class RedisTest extends TestCase
 
     /**
      * @param \SimpleSAML\Configuration|\SimpleSAML\Store $service
-     * @param class-string $className
+     * @param string $className
      * @return void
      */
     protected function clearInstance($service, $className)
     {
-        $reflectedClass = new ReflectionClass($className);
+        $reflectedClass = new \ReflectionClass($className);
         $reflectedInstance = $reflectedClass->getProperty('instance');
         $reflectedInstance->setAccessible(true);
         $reflectedInstance->setValue($service, null);

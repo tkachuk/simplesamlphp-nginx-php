@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Metadata;
 
 use SAML2\Constants;
@@ -12,7 +10,6 @@ use SimpleSAML\Logger;
 use SimpleSAML\Utils;
 use SimpleSAML\Error\MetadataNotFound;
 use SimpleSAML\Utils\ClearableState;
-use Webmozart\Assert\Assert;
 
 /**
  * This file defines a class for metadata handling.
@@ -49,7 +46,7 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
      *
      * @return MetaDataStorageHandler The current metadata handler instance.
      */
-    public static function getMetadataHandler(): MetaDataStorageHandler
+    public static function getMetadataHandler()
     {
         if (self::$metadataHandler === null) {
             self::$metadataHandler = new MetaDataStorageHandler();
@@ -91,10 +88,10 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
      * @param string $property The metadata property which should be auto-generated.
      * @param string $set The set we the property comes from.
      *
-     * @return string|array The auto-generated metadata property.
+     * @return string The auto-generated metadata property.
      * @throws \Exception If the metadata cannot be generated automatically.
      */
-    public function getGenerated(string $property, string $set)
+    public function getGenerated($property, $set)
     {
         // first we check if the user has overridden this property in the metadata
         try {
@@ -108,6 +105,7 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
 
         // get the configuration
         $config = Configuration::getInstance();
+        assert($config instanceof Configuration);
 
         $baseurl = Utils\HTTP::getSelfURLHost() . $config->getBasePath();
 
@@ -129,6 +127,10 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
                 case 'SingleLogoutServiceBinding':
                     return Constants::BINDING_HTTP_REDIRECT;
             }
+        } elseif ($set == 'shib13-idp-hosted') {
+            if ($property === 'SingleSignOnService') {
+                return $baseurl . 'shib13/idp/SSOService.php';
+            }
         }
 
         throw new \Exception('Could not generate metadata property ' . $property . ' for set ' . $set . '.');
@@ -144,8 +146,10 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
      *
      * @return array An associative array with the metadata from from the given set.
      */
-    public function getList(string $set = 'saml20-idp-remote', bool $showExpired = false): array
+    public function getList($set = 'saml20-idp-remote', $showExpired = false)
     {
+        assert(is_string($set));
+
         $result = [];
 
         foreach ($this->sources as $source) {
@@ -181,7 +185,7 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
      *
      * @return array An associative array with the metadata.
      */
-    public function getMetaDataCurrent(string $set): array
+    public function getMetaDataCurrent($set)
     {
         return $this->getMetaData(null, $set);
     }
@@ -197,8 +201,10 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
      * @return string The entity id which is associated with the current hostname/path combination.
      * @throws \Exception If no default metadata can be found in the set for the current host.
      */
-    public function getMetaDataCurrentEntityID(string $set, string $type = 'entityid'): string
+    public function getMetaDataCurrentEntityID($set, $type = 'entityid')
     {
+        assert(is_string($set));
+
         // first we look for the hostname/path combination
         $currenthostwithpath = Utils\HTTP::getSelfHostWithPath(); // sp.example.org/university
 
@@ -245,7 +251,7 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
      * @return string|null The entity id of a entity which have a CIDR hint where the provided
      *        IP address match.
      */
-    public function getPreferredEntityIdFromCIDRhint(string $set, string $ip): ?string
+    public function getPreferredEntityIdFromCIDRhint($set, $ip)
     {
         foreach ($this->sources as $source) {
             $entityId = $source->getPreferredEntityIdFromCIDRhint($set, $ip);
@@ -257,15 +263,14 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
         return null;
     }
 
-
     /**
      * This function loads the metadata for entity IDs in $entityIds. It is returned as an associative array
      * where the key is the entity id. An empty array may be returned if no matching entities were found
-     * @param string[] $entityIds The entity ids to load
+     * @param array $entityIds The entity ids to load
      * @param string $set The set we want to get metadata from.
      * @return array An associative array with the metadata for the requested entities, if found.
      */
-    public function getMetaDataForEntities(array $entityIds, string $set): array
+    public function getMetaDataForEntities(array $entityIds, $set)
     {
         $result = [];
         foreach ($this->sources as $source) {
@@ -282,7 +287,6 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
                     }
                 }
                 // We found the entity id so remove it from the list that needs resolving
-                /** @psalm-suppress PossiblyInvalidArrayOffset */
                 unset($entityIds[array_search($key, $entityIds)]);
             }
             $result = array_merge($srcList, $result);
@@ -290,7 +294,6 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
 
         return $result;
     }
-
 
     /**
      * This function looks up the metadata for the given entity id in the given set. It will throw an
@@ -304,11 +307,15 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
      * @throws \Exception If metadata for the specified entity is expired.
      * @throws \SimpleSAML\Error\MetadataNotFound If no metadata for the entity specified can be found.
      */
-    public function getMetaData(?string $index, string $set): array
+    public function getMetaData($index, $set)
     {
+        assert(is_string($set));
+
         if ($index === null) {
             $index = $this->getMetaDataCurrentEntityID($set, 'metaindex');
         }
+
+        assert(is_string($index));
 
         foreach ($this->sources as $source) {
             $metadata = $source->getMetaData($index, $set);
@@ -325,7 +332,7 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
 
                 $metadata['metadata-index'] = $index;
                 $metadata['metadata-set'] = $set;
-                Assert::keyExists($metadata, 'entityid');
+                assert(array_key_exists('entityid', $metadata));
                 return $metadata;
             }
         }
@@ -345,8 +352,11 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
      * @return \SimpleSAML\Configuration The configuration object representing the metadata.
      * @throws \SimpleSAML\Error\MetadataNotFound If no metadata for the entity specified can be found.
      */
-    public function getMetaDataConfig(string $entityId, string $set): Configuration
+    public function getMetaDataConfig($entityId, $set)
     {
+        assert(is_string($entityId));
+        assert(is_string($set));
+
         $metadata = $this->getMetaData($entityId, $set);
         return Configuration::loadFromArray($metadata, $set . '/' . var_export($entityId, true));
     }
@@ -361,8 +371,11 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
      * @return null|\SimpleSAML\Configuration The metadata corresponding to the entity, or null if the entity cannot be
      * found.
      */
-    public function getMetaDataConfigForSha1(string $sha1, string $set): ?Configuration
+    public function getMetaDataConfigForSha1($sha1, $set)
     {
+        assert(is_string($sha1));
+        assert(is_string($set));
+
         $result = [];
 
         foreach ($this->sources as $source) {
@@ -394,7 +407,7 @@ class MetaDataStorageHandler implements \SimpleSAML\Utils\ClearableState
      * when running phpunit tests and needing to alter config.php and metadata sources between test cases
      * @return void
      */
-    public static function clearInternalState(): void
+    public static function clearInternalState()
     {
         self::$metadataHandler = null;
     }

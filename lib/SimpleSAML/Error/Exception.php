@@ -1,12 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace SimpleSAML\Error;
 
 use SimpleSAML\Configuration;
 use SimpleSAML\Logger;
-use Webmozart\Assert\Assert;
 
 /**
  * Base class for SimpleSAMLphp Exceptions
@@ -25,14 +22,15 @@ class Exception extends \Exception
      * We need to save the backtrace, since we cannot rely on
      * serializing the Exception::trace-variable.
      *
-     * @var array<int, string>
+     * @var array
      */
     private $backtrace = [];
+
 
     /**
      * The cause of this exception.
      *
-     * @var \SimpleSAML\Error\Exception|null
+     * @var Exception|null
      */
     private $cause = null;
 
@@ -47,8 +45,11 @@ class Exception extends \Exception
      * @param int            $code Error code
      * @param \Exception|null $cause The cause of this exception.
      */
-    public function __construct(string $message, int $code = 0, \Exception $cause = null)
+    public function __construct($message, $code = 0, \Exception $cause = null)
     {
+        assert(is_string($message));
+        assert(is_int($code));
+
         parent::__construct($message, $code);
 
         $this->initBacktrace($this);
@@ -64,9 +65,9 @@ class Exception extends \Exception
      *
      * @param \Exception $e The exception.
      *
-     * @return \SimpleSAML\Error\Exception The new exception.
+     * @return Exception The new exception.
      */
-    public static function fromException(\Exception $e): Exception
+    public static function fromException(\Exception $e)
     {
         if ($e instanceof Exception) {
             return $e;
@@ -81,7 +82,7 @@ class Exception extends \Exception
      * @param \Exception $exception The exception we should fetch the backtrace from.
      * @return void
      */
-    protected function initBacktrace(\Exception $exception): void
+    protected function initBacktrace(\Exception $exception)
     {
         $this->backtrace = [];
 
@@ -110,9 +111,9 @@ class Exception extends \Exception
     /**
      * Retrieve the backtrace.
      *
-     * @return string[] An array where each function call is a single item.
+     * @return array An array where each function call is a single item.
      */
-    public function getBacktrace(): array
+    public function getBacktrace()
     {
         return $this->backtrace;
     }
@@ -121,9 +122,9 @@ class Exception extends \Exception
     /**
      * Retrieve the cause of this exception.
      *
-     * @return \SimpleSAML\Error\Exception|null The cause of this exception.
+     * @return Exception|null The cause of this exception.
      */
-    public function getCause(): ?Exception
+    public function getCause()
     {
         return $this->cause;
     }
@@ -134,7 +135,7 @@ class Exception extends \Exception
      *
      * @return string The name of the class.
      */
-    public function getClass(): string
+    public function getClass()
     {
         return get_class($this);
     }
@@ -147,9 +148,9 @@ class Exception extends \Exception
      *
      * @param boolean $anonymize Whether the resulting messages should be anonymized or not.
      *
-     * @return string[] Log lines that should be written out.
+     * @return array Log lines that should be written out.
      */
-    public function format(bool $anonymize = false): array
+    public function format($anonymize = false)
     {
         $ret = [
             $this->getClass() . ': ' . $this->getMessage(),
@@ -165,9 +166,9 @@ class Exception extends \Exception
      *
      * @param boolean $anonymize Whether the resulting messages should be anonymized or not.
      *
-     * @return string[] All lines of the backtrace, properly formatted.
+     * @return array All lines of the backtrace, properly formatted.
      */
-    public function formatBacktrace(bool $anonymize = false): array
+    public function formatBacktrace($anonymize = false)
     {
         $ret = [];
         $basedir = Configuration::getInstance()->getBaseDir();
@@ -199,7 +200,7 @@ class Exception extends \Exception
      * @param int $level
      * @return void
      */
-    protected function logBacktrace(int $level = Logger::DEBUG): void
+    protected function logBacktrace($level = Logger::DEBUG)
     {
         // see if debugging is enabled for backtraces
         $debug = Configuration::getInstance()->getArrayize('debug', ['backtraces' => false]);
@@ -241,7 +242,7 @@ class Exception extends \Exception
      * @param int $default_level The log level to use if this method was not overridden.
      * @return void
      */
-    public function log(int $default_level): void
+    public function log($default_level)
     {
         $fn = [
             Logger::ERR     => 'logError',
@@ -259,7 +260,7 @@ class Exception extends \Exception
      * This function will write this exception to the log, including a full backtrace.
      * @return void
      */
-    public function logError(): void
+    public function logError()
     {
         Logger::error($this->getClass() . ': ' . $this->getMessage());
         $this->logBacktrace(Logger::ERR);
@@ -272,7 +273,7 @@ class Exception extends \Exception
      * This function will write this exception to the log, including a full backtrace.
      * @return void
      */
-    public function logWarning(): void
+    public function logWarning()
     {
         Logger::warning($this->getClass() . ': ' . $this->getMessage());
         $this->logBacktrace(Logger::WARNING);
@@ -285,7 +286,7 @@ class Exception extends \Exception
      * This function will write this exception to the log, including a full backtrace.
      * @return void
      */
-    public function logInfo(): void
+    public function logInfo()
     {
         Logger::info($this->getClass() . ': ' . $this->getMessage());
         $this->logBacktrace(Logger::INFO);
@@ -298,7 +299,7 @@ class Exception extends \Exception
      * This function will write this exception to the log, including a full backtrace.
      * @return void
      */
-    public function logDebug(): void
+    public function logDebug()
     {
         Logger::debug($this->getClass() . ': ' . $this->getMessage());
         $this->logBacktrace(Logger::DEBUG);
@@ -313,7 +314,7 @@ class Exception extends \Exception
      *
      * @return array Array with the variables that should be serialized.
      */
-    public function __sleep(): array
+    public function __sleep()
     {
         $ret = array_keys((array) $this);
 

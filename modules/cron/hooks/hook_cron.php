@@ -1,17 +1,16 @@
 <?php
 
-use Webmozart\Assert\Assert;
-
 /**
  * Hook to run a cron job.
  *
  * @param array &$croninfo  Output
  * @return void
  */
-function cron_hook_cron(array &$croninfo): void
+function cron_hook_cron(&$croninfo)
 {
-    Assert::keyExists($croninfo, 'summary');
-    Assert::keyExists($croninfo, 'tag');
+    assert(is_array($croninfo));
+    assert(array_key_exists('summary', $croninfo));
+    assert(array_key_exists('tag', $croninfo));
 
     $cronconfig = \SimpleSAML\Configuration::getConfig('module_cron.php');
 
